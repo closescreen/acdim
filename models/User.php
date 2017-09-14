@@ -30,7 +30,11 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      
      if (self::$is_loaded_from_db) return;
         
+<<<<<<< HEAD
      $userlist = Users::find()->with('org.org_type')->all();
+=======
+     $userlist = Users::find()->all();
+>>>>>>> ca121cc6397939196af178d516a47e1270363547
      foreach ( $userlist as $u ){
 	self::$users[ (string)$u->id ] = [
 	    'id'=>(string)$u->id, 
