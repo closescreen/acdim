@@ -6,12 +6,12 @@ class Orgs extends ActiveRecord{
 
     // юзеры организации    
     public function getUsers(){
-        $this->hasMany( Users::classname(), ['org_id' => 'id'] );
+        return $this->hasMany( Users::classname(), ['org_id' => 'id'] );
     }
 
     // тип организации
-    public function getOrg_type(){
-        $this->hasOne( Org_type::className(), ['id' => 'org_type_id'] );
+    public function getOrg_types(){
+        return $this->hasOne( Org_types::className(), ['id' => 'org_type_id'] );
     }
     
 //    public function getUsers(){

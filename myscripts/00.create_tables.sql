@@ -23,7 +23,7 @@ CREATE TABLE orgs (
 
 # Должна быть первая организация id=1 org_type_id='admins'
 # она нужна для жестко прописанног в модель User пользователя
-insert into orgs (id, name, org_type_id) values (1,'Администратирная организация', 'admins');
+insert into orgs (id, name, org_type_id) values (1,'АдминДляВас', 'admins');
 
 # users:
 create table users (

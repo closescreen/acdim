@@ -13,7 +13,10 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     public $accessToken;
     public $org_id;
     public $org_name;
+    public $org_type_id;
+    public $org_type_name;
     private static $is_loaded_from_db;
+    
 
     private static $users = [
         '-100' => [
@@ -23,7 +26,9 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             'authKey' => 'test100key',
             'accessToken' => '100-token',
             'org_id' => '1', // это д.б. административная орг
-            'org_name' => 'Встроенная административная',
+            'org_name' => 'Админы(встроенная)', // игнорируем БД
+            'org_type_id' => 'admins', // игнор  БД
+            'org_type_name' => 'Административная(встроенная)'
         ],
     ];
     
@@ -33,10 +38,16 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      
      if (self::$is_loaded_from_db) return;
         
-     $userlist = Users::find()->with('org.org_type')->all();
+     $userlist = Users::find()
+            ->with('orgs.org_types')
+            ->all();
+            
+            
+//     joinWith('org')->where(['org.id'=>''])->all();
 //     $userlist = Users::find()->all();
 
      foreach ( $userlist as $u ){
+//        print_r($u);
 	self::$users[ (string)$u->id ] = [
 	    'id'=>(string)$u->id, 
 	    'username'=>$u->username,
@@ -44,9 +55,10 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
 	    'authKey'=>'test'.$u->id.'key',
 	    'accessToken'=>$u->id.'-token',
 	    'org_id'=>(string)$u->org_id,
-            'org_name'=>$u->org,
+            'org_name'=>$u->orgs->name,
+            'org_type_id'=>$u->orgs->org_type_id,
+            'org_type_name'=>$u->orgs->org_types->name,
 	    ];
-//	var_dump( $u->org );    
      }
      self::$is_loaded_from_db = true;
     }
