@@ -7,5 +7,7 @@ class Org_types extends ActiveRecord{
     public function getOrgs(){
         return $this->hasMany( Orgs::className(), ['org_type_id'=>'id'] );
     }
+
+    
 }
 ?>
