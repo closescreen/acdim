@@ -8,5 +8,6 @@ class Org_types extends ActiveRecord{
         return $this->hasMany( Orgs::className(), ['org_type_id'=>'id'] );
     }
 
+    
 }
 ?>

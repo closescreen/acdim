@@ -26,6 +26,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     ];
     
     
+    
     private static function load_users_from_db(){
      
      if (self::$is_loaded_from_db) return;

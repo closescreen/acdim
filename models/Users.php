@@ -9,5 +9,6 @@ class Users extends ActiveRecord{
         return $this->hasOne(Orgs::className(), ['id'=>'org_id']);
     }
 
+    
 
 }

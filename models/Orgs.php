@@ -19,5 +19,6 @@ class Orgs extends ActiveRecord{
 //        $this->hasmany( Users::classname(), ['org_id' => 'id'] );
 
 
+    
 }
 ?>

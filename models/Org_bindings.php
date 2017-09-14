@@ -15,5 +15,6 @@ class Orgs extends ActiveRecord{
         $this->hasOne( Orgs::className(), ['id' => 'salon_id'] );
     }
 
+    
 }
 ?>
