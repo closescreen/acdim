@@ -1,5 +1,5 @@
 <?php
-
+// шаблон из yii, не используется
 /* @var $this \yii\web\View */
 /* @var $content string */
 

@@ -4,7 +4,7 @@ namespace app\controllers;
 
 use Yii;
 use yii\filters\AccessControl;
-use yii\web\Controller;
+//use yii\web\Controller;
 use yii\web\UploadedFile;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -14,14 +14,14 @@ use app\models\MyForm;
 use app\models\Org_types;
 use app\models\Orgs;
 use app\models\Users;
+
 use yii\helpers\Html;
 use yii\data\Pagination;
 
-class SiteController extends Controller
+class SiteController extends AppController
 {
-    /**
-     * @inheritdoc
-     */
+
+/*
     public function behaviors()
     {
         return [
@@ -44,22 +44,9 @@ class SiteController extends Controller
             ],
         ];
     }
+*/
 
-    /**
-     * @inheritdoc
-     */
-    public function actions()
-    {
-        return [
-            'error' => [
-                'class' => 'yii\web\ErrorAction',
-            ],
-            'captcha' => [
-                'class' => 'yii\captcha\CaptchaAction',
-                'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
-            ],
-        ];
-    }
+
 
     /**
      * Displays homepage.
@@ -68,6 +55,7 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
+        debug([123]);
         return $this->render('index');
     }
 
@@ -78,9 +66,10 @@ class SiteController extends Controller
      */
     public function actionLogin()
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+// выключил для эксперимента
+//        if (!Yii::$app->user->isGuest) {
+//            return $this->goHome();
+//        }
 
         $model = new LoginForm();
         
@@ -105,9 +94,6 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
-    public function init(){
-        //var_dump( Yii::$app->user );
-    }
 
 /*    // Тестовая форма:
     public function actionForm(){

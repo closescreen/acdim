@@ -33,7 +33,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
     ];
     
     
-    // пока может использоваться поиском по токену
+    
     private static function load_users_from_db(){
      
      if (self::$is_loaded_from_db) return;
@@ -42,7 +42,12 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
             ->with('org.org_type')
             ->all();
             
+            
+//     joinWith('org')->where(['org.id'=>''])->all();
+//     $userlist = Users::find()->all();
+
      foreach ( $userlist as $u ){
+//        print_r($u);
 	self::$users[ (string)$u->id ] = [
 	    'id'=>(string)$u->id, 
 	    'username'=>$u->username,
@@ -64,51 +69,21 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findIdentity($id)
     {   
-        // старый код:
-        //self::load_users_from_db();
-        //return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
-        
-        $u = Users::find()
-            ->with('org.org_type')
-            ->where(['id'=>$id])
-            ->one();
-        
-            if ( $u ){
-            
-                $user = [
-	            'id'=>(string)$u->id, 
-	            'username'=>$u->username,
-	            'password'=>$u->password,
-	            'authKey'=>'test'.$u->id.'key',
-	            'accessToken'=>$u->id.'-token',
-	            'org_id'=>(string)$u->org_id,
-                    'org_name'=>$u->org->name,
-                    'org_type_id'=>$u->org->org_type_id,
-                    'org_type_name'=>$u->org->org_type->name,
-	        ];
-
-                return new static($user);
-            }
-
-        return null;        
-        
+        self::load_users_from_db();
+        return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
     }
 
     /**
      * @inheritdoc
      */
-    // в этом коде поиск по access token
-    // либо загружать всех пользователей из табл users, присваивать им токены и потом искать (чтение всей таблицы )
-    // либо добавить в табллицу users поле access_token и по нему искать
-    // пока оставляю первый вариант, т.к. по токену вроде не работаем
     public static function findIdentityByAccessToken($token, $type = null)
     {
-        self::load_users_from_db();
         foreach (self::$users as $user) {
             if ($user['accessToken'] === $token) {
                 return new static($user);
             }
         }
+
         return null;
     }
 
@@ -120,28 +95,13 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        
-        $u = Users::find()
-            ->with('org.org_type')
-            ->where(['username'=>$username])
-            ->one();
-        
-            if ( $u and strcasecmp($u->username, $username) === 0) {
-            
-                $user = [
-	            'id'=>(string)$u->id, 
-	            'username'=>$u->username,
-	            'password'=>$u->password,
-	            'authKey'=>'test'.$u->id.'key',
-	            'accessToken'=>$u->id.'-token',
-	            'org_id'=>(string)$u->org_id,
-                    'org_name'=>$u->org->name,
-                    'org_type_id'=>$u->org->org_type_id,
-                    'org_type_name'=>$u->org->org_type->name,
-	        ];
+        self::load_users_from_db();        
 
+        foreach (self::$users as $user) {
+            if (strcasecmp($user['username'], $username) === 0) {
                 return new static($user);
             }
+        }
 
         return null;
     }

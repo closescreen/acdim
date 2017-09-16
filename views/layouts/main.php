@@ -28,8 +28,19 @@ AppAsset::register($this);
 
 <div class="wrap">
     <?php
+    
+    // sample: Yii::$app->user->identity->org_type_id == 'admins'    
+    
+    $admin_menu = ['label' => 'Администратор', 
+                'items' => [
+                    ['label' => 'Организации', 'url' => ['/org/']],
+                    ['label' => 'Привязки банк-салон', 'url' => ['/org_binding/']],
+                    ['label' => 'Пользователи', 'url' => ['/user/']],
+                ],
+            ];    
+    
     NavBar::begin([
-        'brandLabel' => 'avto-cred.com',
+        'brandLabel' => 'Автокредитование / ' . ( Yii::$app->user->identity ? Yii::$app->user->identity->org_name : '' ) ,
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -38,22 +49,19 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-//            ['label' => 'Home', 'url' => ['/site/index']],
-//            ['label' => 'About', 'url' => ['/site/about'],
-//                'items' => [
-//                    ['label' => 'Home', 'url' => ['/site/index']],
-//                    ['label' => 'About', 'url' => ['/site/about']],
-//                    ['label' => 'Contact', 'url' => ['/site/contact']],
-//                ],
-//            ],    
-//            ['label' => 'Contact', 'url' => ['/site/contact']],
+            // sample for home: ['label' => 'Home', 'url' => ['/site/index']],
+            
+            // только админам:
+            ( Yii::$app->user->identity && Yii::$app->user->identity->in(['admins']) ? $admin_menu : '' ),
+
+            // ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Login', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout ('. Yii::$app->user->identity->username .' '. Yii::$app->user->identity->org_type_name .' '. Yii::$app->user->identity->org_name.')',
+                    'Logout (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -68,6 +76,7 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
+        
         <?= $content ?>
     </div>
 </div>

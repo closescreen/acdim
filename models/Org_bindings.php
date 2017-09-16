@@ -3,18 +3,16 @@ namespace app\models;
 use yii\db\ActiveRecord;
 
 // привязки банков к салонам
-class Orgs extends ActiveRecord{
+class Org_bindings extends ActiveRecord{
 
     // Связь с Банком
-    public function getBank(){
+    public function getBank_id(){
         $this->hasOne( Orgs::className(), ['id' => 'bank_id'] );
     }
 
-    // Связь с Салоном
-    public function getSalon(){
+    public function getSalon_id(){
         $this->hasOne( Orgs::className(), ['id' => 'salon_id'] );
     }
-
     
 }
 ?>

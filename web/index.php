@@ -9,4 +9,7 @@ require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
 
 $config = require(__DIR__ . '/../config/web.php');
 
+// Подкючаю свои функции:
+require( __DIR__ . '/../components/myfunctions.php');
+
 (new yii\web\Application($config))->run();

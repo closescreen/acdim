@@ -4,10 +4,44 @@ $params = require(__DIR__ . '/params.php');
 $db = require(__DIR__ . '/db.php');
 
 $config = [
+// не работает
+//    'as access' => [
+//        'class' => 'yii\filters\AccessControl',
+//        'except' => ['site/login'],
+/*        'rules' => [
+            [
+                'allow' => false,
+                'roles' => ['?'],
+            ],
+            [
+                'allow' => true,
+                'roles' => ['@'],
+            ]
+        ]
+*/
+//    ],
+     
     'id' => 'basic',
+//    'name' => 'Автокредитование', не влияет, если не исп в коде
+    'on beforeAction' => function ($event) {
+        //var_dump(345);
+        //exit();
+        //if (некоторое условие) {
+        //    $event->isValid = false;
+        //} else {
+        //}
+    },    
+    // 'on beforeRequest' => function ($event) {
+        //var_dump(Yii::$app->user->identity->org_type_id);
+        //var_dump( Yii::$app->is_user_org_type_id('admin') );
+        //exit;
+    //},
+    
+    'timeZone' => 'Europe/Moscow',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'components' => [
+        
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'hSYjroJbvS2JQtEJumahF6ir2OJP98SG',
@@ -18,12 +52,18 @@ $config = [
     	    'enablePrettyUrl' => false,
     	    'showScriptName' => true, 
     	],
+    	// Дима:
+    	'authManager' => [
+            'class' => 'yii\rbac\PhpManager',
+        ],
+    	
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl' => ['site/login'], 
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -63,14 +103,14 @@ if (YII_ENV_DEV) {
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        'allowedIPs' => ['81.9.106.146', '84.52.92.85', '176.117.137.31'],
+        'allowedIPs' => ['*'],
     ];
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
         // uncomment the following to add your IP if you are not connecting from localhost.
-        'allowedIPs' => ['81.9.106.146', '84.52.92.85', '176.117.137.31'],
+        'allowedIPs' => ['*'],
     ];
 }
 
