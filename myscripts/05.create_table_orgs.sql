@@ -8,7 +8,7 @@ CREATE TABLE `orgs` (
   `active` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `org_type_id` (`org_type_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci
+) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 # Должна быть первая организация id=1 org_type_id='admins'
 # она нужна для жестко прописанног в модель User пользователя
