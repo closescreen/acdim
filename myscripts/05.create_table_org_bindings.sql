@@ -9,3 +9,6 @@ CREATE TABLE `org_bindings` (
   KEY `bank_id` (`bank_id`),
   KEY `salon_id` (`salon_id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE org_bindings AUTO_INCREMENT=0;
+

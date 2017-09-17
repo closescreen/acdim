@@ -11,3 +11,4 @@ insert into orgs (name,org_type_id) values ('Салон Авто Лучший Т
 insert into orgs (name,org_type_id) values ('Банк Надежный Тестовый','bank');
 insert into orgs (name,org_type_id) values ('Банк Восторг Тестовый','bank');
 insert into orgs (name,org_type_id) values ('Современный Банк Тестовый','bank');
+
