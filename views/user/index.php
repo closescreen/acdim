@@ -22,8 +22,11 @@ echo GridView::widget([
     'filterModel' => $searchModel,
     'columns' => [
         'active','username','fio','org.name','org.org_type_id',
-
-    ],
+        [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{update}',
+        ],
+     ],
 ]);
 
 /*
