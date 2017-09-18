@@ -7,7 +7,7 @@ class Users extends ActiveRecord{
 
     public function rules(){
         return [
-            [['usernane','password','org_id'], 'required'],
+            [['active','username','password','fio','org_id'], 'required'],
         ];
     }
 

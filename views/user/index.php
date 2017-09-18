@@ -21,15 +21,33 @@ echo GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
     'columns' => [
+        'active','username','fio','org.name','org.org_type_id',
         [
-        'class' => 'yii\grid\ActionColumn',
-        'template' => '{update}', //'{view}',// {update}', // {delete}',
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{update}',
         ],
-        'org.org_type_id','org.name','username','fio','active',
-
-    ],
+     ],
 ]);
 
+
+use yii\widgets\ActiveForm;
+
+?>
+
+<?php $f = ActiveForm::begin(['action'=>[Url::to(['create'])]]); ?>
+<?= $f->field($record,'id')->hiddenInput()->label(false) ?>
+<?= $f->field($record,'username')->label('логин'); ?>
+<?= $f->field($record, 'password')->label('пароль') ?>
+<?= $f->field($record, 'fio')->label('ФИО') ?>
+<?= $f->field($record, 'active')->checkbox() ?>
+<?= $f->field($record, 'org_id')->dropDownList($orgs) ?>
+<?= Html::submitButton('Cоздать') ?>
+
+<?php ActiveForm::end(); ?>
+
+
+
+<?php
 /*
 $dataProvider = new ActiveDataProvider([
     'query' => $query, 
