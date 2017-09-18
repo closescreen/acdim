@@ -26,11 +26,18 @@ class UserController extends AppController
 
         $searchModel = new UsersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
+        $record = new Users();
+        $orgs = Orgs::find()->select(['name'])->asArray()->indexBy('id')->column();
 
-        return $this->render('index', [
-            'dataProvider' => $dataProvider,
-            'searchModel' => $searchModel,
-        ]);    
+        return $this->render('index', compact(
+            'dataProvider', 'searchModel',
+            'record',
+            'orgs'));
+
+
+
+
+//        return $this->render('create', compact('record', 'orgs'));
 
 //        $query = Users::find()
 //            ->joinWith(['org' => function($query) { $query->from(['org' => 'orgs']); }]);
