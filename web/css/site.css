@@ -113,3 +113,35 @@ a.desc:after {
 .nav > li > form > button.logout:focus {
     outline: none;
 }
+
+/* Дима: мои стили, используются в логике */
+/* Выключенная запись в БД (почти удаленная) - снят признак active */
+.inactive {
+    background-color: #e7c3c3;
+}
+
+/*новая заявка*/
+.request-status-new {
+    background-color: whitesmoke;
+}
+
+/*заявка в работе*/
+.request-status-in-work {
+    background-color: #9d9d9d;
+}
+
+/*заявка одобрена*/
+.request-status-approved {
+    background-color: #b2dba1;
+}
+
+/*заявка отклонена*/
+.request-status-rejected {
+    background-color: #dca7a7;
+}
+
+/*заявка оформлена*/
+.request-status-formalized {
+    background-color: cornflowerblue;
+}
+
