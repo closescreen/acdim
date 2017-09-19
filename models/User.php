@@ -39,6 +39,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      if (self::$is_loaded_from_db) return;
         
      $userlist = Users::find()
+            ->where(['active'=>1])
             ->with('org.org_type')
             ->all();
             
@@ -70,7 +71,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         
         $u = Users::find()
             ->with('org.org_type')
-            ->where(['id'=>$id])
+            ->where(['id'=>$id, 'active'=>1])
             ->one();
         
             if ( $u ){
@@ -123,7 +124,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
         
         $u = Users::find()
             ->with('org.org_type')
-            ->where(['username'=>$username])
+            ->where(['username'=>$username, 'active'=>1])
             ->one();
         
             if ( $u and strcasecmp($u->username, $username) === 0) {

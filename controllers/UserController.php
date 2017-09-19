@@ -26,35 +26,32 @@ class UserController extends AppController
 
         $searchModel = new UsersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->get());
-        $record = new Users();
+        $newuser = new Users();
+        $newuser->active = 1;
+
         $orgs = Orgs::find()->select(['name'])->asArray()->indexBy('id')->column();
 
         return $this->render('index', compact(
             'dataProvider', 'searchModel',
-            'record',
+            'newuser',
             'orgs'));
 
 
-
-
 //        return $this->render('create', compact('record', 'orgs'));
-
 //        $query = Users::find()
 //            ->joinWith(['org' => function($query) { $query->from(['org' => 'orgs']); }]);
         
-            
+
 /*	$pagination = new Pagination([
 	    'defaultPageSize' => 2,
 	    'totalCount' => $userlist->count()
 	]);
-
 	$userlist = $userlist->offset( $pagination->offset )
 			    ->limit( $pagination->limit)
 			    ->all();
 */
 	//return $this->render('index', compact('query')); //=>$userlist, 'pagination'=>$pagination]);
     }
-
 
 
 // ---------------------- update -------------------------
@@ -83,10 +80,28 @@ class UserController extends AppController
         else{
             debug('no');
         }
+    }
 
+// -------------------------- create ----------------------------------
+    public function actionCreate(){
+        $users = new Users();
+        if ( $users->load( Yii::$app->request->post())){
+            if ($users->save()){
+                $this->redirect(['user/index']);
+            }else{
+                debug( $users->errors ); // переделать
+            }
+        }
 
+    }
 
-
+    // -------------------- delete (deactivate) --------------
+    public function actionDelete($id){
+        if( $user = Users::findOne(['id'=>$id])){
+            $user->active = false;
+            $user->save();
+            $this->redirect(['user/index']);
+        }
     }
 
 

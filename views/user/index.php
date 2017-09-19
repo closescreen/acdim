@@ -21,12 +21,17 @@ echo GridView::widget([
     'dataProvider' => $dataProvider,
     'filterModel' => $searchModel,
     'columns' => [
-        'active','username','fio','org.name','org.org_type_id',
+        'active','username','fio','org.name',
         [
             'class' => 'yii\grid\ActionColumn',
-            'template' => '{update}',
+            'template' => '{update}  {delete}',
         ],
      ],
+    'rowOptions'=>function($model) {
+        if (0 == $model->active) {
+            return ['class' => 'disabled'];
+        }
+    }
 ]);
 
 
@@ -34,13 +39,13 @@ use yii\widgets\ActiveForm;
 
 ?>
 
-<?php $f = ActiveForm::begin(['action'=>[Url::to(['create'])]]); ?>
-<?= $f->field($record,'id')->hiddenInput()->label(false) ?>
-<?= $f->field($record,'username')->label('логин'); ?>
-<?= $f->field($record, 'password')->label('пароль') ?>
-<?= $f->field($record, 'fio')->label('ФИО') ?>
-<?= $f->field($record, 'active')->checkbox() ?>
-<?= $f->field($record, 'org_id')->dropDownList($orgs) ?>
+<?php $f = ActiveForm::begin(['action'=>Url::to('user/create')]); ?>
+<?= $f->field($newuser,'id')->hiddenInput()->label(false) ?>
+<?= $f->field($newuser,'username')->label('логин'); ?>
+<?= $f->field($newuser, 'password')->label('пароль') ?>
+<?= $f->field($newuser, 'fio')->label('ФИО') ?>
+<?= $f->field($newuser, 'active')->checkbox() ?>
+<?= $f->field($newuser, 'org_id')->dropDownList($orgs) ?>
 <?= Html::submitButton('Cоздать') ?>
 
 <?php ActiveForm::end(); ?>
