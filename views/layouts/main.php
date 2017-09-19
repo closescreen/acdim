@@ -31,16 +31,21 @@ AppAsset::register($this);
     
     // sample: Yii::$app->user->identity->org_type_id == 'admins'    
     
-    $admin_menu = ['label' => 'Администратор', 
-                'items' => [
-                    ['label' => 'Организации', 'url' => ['/org/']],
-                    ['label' => 'Привязки банк-салон', 'url' => ['/org_binding/']],
-                    ['label' => 'Пользователи', 'url' => ['/user/']],
-                ],
-            ];    
-    
+    $admin_menu = [ 'label' => 'Администратор',
+                    'items' => [
+                        ['label' => 'Организации', 'url' => ['/org/']],
+                        ['label' => 'Привязки банк-салон', 'url' => ['/org_binding/']],
+                        ['label' => 'Пользователи', 'url' => ['/user/']],
+                    ],
+    ];
+
+    $insalon_menu = ['label' => 'Салон', 'url' => ['/insalon/']];
+    $inbank_menu = ['label' => 'Банк', 'url' => ['/inbank/']];
+
+
     NavBar::begin([
-        'brandLabel' => 'Автокредитование / ' . ( Yii::$app->user->identity ? Yii::$app->user->identity->org_name : '' ) ,
+        'brandLabel' => 'Автокредитование / ' .
+            ( Yii::$app->user->identity ? Yii::$app->user->identity->org_name : '' ),
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
@@ -50,9 +55,19 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             // sample for home: ['label' => 'Home', 'url' => ['/site/index']],
-            
+
+            // только салонам:
+            ( Yii::$app->user->identity && Yii::$app->user->identity->in(['salon','admins']) ?
+                $insalon_menu : '' ),
+
+            // только банкам:
+            ( Yii::$app->user->identity && Yii::$app->user->identity->in(['salon','admins']) ?
+                $inbank_menu : '' ),
+
+
             // только админам:
-            ( Yii::$app->user->identity && Yii::$app->user->identity->in(['admins']) ? $admin_menu : '' ),
+            ( Yii::$app->user->identity && Yii::$app->user->identity->in(['admins']) ?
+                $admin_menu : '' ),
 
             // ['label' => 'Contact', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (

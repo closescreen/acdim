@@ -55,7 +55,6 @@ class SiteController extends AppController
      */
     public function actionIndex()
     {
-        debug([123]);
         return $this->render('index');
     }
 

@@ -37,6 +37,7 @@ class AppController extends Controller
                         throw new \Exception("Нет доступа. ${un} ( ${oti} ) --> $rr ($am)");
                     }else{
                         print "<br>Нужно залогиниться.</br>";
+                        $this->redirect('site/login');
                         // незалогиненным опасно показывать стектрейс:
                         // throw new \Exception("Нет доступа."); 
                     }    
@@ -62,10 +63,29 @@ class AppController extends Controller
                         // 'actions' => ['index'],
                         'allow' => true,
                         'matchCallback' => function($role,$action){
-                           return  Yii::$app->user->identity and Yii::$app->user->identity->in(['admins']);
+                           return  Yii::$app->user->identity and
+                               Yii::$app->user->identity->in(['admins']);
                         }
                     ],
-                    
+                    [
+                        'controllers' => ['insalon'],
+                        // 'actions' => ['index'],
+                        'allow' => true,
+                        'matchCallback' => function($role,$action){
+                            return  Yii::$app->user->identity and
+                                Yii::$app->user->identity->in(['admins','salon']);
+                        }
+                    ],
+                    [
+                        'controllers' => ['inbank'],
+                        // 'actions' => ['index'],
+                        'allow' => true,
+                        'matchCallback' => function($role,$action){
+                            return  Yii::$app->user->identity and
+                                Yii::$app->user->identity->in(['admins','bank']);
+                        }
+                    ],
+
                 ],
             ],
             'verbs' => [

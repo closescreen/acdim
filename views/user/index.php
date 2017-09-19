@@ -1,6 +1,7 @@
 
 <? use yii\widgets\LinkPager; ?>
 
+
 <h1>Пользователи</h1>
 
 <?php
@@ -10,6 +11,9 @@ use yii\data\ActiveDataProvider;
 // use app\models\Orgs;
 use yii\helpers\Url;
 use yii\helpers\Html;
+
+$this->title = 'Пользователи';
+
 
 $dataProvider->sort->attributes['org.name'] = [
     'asc' => ['org.name' => SORT_ASC],
