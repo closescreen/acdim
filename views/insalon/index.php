@@ -1,71 +1,54 @@
-
-<? use yii\widgets\LinkPager; ?>
-
-
 <?php
 
-use yii\grid\GridView;
-use yii\data\ActiveDataProvider;
-// use app\models\Orgs;
-use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\grid\GridView;
+use yii\widgets\Pjax;
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\InsalonSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Салон';
-
-// кнопка (только) на создание новой
-echo Html::a('Создать заявку', ['/insalon/create'], ['class'=>'btn btn-primary']);
-
-
-/* список заявок (табл insalon)
-со ссылками на редактирование
-*/
-
-
-
-
-/*
-$dataProvider->sort->attributes['org.name'] = [
-    'asc' => ['org.name' => SORT_ASC],
-    'desc' => ['org.name' => SORT_DESC],
-];
-*/
-
-/*
-echo GridView::widget([
-    'dataProvider' => $dataProvider,
-    'filterModel' => $searchModel,
-    'columns' => [
-        'active','username','fio','org.name',
-        [
-            'class' => 'yii\grid\ActionColumn',
-            'template' => '{update}  {delete}',
-        ],
-     ],
-    'rowOptions'=>function($model) {
-        if (0 == $model->active) {
-            return ['class' => 'disabled'];
-        }
-    }
-]);
-*/
-
-/*
-use yii\widgets\ActiveForm;
-
+$this->title = 'Insalons';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="insalon-index">
 
-<?php $f = ActiveForm::begin(['action'=>Url::to('user/create')]); ?>
-<?= $f->field($newuser,'id')->hiddenInput()->label(false) ?>
-<?= $f->field($newuser,'username')->label('логин'); ?>
-<?= $f->field($newuser, 'password')->label('пароль') ?>
-<?= $f->field($newuser, 'fio')->label('ФИО') ?>
-<?= $f->field($newuser, 'active')->checkbox() ?>
-<?= $f->field($newuser, 'org_id')->dropDownList($orgs) ?>
-<?= Html::submitButton('Cоздать') ?>
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-<?php ActiveForm::end(); ?>
-*/
+    <p>
+        <?= Html::a('Create Insalon', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+<?php Pjax::begin(); ?>    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
 
+            'id',
+            'active',
+            'salon_id',
+            'created',
+            'created_by_user_id',
+            // 'changed',
+            // 'changed_by_user_id',
+            // 'client_fname',
+            // 'client_sname',
+            // 'client_tname',
+            // 'client_bdate',
+            // 'client_phone',
+            // 'car_price',
+            // 'down_payment',
+            // 'equipment_cost',
+            // 'equipment_desc',
+            // 'car_model',
+            // 'car_year',
+            // 's1',
+            // 's2',
+            // 's3',
+            // 's4',
+            // 's5',
 
-
-
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+    ]); ?>
+<?php Pjax::end(); ?></div>
