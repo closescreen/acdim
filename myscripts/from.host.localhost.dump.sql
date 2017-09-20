@@ -27,15 +27,15 @@ CREATE TABLE `inbank` (
   `active` int(11) NOT NULL DEFAULT '1',
   `insalon_id` int(11) NOT NULL,
   `bank_id` int(11) NOT NULL,
-  `changed` varchar(45) NOT NULL DEFAULT 'current_timestamp on update',
+  `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `changed_by_user_id` int(11) NOT NULL,
   `state_id` varchar(10) NOT NULL DEFAULT 'new',
-  `state_desc` varchar(255) NOT NULL,
+  `state_desc` varchar(255) NOT NULL DEFAULT '',
   `b1` varchar(255) NOT NULL DEFAULT '',
   `b2` varchar(255) NOT NULL DEFAULT '',
   `b3` varchar(255) NOT NULL DEFAULT '',
   `b4` varchar(255) NOT NULL DEFAULT '',
-  `b5` varchar(45) NOT NULL DEFAULT '',
+  `b5` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -262,4 +262,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-20 15:50:57
+-- Dump completed on 2017-09-20 20:49:57
