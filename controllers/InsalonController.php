@@ -152,7 +152,19 @@ class InsalonController extends Controller
 //, $active, $salon_id, $created_by_user_id,
 //                                 $changed_by_user_id, $client_tname, $client_phone)
     {
-        if ( ($model = Insalon::findOne(['id' => $id ])) !== null ){
+        $find_cond = ['id' => $id ];
+
+        $org_type_id = Yii::$app->user->identity->org_type_id;
+        $org_id = Yii::$app->user->identity->org_id;
+
+        if ( $org_type_id == 'salon' ){
+            // салоны должны иметь доступ только по своему салону
+            //$dataProvider->query->andFilterWhere(['salon_id'=>$org_id]);
+            $find_cond['salon_id'] = $org_id;
+        }
+
+
+        if ( ($model = Insalon::findOne( $find_cond )) !== null ){
             //, 'active' => $active, 'salon_id' => $salon_id,
             // 'created_by_user_id' => $created_by_user_id,
             // 'changed_by_user_id' => $changed_by_user_id, 'client_tname' => $client_tname,
