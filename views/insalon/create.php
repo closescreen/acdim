@@ -6,7 +6,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Insalon */
 
-$this->title = 'Create Insalon';
+$this->title = 'Новая заявка';
 $this->params['breadcrumbs'][] = ['label' => 'Insalons', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

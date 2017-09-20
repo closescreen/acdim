@@ -10,25 +10,17 @@ use yii\widgets\ActiveForm;
 
 <div class="insalon-form">
 
+
+
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'active')->textInput() ?>
+    <?= $form->errorSummary($model) ?>
 
-    <?= $form->field($model, 'salon_id')->textInput() ?>
-
-    <?= $form->field($model, 'created')->textInput() ?>
-
-    <?= $form->field($model, 'created_by_user_id')->textInput() ?>
-
-    <?= $form->field($model, 'changed')->textInput() ?>
-
-    <?= $form->field($model, 'changed_by_user_id')->textInput() ?>
+    <?= $form->field($model, 'client_tname')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'client_fname')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'client_sname')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'client_tname')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'client_bdate')->textInput() ?>
 
