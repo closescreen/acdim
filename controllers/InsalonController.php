@@ -35,6 +35,24 @@ class InsalonController extends Controller
         $searchModel = new InsalonSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+
+
+        $org_type_id = Yii::$app->user->identity->org_type_id;
+        $org_id = Yii::$app->user->identity->org_id;
+
+        if ( $org_type_id == 'salon' ){
+            // салоны должны видеть заявки только по своему салону
+            $dataProvider->query->andFilterWhere(['salon_id'=>$org_id]);
+        }
+
+        if ( $org_type_id == 'bank'){
+            // банки должны видеть только заявки приязанных салонов
+            // но в эту функцию они пока не попадают
+        }
+
+        // ( админы видят всех )
+
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
