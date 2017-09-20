@@ -18,37 +18,44 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Insalon', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>    <?= GridView::widget([
+<?php Pjax::begin(); ?>
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions'=>function($model) {
+            if ($model->active == 0) {
+                return ['class' => 'inactive'];
+            }
+        },
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'active',
-            'salon_id',
+            //'salon_id',
             'created',
-            'created_by_user_id',
             // 'changed',
             // 'changed_by_user_id',
-            // 'client_fname',
-            // 'client_sname',
-            // 'client_tname',
+            'client_fname',
+            'client_sname',
+            'client_tname',
             // 'client_bdate',
-            // 'client_phone',
-            // 'car_price',
-            // 'down_payment',
-            // 'equipment_cost',
+            'client_phone',
+            //'car_price',
+            //'down_payment',
+            //'equipment_cost',
             // 'equipment_desc',
-            // 'car_model',
-            // 'car_year',
+            'car_model',
+            'car_year',
             // 's1',
             // 's2',
             // 's3',
             // 's4',
             // 's5',
+            'created_by_user_id',
+            'active',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-<?php Pjax::end(); ?></div>
+<?php Pjax::end(); ?>
+</div>

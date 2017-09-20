@@ -21,14 +21,14 @@ class Insalon extends \yii\db\ActiveRecord
                 ['active', 'salon_id', 'created_by_user_id', 'changed_by_user_id',
                     'client_fname', 'client_sname', 'client_tname', 'client_bdate',
                     'client_phone', 'car_price', 'down_payment', 'equipment_cost',
-                    'equipment_desc', 'car_model', 'car_year'
+                     'car_model', 'car_year'
                 ], 'required'],
             [
                 ['active', 'salon_id', 'created_by_user_id',
                     'changed_by_user_id', 'car_price', 'down_payment',
                     'equipment_cost', 'car_year'
                 ], 'integer'],
-            [['created', 'changed', 'client_bdate', 's1', 's2', 's3', 's4', 's5'], 'safe'],
+            [['equipment_desc','created', 'changed', 'client_bdate', 's1', 's2', 's3', 's4', 's5'], 'safe'],
             [['client_fname', 'client_sname', 'client_tname'], 'string', 'max' => 20],
             [['client_phone'], 'string', 'max' => 45],
             [['equipment_desc', 'car_model', 's1', 's2', 's3', 's4', 's5'], 'string', 'max' => 255],

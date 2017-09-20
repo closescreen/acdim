@@ -67,7 +67,7 @@ CREATE TABLE `insalon` (
   `client_fname` varchar(20) NOT NULL,
   `client_sname` varchar(20) NOT NULL,
   `client_tname` varchar(20) NOT NULL,
-  `client_bdate` datetime NOT NULL,
+  `client_bdate` date NOT NULL,
   `client_phone` varchar(45) NOT NULL,
   `car_price` int(11) NOT NULL,
   `down_payment` int(11) NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE `insalon` (
   `s4` varchar(255) NOT NULL,
   `s5` varchar(255) NOT NULL,
   PRIMARY KEY (`id`,`active`,`salon_id`,`created_by_user_id`,`changed_by_user_id`,`client_tname`,`client_phone`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +90,7 @@ CREATE TABLE `insalon` (
 
 LOCK TABLES `insalon` WRITE;
 /*!40000 ALTER TABLE `insalon` DISABLE KEYS */;
-INSERT INTO `insalon` VALUES (2,1,2,'2017-09-20 08:10:19',20,'2017-09-20 09:24:48',20,'asdf','asdf','asdf','1980-02-01 00:00:00','  34563456',3456,3456,100,'sdf','sdf',1900,'','','','','');
+INSERT INTO `insalon` VALUES (2,0,2,'2017-09-20 08:10:19',20,'2017-09-20 12:43:45',20,'asdf','asdf','asdf','1980-02-01','  34563456',3456,3456,100,'sdf','sdf',1900,'','','','',''),(3,1,2,'2017-09-20 12:35:18',20,'2017-09-20 12:40:58',20,'Петр','Пертович','Петров','1995-06-05','0987987987',5000,123,0,'','Lada',1945,'','','','','');
 /*!40000 ALTER TABLE `insalon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -262,4 +262,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-20 12:52:45
+-- Dump completed on 2017-09-20 15:50:57

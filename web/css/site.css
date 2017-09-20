@@ -116,7 +116,7 @@ a.desc:after {
 
 /* Дима: мои стили, используются в логике */
 /* Выключенная запись в БД (почти удаленная) - снят признак active */
-.inactive {
+.inactive, .inactive * {
     background-color: #e7c3c3;
 }
 

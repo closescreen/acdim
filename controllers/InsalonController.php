@@ -29,10 +29,7 @@ class InsalonController extends Controller
         ];
     }
 
-    /**
-     * Lists all Insalon models.
-     * @return mixed
-     */
+    // -------------------- index -------------------------
     public function actionIndex()
     {
         $searchModel = new InsalonSearch();
@@ -44,22 +41,17 @@ class InsalonController extends Controller
         ]);
     }
 
-    /**
-     * Displays a single Insalon model.
-     * @param integer $id
-     * @param integer $active
-     * @param integer $salon_id
-     * @param integer $created_by_user_id
-     * @param integer $changed_by_user_id
-     * @param string $client_tname
-     * @param string $client_phone
-     * @return mixed
-     */
-    public function actionView($id, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone)
+
+    // ------------- view --------------------------------
+    public function actionView(
+        $id, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone
+    )
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone),
-        ]);
+        $model = $this->findModel($id);
+
+        return $this->render('view', compact('model'));
+        //, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone),
+
     }
 
     public function actionCreate()
@@ -99,12 +91,20 @@ class InsalonController extends Controller
     }
 
     // ---------------------- update --------------------------------
-    public function actionUpdate($id, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone)
+    public function actionUpdate( $id )
+    //    $id, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone
+    //)
     {
-        $model = $this->findModel($id, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone);
+        $model = $this->findModel( $id );
+        //, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone
+        //);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id, 'active' => $model->active, 'salon_id' => $model->salon_id, 'created_by_user_id' => $model->created_by_user_id, 'changed_by_user_id' => $model->changed_by_user_id, 'client_tname' => $model->client_tname, 'client_phone' => $model->client_phone]);
+        if ($model->load(Yii::$app->request->post()) ) {
+            $model->changed = null; // бд вставит время правки
+            $model->changed_by_user_id = Yii::$app->user->identity->id;
+            if ( $model->save() ) {
+                return $this->redirect(['view', 'id' => $model->id, 'active' => $model->active, 'salon_id' => $model->salon_id, 'created_by_user_id' => $model->created_by_user_id, 'changed_by_user_id' => $model->changed_by_user_id, 'client_tname' => $model->client_tname, 'client_phone' => $model->client_phone]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -113,18 +113,32 @@ class InsalonController extends Controller
     }
 
     // --------------------------------- delete -------------------------
-    public function actionDelete($id, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone)
+    public function actionDelete($id)
+//, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone)
     {
-        $this->findModel($id, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone)->delete();
+
+        // решить удаление будет удалением или деактивацией
+
+        $model = $this->findModel($id);
+        $model->active = 0;
+        $model->save();
+
+        //, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone)
+        // ->delete();
 
         return $this->redirect(['index']);
     }
 
     // -------------------------------- findModel -------------------------
-    protected function findModel($id, $active, $salon_id, $created_by_user_id,
-                                 $changed_by_user_id, $client_tname, $client_phone)
+    protected function findModel($id)
+//, $active, $salon_id, $created_by_user_id,
+//                                 $changed_by_user_id, $client_tname, $client_phone)
     {
-        if (($model = Insalon::findOne(['id' => $id, 'active' => $active, 'salon_id' => $salon_id, 'created_by_user_id' => $created_by_user_id, 'changed_by_user_id' => $changed_by_user_id, 'client_tname' => $client_tname, 'client_phone' => $client_phone])) !== null) {
+        if ( ($model = Insalon::findOne(['id' => $id ])) !== null ){
+            //, 'active' => $active, 'salon_id' => $salon_id,
+            // 'created_by_user_id' => $created_by_user_id,
+            // 'changed_by_user_id' => $changed_by_user_id, 'client_tname' => $client_tname,
+            // 'client_phone' => $client_phone])) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

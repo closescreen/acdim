@@ -49,6 +49,8 @@ class InsalonSearch extends Insalon
             'query' => $query,
         ]);
 
+        $this->active = 1; // default filter
+
         $this->load($params);
 
         if (!$this->validate()) {

@@ -14,30 +14,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id, 'active' => $model->active, 'salon_id' => $model->salon_id, 'created_by_user_id' => $model->created_by_user_id, 'changed_by_user_id' => $model->changed_by_user_id, 'client_tname' => $model->client_tname, 'client_phone' => $model->client_phone], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id, 'active' => $model->active, 'salon_id' => $model->salon_id, 'created_by_user_id' => $model->created_by_user_id, 'changed_by_user_id' => $model->changed_by_user_id, 'client_tname' => $model->client_tname, 'client_phone' => $model->client_phone], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <?php
+       $options = ['class' => []];
+       if (!$model->active) {
+           Html::addCssClass($options, 'inactive');
+       }
+    ?>
+    <?= Html::beginTag('div', $options) ?>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'active',
             'salon_id',
-            'created',
-            'created_by_user_id',
-            'changed',
-            'changed_by_user_id',
+            'created:datetime',
+            'client_tname',
             'client_fname',
             'client_sname',
-            'client_tname',
             'client_bdate',
             'client_phone',
             'car_price',
@@ -51,7 +44,25 @@ $this->params['breadcrumbs'][] = $this->title;
             's3',
             's4',
             's5',
+            'created_by_user_id',
+            'changed:datetime',
+            'changed_by_user_id',
+            'active',
         ],
-    ]) ?>
+
+
+    ] ) ?>
+    <?= Html::endTag('div')?>
+
+    <p>
+        <?= Html::a('Update', ['update', 'id' => $model->id, 'active' => $model->active, 'salon_id' => $model->salon_id, 'created_by_user_id' => $model->created_by_user_id, 'changed_by_user_id' => $model->changed_by_user_id, 'client_tname' => $model->client_tname, 'client_phone' => $model->client_phone], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Delete', ['delete', 'id' => $model->id, 'active' => $model->active, 'salon_id' => $model->salon_id, 'created_by_user_id' => $model->created_by_user_id, 'changed_by_user_id' => $model->changed_by_user_id, 'client_tname' => $model->client_tname, 'client_phone' => $model->client_phone], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Are you sure you want to delete this item?',
+                'method' => 'post',
+            ],
+        ]) ?>
+    </p>
 
 </div>

@@ -10,7 +10,13 @@ use yii\widgets\ActiveForm;
 
 <div class="insalon-form">
 
-
+    <?php
+       $options = ['class' => []];
+       if (!$model->active) {
+           Html::addCssClass($options, 'inactive');
+       }
+    ?>
+    <?= Html::beginTag('div', $options) ?>
 
     <?php $form = ActiveForm::begin(); ?>
 
@@ -48,10 +54,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 's5')->textInput(['maxlength' => true]) ?>
 
+    <?= $form->field($model, 'active')->checkbox() ?>
+
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
+
+    <?= Html::endTag('div')?>
 
 </div>
