@@ -219,6 +219,7 @@ CREATE TABLE `rstates` (
 
 LOCK TABLES `rstates` WRITE;
 /*!40000 ALTER TABLE `rstates` DISABLE KEYS */;
+INSERT INTO `rstates` VALUES ('new','Новая','request-status-new'),('in-work','В работе','request-status-in-work'),('approved','Одобрена','request-status-approved'),('rejected','Отклонена','request-status-rejected'),('formalized','Оформлена','request-status-formalized');
 /*!40000 ALTER TABLE `rstates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -261,4 +262,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-20 12:37:55
+-- Dump completed on 2017-09-20 12:52:45
