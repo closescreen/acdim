@@ -29,3 +29,8 @@ $this->params['breadcrumbs'][] = 'Update';
     ]) ?>
 
 </div>
+
+<div>
+    <?= $this->render('_distrib_form', compact('model')) ?>
+
+</div>

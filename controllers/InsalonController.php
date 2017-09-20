@@ -72,6 +72,19 @@ class InsalonController extends Controller
 
     }
 
+    // ------------------- distribute_to_banks --------------------
+    // раскидывает заявку insalon_id по банкам [bank_id1, bank_id2, ...]
+    public function distribute_to_banks( $insalon_id, $org_ids ){
+        // найти insalon_id + salon_id
+
+
+        if ( !$org_ids ){
+            $org_ids = [];// список привязанных банков
+        }
+    }
+
+
+    // ------------------ create ------------------------------
     public function actionCreate()
     {
         $model = new Insalon();
@@ -86,6 +99,9 @@ class InsalonController extends Controller
             $model->salon_id = Yii::$app->user->identity->org_id;
 
             if ( $model->save() ) {
+                // раскидать заявку по банкам
+
+
                 return $this->redirect(['view',
                         'id' => $model->id,
                         'active' => $model->active,
