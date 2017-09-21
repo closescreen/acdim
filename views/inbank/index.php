@@ -10,6 +10,12 @@ use yii\widgets\Pjax;
 
 $this->title = 'Inbanks';
 $this->params['breadcrumbs'][] = $this->title;
+
+$dataProvider->sort->attributes['insalon.client_tname'] = [
+    'asc' => ['insalon.client_tname' => SORT_ASC],
+    'desc' => ['insalon.client_tname' => SORT_DESC],
+];
+
 ?>
 <div class="inbank-index">
 
@@ -19,18 +25,23 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Create Inbank', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-    <?php Pjax::begin(); ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+            //['class' => 'yii\grid\SerialColumn'],
 
             'id',
-            'active',
-            'insalon_id',
-            'bank_id',
-            'changed',
+            //'active',
+            //'insalon_id',
+            //'bank_id',
+            //'changed',
+            //'insalon.salon_id',
+            'insalon.client_tname',
+            'insalon.client_fname',
+            'insalon.client_sname',
+            'insalon.salon.name',
+
             // 'changed_by_user_id',
             // 'state_id',
             // 'state_desc',
@@ -43,6 +54,5 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>
-        <?php Pjax::end(); ?>
 
 </div>

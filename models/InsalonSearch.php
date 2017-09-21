@@ -12,6 +12,9 @@ use app\models\Insalon;
  */
 class InsalonSearch extends Insalon
 {
+
+
+
     /**
      * @inheritdoc
      */

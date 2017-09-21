@@ -19,9 +19,36 @@ class InbankSearch extends Inbank
     {
         return [
             [['id', 'active', 'insalon_id', 'bank_id', 'changed_by_user_id'], 'integer'],
-            [['changed', 'state_id', 'state_desc', 'b1', 'b2', 'b3', 'b4', 'b5'], 'safe'],
+            [[
+                'changed', 'state_id', 'state_desc', 'b1', 'b2', 'b3', 'b4', 'b5',
+                'insalon.client_tname',
+                'insalon.client_fname',
+                'insalon.client_sname',
+                //'insalon.salon.name', - не работает
+
+                ], 'safe'],
         ];
     }
+
+    public function attributes()
+    {
+        // делаем поле зависимости доступным для поиска
+        return array_merge(parent::attributes(), [
+            'insalon.salon_id',
+            'insalon.client_tname',
+            'insalon.client_fname',
+            'insalon.client_sname',
+        ]);
+    }
+
+  /*  public function rules()
+    {
+        // только поля определенные в rules() будут доступны для поиска
+        return [
+            [['fio','username','org.name','org.org_type_id'], 'safe'],
+        ];
+    }
+*/
 
     /**
      * @inheritdoc
@@ -41,7 +68,7 @@ class InbankSearch extends Inbank
      */
     public function search($params)
     {
-        $query = Inbank::find();
+        $query = Inbank::find()->joinWith('insalon.salon');
 
         // add conditions that should always apply here
 

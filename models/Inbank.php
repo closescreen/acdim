@@ -66,4 +66,8 @@ class Inbank extends \yii\db\ActiveRecord
             'b5' => 'B5',
         ];
     }
+
+    public function getInsalon(){
+        return $this->hasOne(Insalon::className(),['id'=>'insalon_id']);
+    }
 }

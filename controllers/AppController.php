@@ -88,7 +88,7 @@ class AppController extends Controller
                         //'actions' => ['index'],
                         'allow' => true,
                         'matchCallback' => function($role,$action){
- 
+
                             return  Yii::$app->user->identity and
                                 Yii::$app->user->identity->in(['admins','bank']);
                         }
