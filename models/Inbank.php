@@ -70,4 +70,8 @@ class Inbank extends \yii\db\ActiveRecord
     public function getInsalon(){
         return $this->hasOne(Insalon::className(),['id'=>'insalon_id']);
     }
+
+    public function getState(){
+        return $this->hasOne(Rstates::className(), ['id'=>'state_id']);
+    }
 }

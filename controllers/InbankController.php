@@ -2,9 +2,12 @@
 
 namespace app\controllers;
 
+use app\models\Insalon;
+use app\models\Rstates;
 use Yii;
 use app\models\Inbank;
 use app\models\InbankSearch;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -86,13 +89,22 @@ class InbankController extends AppController
      */
     public function actionUpdate($id)
     {
-        $model = $this->findModel($id);
+        $model = Inbank::find()->where(['inbank.id'=>$id])
+            ->joinWith('insalon.salon')->one();
+
+        $states =  ArrayHelper::map(Rstates::find()->all(), 'id', 'name');
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect(['view',
+                'id' => $model->id,
+                'states'=>$states
+                ]
+            );
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'states'=> $states,
             ]);
         }
     }
