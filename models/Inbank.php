@@ -38,8 +38,8 @@ class Inbank extends \yii\db\ActiveRecord
     {
         return [
             [['active', 'insalon_id', 'bank_id', 'changed_by_user_id'], 'integer'],
-            [['insalon_id', 'bank_id', 'changed_by_user_id'], 'required'],
-            [['changed'], 'safe'],
+            [['insalon_id', 'bank_id' ], 'required'],
+            [['changed', 'changed_by_user_id'], 'safe'],
             [['state_id'], 'string', 'max' => 10],
             [['state_desc', 'b1', 'b2', 'b3', 'b4', 'b5'], 'string', 'max' => 255],
         ];

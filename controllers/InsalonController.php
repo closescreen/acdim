@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Inbank;
+use app\models\Org_bindings;
 use Yii;
 use app\models\Insalon;
 use app\models\InsalonSearch;
@@ -45,10 +47,10 @@ class InsalonController extends Controller
             $dataProvider->query->andFilterWhere(['salon_id'=>$org_id]);
         }
 
-        if ( $org_type_id == 'bank'){
+        //if ( $org_type_id == 'bank'){
             // банки должны видеть только заявки приязанных салонов
             // но в эту функцию они пока не попадают
-        }
+        //}
 
         // ( админы видят всех )
 
@@ -74,13 +76,62 @@ class InsalonController extends Controller
 
     // ------------------- distribute_to_banks --------------------
     // раскидывает заявку insalon_id по банкам [bank_id1, bank_id2, ...]
-    public function distribute_to_banks( $insalon_id, $org_ids ){
-        // найти insalon_id + salon_id
+    // id - insalon.id
+    public function actionDistrib_to_banks(){
+        $insalon_post =  Yii::$app->request->post('Insalon');
+        $insalon_id = $insalon_post['id'];
+
+        $insalon_model = Insalon::find()->where(['id'=>$insalon_id])->one();
+        if (!$insalon_model) throw new NotFoundHttpException("Нет заявки ${insalon_id}");
+
+        // для каких банков уже есть записи в inbank при данном insalon_id
+        $exists_inbank_id = Inbank::find(['insalon_id'=>$insalon_id])
+            ->indexBy('bank_id')->asArray()
+            ->select(['id'])->column();
+        // Должно получиться Array('bank_id'=>'id')
 
 
-        if ( !$org_ids ){
-            $org_ids = [];// список привязанных банков
+        // список привязанных банков
+        $bindings = Org_bindings::find()
+                ->where(['salon_id'=>$insalon_id])
+                ->asArray()->indexBy('bank_id')->select(['bank_id'])
+                ->column();
+            // получим: Array(bank_id=>bank_id)
+
+            // для текущего salon_id
+            //  для каждого bank_id
+            //   должно иметься по одной строке в inbank
+            // Тогда считаем, что все банки увидели заявку.
+
+
+        // для каждого связанного банка
+        foreach ($bindings as $bank_id){
+
+                // если записи еще нет
+                if( !isset( $exists_inbank_id[$bank_id] )){
+                    // создать запись в inbanks
+                    $new_inbank_model = new Inbank();
+                    $new_inbank_model->insalon_id = $insalon_id;
+                    $new_inbank_model->bank_id = $bank_id;
+                    $new_inbank_model->changed_by_user_id = 0;
+                    $new_inbank_model->state_id = 'new';
+
+                    $new_inbank_model->save();
+
+
+                    if ($new_inbank_model->save()){
+                        // insalon model:
+
+                    }else{
+                        // ошибка сохранения
+                        debug($new_inbank_model->errors);
+                        exit;
+                    }
+                }
         }
+
+        $model = $this->findModel( $insalon_id );
+        return $this->render('update', compact('model'));
     }
 
 

@@ -10,6 +10,7 @@ class Org_bindings extends ActiveRecord{
         $this->hasOne( Orgs::className(), ['id' => 'bank_id'] );
     }
 
+    // связь с салоном
     public function getSalon_id(){
         $this->hasOne( Orgs::className(), ['id' => 'salon_id'] );
     }

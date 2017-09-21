@@ -9,9 +9,9 @@ use yii\widgets\ActiveForm;
 
     <? if($model->active): ?>
 
-        <?php $form = ActiveForm::begin(['action'=>['distrib_in_banks']]); ?>
+        <?php $form = ActiveForm::begin(['action'=>['distrib_to_banks']]); ?>
 
-        <?= $form->field($model, 'salon_id')->textInput() ?>
+        <?= $form->field($model, 'id')->textInput() ?>
 
          <div class="form-group">
             <?= Html::submitButton( 'Отослать во все банки' ) ?>
