@@ -12,22 +12,8 @@ use yii\filters\VerbFilter;
 /**
  * InbankController implements the CRUD actions for Inbank model.
  */
-class InbankController extends Controller
+class InbankController extends AppController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
 
     // ------------------------------------ index --------------------------------

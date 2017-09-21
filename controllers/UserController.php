@@ -3,11 +3,11 @@
 namespace app\controllers;
 
 use Yii;
-use yii\filters\AccessControl;
+//use yii\filters\AccessControl;
 //use yii\web\Controller;
 //use yii\web\UploadedFile;
-use yii\web\Response;
-use yii\filters\VerbFilter;
+//use yii\web\Response;
+//use yii\filters\VerbFilter;
 //use app\models\Org_types;
 //use app\models\Orgs;
 use app\models\Users;
@@ -15,8 +15,8 @@ use app\models\Orgs;
 use app\models\UsersSearch;
 use yii\helpers\Url;
 
-use yii\helpers\Html;
-use yii\data\Pagination;
+//use yii\helpers\Html;
+//use yii\data\Pagination;
 
 class UserController extends AppController
 {

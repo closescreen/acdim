@@ -7,29 +7,15 @@ use app\models\Org_bindings;
 use Yii;
 use app\models\Insalon;
 use app\models\InsalonSearch;
-use yii\web\Controller;
+//use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
  * InsalonController implements the CRUD actions for Insalon model.
  */
-class InsalonController extends Controller
+class InsalonController extends AppController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
 
     // -------------------- index -------------------------
     public function actionIndex()

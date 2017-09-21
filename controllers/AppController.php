@@ -28,6 +28,7 @@ class AppController extends Controller
             'access' => [
                 'class' => AccessControl::className(),
                 'denyCallback' => function($rule,$action){
+
                     if (Yii::$app->user->identity){
                         $un = Yii::$app->user->identity->username;
                         $oti = Yii::$app->user->identity->org_type_id;
@@ -44,8 +45,9 @@ class AppController extends Controller
                     
                 },
                 // 'only' => ['login','logout','index'], // что ловит (остальное- разрешено)
-                'except' => ['error'],  // разрешаем всем видеть ошибку
+                //'except' => ['error'],  // разрешаем всем видеть ошибку
                 'rules' => [
+
                     [
                         'controllers' => ['site'],
                         'actions' => ['login','index'],
@@ -58,35 +60,35 @@ class AppController extends Controller
                         'allow' => true,
                         'roles' => ['@'],
                     ],
+
                     [
                         'controllers' => ['user','org','org_binding'],
                         // 'actions' => ['index'],
                         'allow' => true,
                         'matchCallback' => function($role,$action){
-                           debug('сработало');
-                           exit;
+
                            return  Yii::$app->user->identity and
                                Yii::$app->user->identity->in(['admins']);
                         }
                     ],
+
                     [
                         'controllers' => ['insalon'],
-                        // 'actions' => ['index'],
+                        //'actions' => ['index'],
                         'allow' => true,
                         'matchCallback' => function($role,$action){
-                            debug('сработало');
-                            exit;
+
                             return  Yii::$app->user->identity and
                                 Yii::$app->user->identity->in(['admins','salon']);
                         }
                     ],
+
                     [
                         'controllers' => ['inbank'],
                         //'actions' => ['index'],
                         'allow' => true,
                         'matchCallback' => function($role,$action){
-                            debug('сработало');
-                            exit;
+ 
                             return  Yii::$app->user->identity and
                                 Yii::$app->user->identity->in(['admins','bank']);
                         }
@@ -98,8 +100,10 @@ class AppController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'logout' => ['post'],
+                    'delete' => ['POST'],
                 ],
             ],
+
         ];
     }
 
