@@ -29,6 +29,8 @@ class InbankController extends Controller
         ];
     }
 
+
+    // ------------------------------------ index --------------------------------
     /**
      * Lists all Inbank models.
      * @return mixed
@@ -38,12 +40,26 @@ class InbankController extends Controller
         $searchModel = new InbankSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $org_type_id = Yii::$app->user->identity->org_type_id;
+        $org_id = Yii::$app->user->identity->org_id;
+
+        if ( $org_type_id == 'bank' ){
+            // банки должны видеть заявки только по своему банку
+            $dataProvider->query->andFilterWhere(['bank_id'=>$org_id]);
+        }elseif ( $org_type_id == 'salon' ){
+            // салоны если и видят это вообще, то только по своему салону
+            // но тут нужно присоединенные данные insalon.salon_id
+            // $dataProvider->query->andFilterWhere(['bank_id'=>$org_id]);
+        }
+
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
+
+    // ------------------------------------- view ----------------------------------
     /**
      * Displays a single Inbank model.
      * @param integer $id
@@ -74,6 +90,8 @@ class InbankController extends Controller
         }
     }
 
+
+    // -------------------------------- Update ---------------------------------
     /**
      * Updates an existing Inbank model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -93,6 +111,7 @@ class InbankController extends Controller
         }
     }
 
+    // -------------------------------- delete -------------------------------------
     /**
      * Deletes an existing Inbank model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
@@ -106,6 +125,8 @@ class InbankController extends Controller
         return $this->redirect(['index']);
     }
 
+
+    // ---------------------------------- findModel ---------------------------------
     /**
      * Finds the Inbank model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.

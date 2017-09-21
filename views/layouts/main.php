@@ -61,7 +61,7 @@ AppAsset::register($this);
                 $insalon_menu : '' ),
 
             // только банкам:
-            ( Yii::$app->user->identity && Yii::$app->user->identity->in(['salon','admins']) ?
+            ( Yii::$app->user->identity && Yii::$app->user->identity->in(['bank','admins']) ?
                 $inbank_menu : '' ),
 
 

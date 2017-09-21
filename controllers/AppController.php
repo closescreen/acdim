@@ -44,7 +44,7 @@ class AppController extends Controller
                     
                 },
                 // 'only' => ['login','logout','index'], // что ловит (остальное- разрешено)
-                 'except' => ['error'],  // разрешаем всем видеть ошибку
+                'except' => ['error'],  // разрешаем всем видеть ошибку
                 'rules' => [
                     [
                         'controllers' => ['site'],
@@ -63,6 +63,8 @@ class AppController extends Controller
                         // 'actions' => ['index'],
                         'allow' => true,
                         'matchCallback' => function($role,$action){
+                           debug('сработало');
+                           exit;
                            return  Yii::$app->user->identity and
                                Yii::$app->user->identity->in(['admins']);
                         }
@@ -72,15 +74,19 @@ class AppController extends Controller
                         // 'actions' => ['index'],
                         'allow' => true,
                         'matchCallback' => function($role,$action){
+                            debug('сработало');
+                            exit;
                             return  Yii::$app->user->identity and
                                 Yii::$app->user->identity->in(['admins','salon']);
                         }
                     ],
                     [
                         'controllers' => ['inbank'],
-                        // 'actions' => ['index'],
+                        //'actions' => ['index'],
                         'allow' => true,
                         'matchCallback' => function($role,$action){
+                            debug('сработало');
+                            exit;
                             return  Yii::$app->user->identity and
                                 Yii::$app->user->identity->in(['admins','bank']);
                         }
