@@ -74,4 +74,8 @@ class Inbank extends \yii\db\ActiveRecord
     public function getState(){
         return $this->hasOne(Rstates::className(), ['id'=>'state_id']);
     }
+
+    public function getMessages(){
+        return $this->hasMany(Messages)
+    }
 }
