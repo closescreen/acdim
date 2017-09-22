@@ -30,6 +30,7 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
         'filterModel' => $searchModel,
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
+            ['class' => 'yii\grid\ActionColumn','template' => '{update}',],
 
             'id',
             //'active',
@@ -51,7 +52,7 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
             // 'b4',
             // 'b5',
 
-            ['class' => 'yii\grid\ActionColumn'],
+
         ],
     ]); ?>
 

@@ -96,11 +96,18 @@ class InbankController extends AppController
 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        return $this->redirect(['index',
+                'id' => $model->id,
+                'states'=>$states
+                ]
+            );
+            /*  редирект на view
             return $this->redirect(['view',
                 'id' => $model->id,
                 'states'=>$states
                 ]
             );
+        */
         } else {
             return $this->render('update', [
                 'model' => $model,
