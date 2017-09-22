@@ -62,15 +62,20 @@ class MessageController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionCreate()
+    public function actionCreate($inbank_id)
     {
         $model = new Message();
+        $model->inbank_id = $inbank_id;
+        $model->created_by_user_id = Yii::$app->user->identity->id;
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $model->created_by_user_id = Yii::$app->user->identity->id; // перезапись
+            $model->created = null; // бд вставит timestamp
             return $this->redirect(['view', 'id' => $model->id, 'created_by_user_id' => $model->created_by_user_id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'inbank_id' => $inbank_id,
             ]);
         }
     }

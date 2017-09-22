@@ -3,7 +3,9 @@
 namespace app\controllers;
 
 use app\models\Insalon;
+use app\models\Message;
 use app\models\Messages;
+use app\models\MessageSearch;
 use app\models\Rstates;
 use Yii;
 use app\models\Inbank;
@@ -95,7 +97,11 @@ class InbankController extends AppController
 
         $states =  ArrayHelper::map(Rstates::find()->all(), 'id', 'name');
 
-        $messages = Messages::find()->where(['inbank_id'=>$id]);
+        $messages = Message::find()->where(['inbank_id'=>$id])->all();
+
+        $messageSearchModel = new MessageSearch();
+        // тут наверняка никаких параметров
+        $messageDataProvider = $messageSearchModel->search(Yii::$app->request->queryParams);
 
 
 
@@ -117,6 +123,8 @@ class InbankController extends AppController
                 'model' => $model,
                 'states'=> $states,
                 'messages'=> $messages,
+                'messageSearchModel' => $messageSearchModel,
+                'messageDataProvider' => $messageDataProvider,
             ]);
         }
     }

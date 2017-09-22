@@ -18,3 +18,14 @@ $this->params['breadcrumbs'][] = 'Заявка #'.$model->id;
     ]) ?>
 
 </div>
+
+
+<div class="message-list">
+
+    <?= $this->render('_messages', [
+        'messages' => $messages,
+        //'messageDataProvider'=>$messageDataProvider,
+        'inbank_model' => $model,
+    ]) ?>
+
+</div>

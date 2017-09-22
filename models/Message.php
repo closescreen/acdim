@@ -31,7 +31,8 @@ class Message extends \yii\db\ActiveRecord
         return [
             [['inbank_id', 'created_by_user_id'], 'required'],
             [['inbank_id', 'created_by_user_id'], 'integer'],
-            [['created', 'text'], 'string', 'max' => 45],
+            [['created'], 'string', 'max' => 45],
+            [['text'], 'string', 'max' => 65535 ],
         ];
     }
 
@@ -43,9 +44,9 @@ class Message extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'inbank_id' => 'Inbank ID',
-            'created' => 'Created',
-            'created_by_user_id' => 'Created By User ID',
-            'text' => 'Text',
+            'created' => 'Создано',
+            'created_by_user_id' => 'Изменено пользователем',
+            'text' => 'Текст',
         ];
     }
 }
