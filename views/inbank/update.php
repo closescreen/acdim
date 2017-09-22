@@ -12,8 +12,6 @@ $this->params['breadcrumbs'][] = 'Заявка #'.$model->id;
 ?>
 <div class="inbank-update">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <?= $this->render('_form', [
         'model' => $model,
         'states'=>$states,

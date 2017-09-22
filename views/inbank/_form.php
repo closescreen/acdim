@@ -14,18 +14,50 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
+    <?php
+        $client_string = $model->insalon->client_tname
+            . ' ' . $model->insalon->client_fname
+            . ' ' . $model->insalon->client_sname
+            . ' (' . $model->insalon->client_bdate . ')';
 
-    <?= $form->field($model, 'state_id')->dropDownList($states) ?>
+        $avto_string = $model->insalon->car_model
+            . ' ' . $model->insalon->car_year . ' года';
 
-    <?= $form->field($model, 'state_desc')->textInput(['maxlength' => true]) ?>
+        $price_string = ' Cтоимость: ' . $model->insalon->car_price .' руб';
+
+        $eq_string = 'Оборудование:' . $model->insalon->equipment_desc
+            . ' стоимостью ' . $model->insalon->equipment_cost . ' руб';
+    $style1 = ['disabled'=>'disabled', 'style'=>'width:100%;'];
+
+    ?>
+
+
+    <?= Html::label('Клиент: ')
+        . HTML::textInput('client_string',$client_string, $style1) ?><br>
+    <?= Html::label('Авто: ')
+        . HTML::textInput('avto_string',$avto_string, $style1) ?><br>
+    <?= Html::label('Стоимость: ')
+        . HTML::textInput('pr_string',$price_string, $style1) ?><br>
+    <?= Html::label('Оборудование: ')
+        . HTML::textInput('eq_string',$eq_string, $style1) ?><br>
+
+    <?= $form->field($model, 'state_id')->dropDownList($states)
+        ->label('Состояние') ?>
+
+    <?= $form->field($model, 'state_desc')->textInput(['maxlength' => true])
+        ->label('Примечания') ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ?
+            'Create' : 'Update',
+            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
-    <?= $form->field($model, 'changed')->textInput(['disabled'=>'disabled']) ?>
+    <?= $form->field($model, 'changed')->textInput(['disabled'=>'disabled'])
+        ->label('Изменено') ?>
 
-    <?= $form->field($model, 'changed_by_user_id')->textInput(['disabled'=>'disabled']) ?>
+    <?= $form->field($model, 'changed_by_user_id')->textInput(['disabled'=>'disabled'])
+        ->label('Изменено пользователем') ?>
 
 
     <?php ActiveForm::end(); ?>

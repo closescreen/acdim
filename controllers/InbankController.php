@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Insalon;
+use app\models\Messages;
 use app\models\Rstates;
 use Yii;
 use app\models\Inbank;
@@ -94,11 +95,14 @@ class InbankController extends AppController
 
         $states =  ArrayHelper::map(Rstates::find()->all(), 'id', 'name');
 
+        $messages = Messages::find()->where(['inbank_id'=>$id]);
+
+
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
         return $this->redirect(['index',
                 'id' => $model->id,
-                'states'=>$states
+                'states'=>$states,
                 ]
             );
             /*  редирект на view
@@ -112,6 +116,7 @@ class InbankController extends AppController
             return $this->render('update', [
                 'model' => $model,
                 'states'=> $states,
+                'messages'=> $messages,
             ]);
         }
     }
