@@ -66,22 +66,30 @@ class InsalonController extends AppController
     public function actionDistrib_to_banks(){
         $insalon_post =  Yii::$app->request->post('Insalon');
         $insalon_id = $insalon_post['id'];
+        if (!$insalon_id){
+            throw new \Exception('insalon_id!');
+        }
 
         $insalon_model = Insalon::find()->where(['id'=>$insalon_id])->one();
         if (!$insalon_model) throw new NotFoundHttpException("Нет заявки ${insalon_id}");
 
         // для каких банков уже есть записи в inbank при данном insalon_id
-        $exists_inbank_id = Inbank::find(['insalon_id'=>$insalon_id])
+        $exists_inbank_id = Inbank::find()->where(['insalon_id'=>$insalon_id])
             ->indexBy('bank_id')->asArray()
             ->select(['id'])->column();
         // Должно получиться Array('bank_id'=>'id')
+        //debug( $exists_inbank_id);
+        //exit;
 
 
         // список привязанных банков
         $bindings = Org_bindings::find()
-                ->where(['salon_id'=>$insalon_id])
+                ->where([ 'salon_id'=>$insalon_model->salon_id ])
                 ->asArray()->indexBy('bank_id')->select(['bank_id'])
                 ->column();
+
+            //debug($bindings);
+            //exit;
             // получим: Array(bank_id=>bank_id)
 
             // для текущего salon_id
@@ -125,12 +133,12 @@ class InsalonController extends AppController
     public function actionCreate()
     {
         $model = new Insalon();
-
+        $model->active = 1; // в форме уже должно быть активно
 
         if ($model->load(Yii::$app->request->post()) ) {
 
             // задание уже известных полей:
-            $model->active = 1;
+            $model->active = 1; // нет смысла содавать неактивную
             $model->created_by_user_id = Yii::$app->user->identity->id;
             $model->changed_by_user_id = Yii::$app->user->identity->id;
             $model->salon_id = Yii::$app->user->identity->org_id;
