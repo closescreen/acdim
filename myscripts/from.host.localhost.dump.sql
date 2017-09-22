@@ -37,7 +37,7 @@ CREATE TABLE `inbank` (
   `b4` varchar(255) NOT NULL DEFAULT '',
   `b5` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,6 +46,7 @@ CREATE TABLE `inbank` (
 
 LOCK TABLES `inbank` WRITE;
 /*!40000 ALTER TABLE `inbank` DISABLE KEYS */;
+INSERT INTO `inbank` VALUES (7,1,4,5,'2017-09-22 07:57:38',0,'new','','','','','',''),(8,1,4,7,'2017-09-22 07:57:38',0,'new','','','','','',''),(9,1,3,5,'2017-09-22 09:40:13',0,'new','Видим cкоро возьмем','','','','',''),(10,1,3,7,'2017-09-22 07:58:05',0,'new','','','','','','');
 /*!40000 ALTER TABLE `inbank` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -81,7 +82,7 @@ CREATE TABLE `insalon` (
   `s4` varchar(255) NOT NULL,
   `s5` varchar(255) NOT NULL,
   PRIMARY KEY (`id`,`active`,`salon_id`,`created_by_user_id`,`changed_by_user_id`,`client_tname`,`client_phone`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -90,7 +91,7 @@ CREATE TABLE `insalon` (
 
 LOCK TABLES `insalon` WRITE;
 /*!40000 ALTER TABLE `insalon` DISABLE KEYS */;
-INSERT INTO `insalon` VALUES (2,0,2,'2017-09-20 08:10:19',20,'2017-09-20 12:43:45',20,'asdf','asdf','asdf','1980-02-01','  34563456',3456,3456,100,'sdf','sdf',1900,'','','','',''),(3,1,2,'2017-09-20 12:35:18',20,'2017-09-20 12:40:58',20,'Петр','Пертович','Петров','1995-06-05','0987987987',5000,123,0,'','Lada',1945,'','','','','');
+INSERT INTO `insalon` VALUES (2,0,2,'2017-09-20 08:10:19',20,'2017-09-20 12:43:45',20,'asdf','asdf','asdf','1980-02-01','  34563456',3456,3456,100,'sdf','sdf',1900,'','','','',''),(3,1,2,'2017-09-20 12:35:18',20,'2017-09-20 12:40:58',20,'Петр','Пертович','Петров','1995-06-05','0987987987',5000,123,0,'','Lada',1945,'','','','',''),(4,1,2,'2017-09-22 07:39:07',20,'2017-09-22 07:39:07',20,'Валерия','Витальевна','Иванова','1990-03-04','9879879879',500000,10000,5000,'','Патриот ВАЗ---',2015,'коммент','','','','');
 /*!40000 ALTER TABLE `insalon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -104,11 +105,11 @@ DROP TABLE IF EXISTS `messages`;
 CREATE TABLE `messages` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `inbank_id` int(11) NOT NULL,
-  `created` varchar(45) NOT NULL DEFAULT 'current_timestamp',
+  `created` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `created_by_user_id` int(11) NOT NULL,
   `text` varchar(45) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`,`created_by_user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -262,4 +263,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-20 20:49:57
+-- Dump completed on 2017-09-22 16:16:02
