@@ -54,15 +54,71 @@ $this->params['breadcrumbs'][] = $this->title;
     ] ) ?>
     <?= Html::endTag('div')?>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id, 'active' => $model->active, 'salon_id' => $model->salon_id, 'created_by_user_id' => $model->created_by_user_id, 'changed_by_user_id' => $model->changed_by_user_id, 'client_tname' => $model->client_tname, 'client_phone' => $model->client_phone], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id, 'active' => $model->active, 'salon_id' => $model->salon_id, 'created_by_user_id' => $model->created_by_user_id, 'changed_by_user_id' => $model->changed_by_user_id, 'client_tname' => $model->client_tname, 'client_phone' => $model->client_phone], [
+ <!--   <p>
+        <?/*= Html::a('Update', [
+                'update',
+            'id' => $model->id,
+            'active' => $model->active,
+            'salon_id' => $model->salon_id,
+            'created_by_user_id' => $model->created_by_user_id,
+            'changed_by_user_id' => $model->changed_by_user_id,
+            'client_tname' => $model->client_tname,
+            'client_phone' => $model->client_phone
+        ], ['class' => 'btn btn-primary']) */?>
+
+        <?/*= Html::a('Delete', [
+                'delete',
+            'id' => $model->id,
+            'active' => $model->active,
+            'salon_id' => $model->salon_id,
+            'created_by_user_id' => $model->created_by_user_id,
+            'changed_by_user_id' => $model->changed_by_user_id,
+            'client_tname' => $model->client_tname,
+            'client_phone' => $model->client_phone
+        ], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Are you sure you want to delete this item?',
                 'method' => 'post',
             ],
-        ]) ?>
-    </p>
+        ]) */?>
+    </p>-->
 
+</div>
+
+<div class="inbanks">
+    <? foreach ($model->inbanks as $inbank): ?>
+        <div class="container-fluid">
+            <!-- банк -->
+            <h2><?= $inbank->bank->name ?>  </h2>
+            <? foreach ($inbank->messages as $message): ?>
+                <!-- сообщения по inbank -->
+                <?php
+                // наше ли это сообщение
+                $is_our_msg = ( $message->author->org_id == Yii::$app->user->identity->org_id);
+                // fio автора
+                $author_fio = $message->author->fio;
+                // организация-автор сообщения:
+                $author_org_name = $message->author->org->name;
+
+//                что-то со стилями не работает:
+                $div = $is_our_msg ?
+                    Html::beginTag('div', ['class'=>"alert alert-light", 'role'=>"alert"]):
+                    Html::beginTag('div', ['class'=>"alert alert-primary", 'role'=>"alert"]);
+
+                ?>
+
+                <b><?= $is_our_msg ? $author_fio : $author_org_name ?></b>
+                <?= $div ?>
+                    <?= "our: $is_our_msg" ?>
+                    <?= $message->text ?>
+                </div>
+
+
+
+            <? endforeach;?>
+
+        </div>
+
+    <? endforeach;?>
 </div>

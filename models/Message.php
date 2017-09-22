@@ -49,4 +49,8 @@ class Message extends \yii\db\ActiveRecord
             'text' => 'Текст',
         ];
     }
+
+    public function getAuthor(){
+        return $this->hasOne( Users::className(), ['id'=>'created_by_user_id']);
+    }
 }

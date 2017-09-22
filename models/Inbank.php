@@ -76,6 +76,10 @@ class Inbank extends \yii\db\ActiveRecord
     }
 
     public function getMessages(){
-        return $this->hasMany(Messages::className(), ['inbank_id'=>'id']);
+        return $this->hasMany(Message::className(), ['inbank_id'=>'id']);
+    }
+
+    public function getBank(){
+        return $this->hasOne(Orgs::className(), ['id'=>'bank_id']);
     }
 }
