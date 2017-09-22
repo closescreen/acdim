@@ -14,11 +14,6 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'active')->checkbox() ?>
-
-    <?= $form->field($model, 'changed')->textInput(['disabled'=>'disabled']) ?>
-
-    <?= $form->field($model, 'changed_by_user_id')->textInput() ?>
 
     <?= $form->field($model, 'state_id')->dropDownList($states) ?>
 
@@ -27,6 +22,11 @@ use yii\widgets\ActiveForm;
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
+
+    <?= $form->field($model, 'changed')->textInput(['disabled'=>'disabled']) ?>
+
+    <?= $form->field($model, 'changed_by_user_id')->textInput(['disabled'=>'disabled']) ?>
+
 
     <?php ActiveForm::end(); ?>
 
