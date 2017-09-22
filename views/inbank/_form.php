@@ -47,17 +47,19 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'state_desc')->textInput(['maxlength' => true])
         ->label('Примечания') ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ?
-            'Create' : 'Update',
-            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
 
     <?= $form->field($model, 'changed')->textInput(['disabled'=>'disabled'])
         ->label('Изменено') ?>
 
     <?= $form->field($model, 'changed_by_user_id')->textInput(['disabled'=>'disabled'])
         ->label('Изменено пользователем') ?>
+
+    <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ?
+            'Create' : 'Update',
+            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+    </div>
+
 
 
     <?php ActiveForm::end(); ?>
