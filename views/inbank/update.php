@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Html;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Inbank */
@@ -61,5 +62,11 @@ $this->params['breadcrumbs'][] = 'Заявка #'.$model->id;
         //'messageDataProvider'=>$messageDataProvider,
         'inbank_model' => $model,
     ]) ?>
+
+</div>
+
+<div class="answer-form">
+    <? Url::remember(); ?>
+    <?= $this->render('_answer_form',['inbank_model'=>$model]) ?>
 
 </div>

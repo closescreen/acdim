@@ -35,11 +35,11 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
-    <p>
-        <?= Html::a('Новое сообщение', ['message/create', 'inbank_id' => $inbank_model->id],
-                ['class' => 'btn btn-success']
-        ); ?>
-    </p>
+<!--    <p>-->
+<!--        --><?//= Html::a('Новое сообщение', ['message/create', 'inbank_id' => $inbank_model->id],
+//                ['class' => 'btn btn-success']
+//        ); ?>
+<!--    </p>-->
 
  </div>
 
