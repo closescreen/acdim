@@ -8,26 +8,14 @@ use app\models\UploadSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * UploadController implements the CRUD actions for Upload model.
  */
-class UploadController extends Controller
+class UploadController extends AppController
 {
-    /**
-     * @inheritdoc
-     */
-    public function behaviors()
-    {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
-    }
+
 
     /**
      * Lists all Upload models.
@@ -44,6 +32,8 @@ class UploadController extends Controller
         ]);
     }
 
+
+
     /**
      * Displays a single Upload model.
      * @param integer $id
@@ -56,6 +46,8 @@ class UploadController extends Controller
         ]);
     }
 
+
+    // ---------------------------- create -------------------------
     /**
      * Creates a new Upload model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -65,9 +57,40 @@ class UploadController extends Controller
     {
         $model = new Upload();
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+
+        if ($model->load(Yii::$app->request->post())) {
+            $model->created = null;
+            $model->changed = null;
+            $model->created_by_user_id = Yii::$app->user->identity->id;
+            $model->changed_by_user_id = Yii::$app->user->identity->id;
+            $model->active = 1;
+            $model->file_name = UploadedFile::getInstance($model, 'file_name');
+            // filename ???
+//            debug($model);
+//            debug( Yii::$app->request->post() );
+//            debug($_FILES);
+ //           debug($model->file_name);
+ //           exit;
+            if ($model->file_name) {
+                if ($model->validate()) {
+
+                    debug($model->file_name);
+                    exit;
+
+                    $model->file->saveAs('uploads/org'.
+                        Yii::$app->user->. $model->file->baseName . '.' . $model->file->extension);
+
+                    return $this->redirect(['view', 'id' => $model->id]);
+                }
+                else{
+                        debug('NO');
+                        debug($model->errors);
+                        exit;
+                }
+            }
         } else {
+;
+            $model->active = 1;
             return $this->render('create', [
                 'model' => $model,
             ]);

@@ -34,10 +34,11 @@ class Upload extends \yii\db\ActiveRecord
     {
         return [
             [['active', 'created_by_user_id', 'changed_by_user_id'], 'integer'],
+            //  попробовать 'value' => null
             [['created', 'changed'], 'safe'],
-            [['created_by_user_id', 'changed_by_user_id', 'content', 'file_name', 'file_desc'], 'required'],
-            [['content'], 'string'],
-            [['file_name', 'file_desc'], 'string', 'max' => 255],
+            [['created_by_user_id', 'changed_by_user_id', 'file_name', 'file_desc'], 'required'],
+            [['file_name'], 'file'],
+            [[ 'file_desc'], 'string', 'max' => 255],
         ];
     }
 
@@ -48,14 +49,14 @@ class Upload extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'active' => 'Active',
-            'created' => 'Created',
-            'created_by_user_id' => 'Created By User ID',
-            'changed' => 'Changed',
-            'changed_by_user_id' => 'Changed By User ID',
-            'content' => 'Content',
-            'file_name' => 'File Name',
-            'file_desc' => 'File Desc',
+            'active' => 'Активно',
+            'created' => 'Создано',
+            'created_by_user_id' => 'Создано пользователем',
+            'changed' => 'Изменено',
+            'changed_by_user_id' => 'Изменено пользователем',
+            'content' => 'Содержимое',
+            'file_name' => 'Файл',
+            'file_desc' => 'Описание файла',
         ];
     }
 }
