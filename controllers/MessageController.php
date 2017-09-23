@@ -5,6 +5,7 @@ namespace app\controllers;
 use Yii;
 use app\models\Message;
 use app\models\MessageSearch;
+use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -57,6 +58,41 @@ class MessageController extends Controller
         ]);
     }
 
+    /*
+     * по сути то же что и create, только ловим простую форму, не active record
+     * actionCreat мб. вообще уберем
+     */
+    public function actionAnswer($inbank_id){
+        $model = new Message();
+        $model->inbank_id = $inbank_id;
+        $model->created_by_user_id = Yii::$app->user->identity->id;
+        $model->created_by_user_id = Yii::$app->user->identity->id; // перезапись
+        $model->created = null; // бд вставит timestamp
+
+        if ( $model->load(Yii::$app->request->post(),'' )) {
+//            debug(Yii::$app->request->post());
+//            debug($model);
+//            debug($model->errors);
+//            exit;
+
+            if ($model->save()) {
+                // чтоб знать куда редиректить нужны данные
+                //return $this->redirect(['view', 'id' => $model->id, 'created_by_user_id' => $model->created_by_user_id]);
+                $url = Url::previous();
+                return $this->redirect($url);
+
+            }
+        }else {
+            return $this->render('create', [
+                'model' => $model,
+                'inbank_id' => $inbank_id,
+            ]);
+        }
+    }
+
+
+
+
     /**
      * Creates a new Message model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -64,6 +100,8 @@ class MessageController extends Controller
      */
     public function actionCreate($inbank_id)
     {
+        debug('deprecated create called');
+        exit;
         $model = new Message();
         $model->inbank_id = $inbank_id;
         $model->created_by_user_id = Yii::$app->user->identity->id;
@@ -73,7 +111,7 @@ class MessageController extends Controller
 //        $model->load(Yii::$app->request->post(),'');
 
 
-        if ( $model->load(Yii::$app->request->post(),'')) {
+        if ( $model->load(Yii::$app->request->post() )) {
 //            debug(Yii::$app->request->post());
 //            debug($model);
 //            debug($model->errors);
