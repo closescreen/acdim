@@ -89,7 +89,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="inbanks">
     <? foreach ($model->inbanks as $inbank): ?>
         <div class="container-fluid">
-            <!-- банк -->
+            <!-- по банку -->
             <h2><?= $inbank->bank->name ?>  </h2>
             <? foreach ($inbank->messages as $message): ?>
                 <!-- сообщения по inbank -->
@@ -117,6 +117,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
             <? endforeach;?>
+
+            <?= $this->render('_message_form', ['inbank_model'=>$inbank] ) ?>
 
         </div>
 

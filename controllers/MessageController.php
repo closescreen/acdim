@@ -67,12 +67,22 @@ class MessageController extends Controller
         $model = new Message();
         $model->inbank_id = $inbank_id;
         $model->created_by_user_id = Yii::$app->user->identity->id;
+        $model->created_by_user_id = Yii::$app->user->identity->id; // перезапись
+        $model->created = null; // бд вставит timestamp
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            $model->created_by_user_id = Yii::$app->user->identity->id; // перезапись
-            $model->created = null; // бд вставит timestamp
-            return $this->redirect(['view', 'id' => $model->id, 'created_by_user_id' => $model->created_by_user_id]);
-        } else {
+//        $model->load(Yii::$app->request->post(),'');
+
+
+        if ( $model->load(Yii::$app->request->post(),'')) {
+//            debug(Yii::$app->request->post());
+//            debug($model);
+//            debug($model->errors);
+//            exit;
+
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id, 'created_by_user_id' => $model->created_by_user_id]);
+            }
+        }else {
             return $this->render('create', [
                 'model' => $model,
                 'inbank_id' => $inbank_id,

@@ -45,7 +45,7 @@ class AppController extends Controller
                     
                 },
                 // 'only' => ['login','logout','index'], // что ловит (остальное- разрешено)
-                //'except' => ['error'],  // разрешаем всем видеть ошибку
+                'except' => ['error'],  // разрешаем всем видеть ошибку
                 'rules' => [
 
                     [
