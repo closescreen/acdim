@@ -23,7 +23,7 @@ $this->title = 'Загруженные файлы';
         ?>
 
         <div class="<?=$class?>">
-            <?= $upload->file_name?>
+            <?= Html::a($upload->file_name, ['upload/download','id'=>$upload->id]) ?>
             ( <?= Html::encode( $upload->file_desc ) ?> ) <br>
         </div>
 

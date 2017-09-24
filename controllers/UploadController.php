@@ -147,7 +147,7 @@ class UploadController extends AppController
         if ($upload_model === null) throw new NotFoundHttpException('Not found');
 
         return Yii::$app->response
-            ->sendFile( $upload_model->file_real_name );
+            ->sendFile( $upload_model->file_real_name, $upload_model->file_name )->send();
 
     }
 
