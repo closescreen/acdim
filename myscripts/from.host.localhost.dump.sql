@@ -239,7 +239,6 @@ CREATE TABLE `uploads` (
   `created_by_user_id` int(11) NOT NULL,
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `changed_by_user_id` int(11) NOT NULL,
-  `content` mediumblob NOT NULL,
   `file_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `file_desc` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `inbank_id` int(11) NOT NULL,
@@ -295,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-23 20:10:37
+-- Dump completed on 2017-09-24 10:17:11
