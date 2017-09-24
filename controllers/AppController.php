@@ -104,6 +104,16 @@ class AppController extends Controller
                                 Yii::$app->user->identity->in(['admins','bank','salon']);
                         }
                     ],
+                    [
+                        'controllers' => ['message'],
+                        //'actions' => ['index'],
+                        'allow' => true,
+                        'matchCallback' => function($role,$action){
+
+                            return  Yii::$app->user->identity and
+                                Yii::$app->user->identity->in(['admins','bank','salon']);
+                        }
+                    ],
 
                 ],
             ],
