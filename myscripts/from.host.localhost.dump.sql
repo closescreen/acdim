@@ -240,10 +240,11 @@ CREATE TABLE `uploads` (
   `changed` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `changed_by_user_id` int(11) NOT NULL,
   `file_name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `file_desc` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `file_real_name` varchar(512) COLLATE utf8_unicode_ci NOT NULL,
+  `file_desc` varchar(512) COLLATE utf8_unicode_ci NOT NULL,
   `inbank_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -252,6 +253,7 @@ CREATE TABLE `uploads` (
 
 LOCK TABLES `uploads` WRITE;
 /*!40000 ALTER TABLE `uploads` DISABLE KEYS */;
+INSERT INTO `uploads` VALUES (5,1,'2017-09-24 11:34:13',26,'2017-09-24 11:34:13',26,'Beach_by_Renato_Giordanelli.jpg','/home/dima/avto-cred-dim/config/../web/uploads/2017-09/s2/b5//1506252853.1496_Beach_by_Renato_Giordanelli.jpg','aaaaaaaa',9),(6,1,'2017-09-24 12:01:49',26,'2017-09-24 12:01:49',26,'Безымянный документ.txt','/home/dima/avto-cred-dim/config/../web/uploads/2017-09/s2/b5//1506254509.5394_Безымянный документ.txt','Документ, который очень просили',9);
 /*!40000 ALTER TABLE `uploads` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,4 +296,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-24 10:17:11
+-- Dump completed on 2017-09-24 15:03:28
