@@ -65,8 +65,13 @@ $this->params['breadcrumbs'][] = 'Заявка #'.$model->id;
 
 </div>
 
-<div class="answer-form">
-    <? Url::remember(); ?>
-    <?= $this->render('_answer_form',['inbank_model'=>$model]) ?>
+<!-- запомнить урл-->
+<? Url::remember(); ?>
 
+<div class="answer-form">
+    <?= $this->render('_answer_form',['inbank_model'=>$model]) ?>
+</div>
+
+<div class="upload-file">
+    <?= $this->render('_upload_form', ['upload_model'=>$upload_model] ) ?>
 </div>

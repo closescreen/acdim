@@ -13,9 +13,9 @@ use Yii;
  * @property integer $created_by_user_id
  * @property string $changed
  * @property integer $changed_by_user_id
- * @property string $content
  * @property string $file_name
  * @property string $file_desc
+ * @property integer $inbank_id
  */
 class Upload extends \yii\db\ActiveRecord
 {
@@ -33,7 +33,7 @@ class Upload extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['active', 'created_by_user_id', 'changed_by_user_id'], 'integer'],
+            [['active', 'created_by_user_id', 'changed_by_user_id','inbank_id'], 'integer'],
             //  попробовать 'value' => null
             [['created', 'changed'], 'safe'],
             [['created_by_user_id', 'changed_by_user_id', 'file_name', 'file_desc'], 'required'],
@@ -54,9 +54,9 @@ class Upload extends \yii\db\ActiveRecord
             'created_by_user_id' => 'Создано пользователем',
             'changed' => 'Изменено',
             'changed_by_user_id' => 'Изменено пользователем',
-            'content' => 'Содержимое',
             'file_name' => 'Файл',
             'file_desc' => 'Описание файла',
+            'inbank_id' => 'inbank_id',
         ];
     }
 }

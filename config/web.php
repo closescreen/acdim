@@ -20,6 +20,11 @@ $config = [
         ]
 */
 //    ],
+
+    'aliases' => [
+         '@upload' => __DIR__ . '/../web/uploads',
+        ],
+
     'language' => 'ru-RU',
      
     'id' => 'basic',

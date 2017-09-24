@@ -7,6 +7,7 @@ use app\models\Message;
 use app\models\Messages;
 use app\models\MessageSearch;
 use app\models\Rstates;
+use app\models\UploadForm;
 use Yii;
 use app\models\Inbank;
 use app\models\InbankSearch;
@@ -104,7 +105,6 @@ class InbankController extends AppController
         $messageDataProvider = $messageSearchModel->search(Yii::$app->request->queryParams);
 
 
-
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
         return $this->redirect(['index',
                 'id' => $model->id,
@@ -119,12 +119,16 @@ class InbankController extends AppController
             );
         */
         } else {
+            $upload_model = new UploadForm();
+            $upload_model->inbank_id = $id;
+
             return $this->render('update', [
                 'model' => $model,
                 'states'=> $states,
                 'messages'=> $messages,
                 'messageSearchModel' => $messageSearchModel,
                 'messageDataProvider' => $messageDataProvider,
+                'upload_model' => $upload_model,
             ]);
         }
     }
