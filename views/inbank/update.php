@@ -55,6 +55,13 @@ $this->params['breadcrumbs'][] = 'Заявка #'.$model->id;
 */
 -->
 
+<div class="upload-list">
+    <?= $this->render('_uploads',[
+            'upload_model'=>$model->uploads,
+    ]) ?>
+
+</div>
+
 <div class="message-list">
 
     <?= $this->render('_messages', [

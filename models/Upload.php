@@ -14,6 +14,7 @@ use Yii;
  * @property string $changed
  * @property integer $changed_by_user_id
  * @property string $file_name
+ * @property string $file_real_name
  * @property string $file_desc
  * @property integer $inbank_id
  */
@@ -36,9 +37,16 @@ class Upload extends \yii\db\ActiveRecord
             [['active', 'created_by_user_id', 'changed_by_user_id','inbank_id'], 'integer'],
             //  попробовать 'value' => null
             [['created', 'changed'], 'safe'],
-            [['created_by_user_id', 'changed_by_user_id', 'file_name', 'file_desc'], 'required'],
+            [
+                ['created_by_user_id',
+                    'changed_by_user_id',
+                    'file_name',
+                    'file_real_name',
+                    'file_desc'],
+                'required'],
             [['file_name'], 'file'],
-            [[ 'file_desc'], 'string', 'max' => 255],
+            [[ 'file_desc'], 'string', 'max' => 512],
+            [['file_real_name'],'string','max'=>512],
         ];
     }
 

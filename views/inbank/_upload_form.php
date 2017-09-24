@@ -3,9 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-/* @var $this yii\web\View */
-/* @var $upload_model app\models\Upload */
-/* @var $form yii\widgets\ActiveForm */
+
 ?>
 
 <?php $form = ActiveForm::begin([

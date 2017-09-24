@@ -89,6 +89,7 @@ class UploadController extends AppController
                         $upload_ar_model = new Upload();
                         $upload_ar_model->inbank_id = $inbank_id;
                         $upload_ar_model->file_name = $upload_form_model->file_name;
+                        $upload_ar_model->file_real_name = $full_name;
                         $upload_ar_model->file_desc = $upload_form_model->file_desc;
                         $upload_ar_model->created = null;
                         $upload_ar_model->changed = null;
