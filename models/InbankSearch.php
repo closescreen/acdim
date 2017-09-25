@@ -10,7 +10,7 @@ use app\models\Inbank;
 /**
  * InbankSearch represents the model behind the search form about `app\models\Inbank`.
  */
-class InbankSearch extends Inbank
+class InbankSearch extends InbankLastMsgView // Inbank
 {
     /**
      * @inheritdoc
@@ -25,7 +25,6 @@ class InbankSearch extends Inbank
                 'insalon.client_fname',
                 'insalon.client_sname',
                 //'insalon.salon.name', - не работает
-
                 ], 'safe'],
         ];
     }
@@ -68,7 +67,29 @@ class InbankSearch extends Inbank
      */
     public function search($params)
     {
-        $query = Inbank::find()->joinWith('insalon.salon');
+
+//        // samle:
+//        $subQuery = (new Query())->select('COUNT(*)')->from('user');
+//        // SELECT `id`, (SELECT COUNT(*) FROM `user`) AS `count` FROM `post`
+//        $query = (new Query())->select(['id', 'count' => $subQuery])->from('post');
+
+        // samle: $query->leftJoin(['u' => $subQuery], 'u.id = author_id');
+
+//        $last_message_query = Message::find()->
+//            select(['inbank_id','max(id) as m_id'])
+//            ->from('messages')
+//            ->groupBy('inbank_id');
+
+
+        //$query = Inbank::find() //->select('b.*, m.text')
+
+        $query = InbankLastMsgView::find()
+            //->from('inbank b')
+            ->joinWith('insalon.salon');
+
+
+            //->leftJoin(['lm'=>$last_message_query], 'lm.inbank_id = b.id')
+            //->leftJoin(['m'=>'messages'], 'lm.m_id=m.id');
 
         // add conditions that should always apply here
 

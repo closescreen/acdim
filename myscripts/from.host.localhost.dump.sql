@@ -46,9 +46,37 @@ CREATE TABLE `inbank` (
 
 LOCK TABLES `inbank` WRITE;
 /*!40000 ALTER TABLE `inbank` DISABLE KEYS */;
-INSERT INTO `inbank` VALUES (7,1,4,5,'2017-09-22 07:57:38',0,'new','','','','','',''),(8,1,4,7,'2017-09-22 07:57:38',0,'new','','','','','',''),(9,1,3,5,'2017-09-22 09:40:13',0,'new','Видим cкоро возьмем','','','','',''),(10,1,3,7,'2017-09-22 07:58:05',0,'new','','','','','','');
+INSERT INTO `inbank` VALUES (7,1,4,5,'2017-09-22 07:57:38',0,'new','','','','','',''),(8,1,4,7,'2017-09-22 07:57:38',0,'new','','','','','',''),(9,1,3,5,'2017-09-25 09:51:54',0,'in-work','Видим cкоро возьмем','','','','',''),(10,1,3,7,'2017-09-22 07:58:05',0,'new','','','','','','');
 /*!40000 ALTER TABLE `inbank` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Temporary table structure for view `inbank_last_msg`
+--
+
+DROP TABLE IF EXISTS `inbank_last_msg`;
+/*!50001 DROP VIEW IF EXISTS `inbank_last_msg`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `inbank_last_msg` AS SELECT 
+ 1 AS `id`,
+ 1 AS `active`,
+ 1 AS `insalon_id`,
+ 1 AS `bank_id`,
+ 1 AS `changed`,
+ 1 AS `changed_by_user_id`,
+ 1 AS `state_id`,
+ 1 AS `state_desc`,
+ 1 AS `b1`,
+ 1 AS `b2`,
+ 1 AS `b3`,
+ 1 AS `b4`,
+ 1 AS `b5`,
+ 1 AS `m_id`,
+ 1 AS `m_created`,
+ 1 AS `m_created_by_user_id`,
+ 1 AS `m_text`*/;
+SET character_set_client = @saved_cs_client;
 
 --
 -- Table structure for table `insalon`
@@ -286,6 +314,24 @@ LOCK TABLES `users` WRITE;
 INSERT INTO `users` VALUES (19,1,'admin2','yatut123','Красавкин И.И.',1),(20,1,'salonop21','mashina2','Гонкин А.А.',2),(21,1,'salonop22','mashina2','Винтик В.С.',2),(22,1,'salonop31','gonka3','Шпунтик А.В.',3),(23,1,'salonop32','gonka3','Гайкин А.В.',3),(24,1,'salonop41','gonka3','Тросов В.А.',4),(25,1,'salonop42','gonka3','Лебедкин П.Р.',4),(26,1,'bankop51','dengi4','Планктонов М.И.',5),(27,1,'bankop52','baksi5','Сидячев С.М.',5),(28,1,'bankop61','dengi4','Бумажкин С.М.',6),(29,1,'bankop62','baksi5','Печаткин А.П,',6),(30,1,'bankop71','dengi4','Ручкин В.А.',7),(31,1,'bankop72','baksi5','Стеркин П.А.',7),(32,0,'asdfasd','asdf','asdf',1),(33,0,'111','111','dfgh',1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Final view structure for view `inbank_last_msg`
+--
+
+/*!50001 DROP VIEW IF EXISTS `inbank_last_msg`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `inbank_last_msg` AS select `b`.`id` AS `id`,`b`.`active` AS `active`,`b`.`insalon_id` AS `insalon_id`,`b`.`bank_id` AS `bank_id`,`b`.`changed` AS `changed`,`b`.`changed_by_user_id` AS `changed_by_user_id`,`b`.`state_id` AS `state_id`,`b`.`state_desc` AS `state_desc`,`b`.`b1` AS `b1`,`b`.`b2` AS `b2`,`b`.`b3` AS `b3`,`b`.`b4` AS `b4`,`b`.`b5` AS `b5`,`m`.`id` AS `m_id`,`m`.`created` AS `m_created`,`m`.`created_by_user_id` AS `m_created_by_user_id`,`m`.`text` AS `m_text` from ((`avto_cred`.`inbank` `b` left join (select `avto_cred`.`messages`.`inbank_id` AS `inbank_id`,max(`avto_cred`.`messages`.`id`) AS `last_msg_id` from `avto_cred`.`messages` group by `avto_cred`.`messages`.`inbank_id`) `lm` on((`lm`.`inbank_id` = `b`.`id`))) left join `avto_cred`.`messages` `m` on((`lm`.`last_msg_id` = `m`.`id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -296,4 +342,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-24 15:03:28
+-- Dump completed on 2017-09-25 17:40:15

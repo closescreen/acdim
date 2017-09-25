@@ -22,6 +22,7 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
+<!--    --><?// debug($searchModel);exit; ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -40,7 +41,6 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
             'insalon.client_fname',
             'insalon.client_sname',
             'insalon.salon.name',
-
             // 'changed_by_user_id',
             // 'state_id',
             // 'state_desc',
@@ -49,6 +49,7 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
             // 'b3',
             // 'b4',
             // 'b5',
+            'm_text',
 
 
         ],

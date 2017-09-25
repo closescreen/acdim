@@ -141,7 +141,14 @@ class InsalonController extends AppController
             $model->active = 1; // нет смысла содавать неактивную
             $model->created_by_user_id = Yii::$app->user->identity->id;
             $model->changed_by_user_id = Yii::$app->user->identity->id;
-            $model->salon_id = Yii::$app->user->identity->org_id;
+            // действительно только для org_type_id salon:
+            if (Yii::$app->user->identity->org_type_id == 'salon') {
+                $model->salon_id = Yii::$app->user->identity->org_id;
+            }elseif(Yii::$app->user->identity->org_type_id == 'admins'){
+                // если это админ, то пусть он выберет салон сам
+                // ...
+                // или получить готовый salon_id в actionCreate() в виде GET параметра
+            }
 
             if ( $model->save() ) {
                 // раскидать заявку по банкам

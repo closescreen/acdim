@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\InbankLastMsgViewSearch;
 use app\models\Insalon;
 use app\models\Message;
 use app\models\Messages;
@@ -30,7 +31,8 @@ class InbankController extends AppController
      */
     public function actionIndex()
     {
-        $searchModel = new InbankSearch();
+        $searchModel = new InbankSearch(); //-> пробуем заменить на:
+        // $searchModel = new InbankLastMsgViewSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $org_type_id = Yii::$app->user->identity->org_type_id;
