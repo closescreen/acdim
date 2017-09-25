@@ -66,6 +66,18 @@ class InsalonController extends AppController
     public function actionDistrib_to_banks(){
         $insalon_post =  Yii::$app->request->post('Insalon');
         $insalon_id = $insalon_post['id'];
+
+        $this->_distrib_to_banks($insalon_id);
+
+        $model = $this->findModel( $insalon_id );
+        return $this->render('update', compact('model'));
+    }
+
+
+    // ---------------------- _distrib_to_banks ----------------------
+    public function _distrib_to_banks($insalon_id){
+        // раскидывает заявку insalon_id по банкам [bank_id1, bank_id2, ...]
+
         if (!$insalon_id){
             throw new \Exception('insalon_id!');
         }
@@ -124,8 +136,6 @@ class InsalonController extends AppController
                 }
         }
 
-        $model = $this->findModel( $insalon_id );
-        return $this->render('update', compact('model'));
     }
 
 
@@ -152,6 +162,7 @@ class InsalonController extends AppController
 
             if ( $model->save() ) {
                 // раскидать заявку по банкам
+                $this->_distrib_to_banks($model->id);
 
 
                 return $this->redirect(['view',
