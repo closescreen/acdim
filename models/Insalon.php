@@ -80,4 +80,8 @@ class Insalon extends \yii\db\ActiveRecord
     public function  getChangerUser(){
         return $this->hasOne(Users::className(), ['id'=>'created_by_user_id']);
     }
+
+    public function getInbanks(){
+        return $this->hasMany(Inbank::className(), ['insalon_id'=>'id']);
+    }
 }
