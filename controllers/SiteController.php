@@ -55,6 +55,15 @@ class SiteController extends AppController
      */
     public function actionIndex()
     {
+        $iden = Yii::$app->user->identity;
+        if( isset( $iden )){
+            if ( $iden->org_type_id == 'salon') {
+                return $this->redirect(['insalon/index']);
+            }
+            if ($iden->org_type_id == 'bank'){
+                return $this->redirect(['inbank/index']);
+            }
+        }
         return $this->render('index');
     }
 
