@@ -8,7 +8,7 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\InbankSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Inbanks';
+$this->title = 'Заявки';
 $this->params['breadcrumbs'][] = $this->title;
 
 $dataProvider->sort->attributes['insalon.client_tname'] = [
@@ -22,9 +22,7 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
     <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?= Html::a('Create Inbank', ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
