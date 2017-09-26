@@ -14,14 +14,15 @@ $this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['index']]
 $this->params['breadcrumbs'][] = 'Заявка #'.$model->id;
 ?>
 
-<div class="container bg-info text-info h2">
+
 
     <? if( $msgs = Yii::$app->session->getFlash('inbank_update') ): ?>
         <? foreach( $msgs as $msg ): ?>
-            <?= $msg ?>
+            <div class="alert alert-success">
+                <?= $msg ?>
+            </div>
         <? endforeach; ?>
     <? endif; ?>
-</div>
 
 <div class="inbank-update">
 
