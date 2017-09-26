@@ -124,6 +124,48 @@ INSERT INTO `insalon` VALUES (2,0,2,'2017-09-20 08:10:19',20,'2017-09-20 12:43:4
 UNLOCK TABLES;
 
 --
+-- Temporary table structure for view `insalon_max_state_last_msg`
+--
+
+DROP TABLE IF EXISTS `insalon_max_state_last_msg`;
+/*!50001 DROP VIEW IF EXISTS `insalon_max_state_last_msg`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `insalon_max_state_last_msg` AS SELECT 
+ 1 AS `id`,
+ 1 AS `active`,
+ 1 AS `salon_id`,
+ 1 AS `created`,
+ 1 AS `created_by_user_id`,
+ 1 AS `changed`,
+ 1 AS `changed_by_user_id`,
+ 1 AS `client_fname`,
+ 1 AS `client_sname`,
+ 1 AS `client_tname`,
+ 1 AS `client_bdate`,
+ 1 AS `client_phone`,
+ 1 AS `car_price`,
+ 1 AS `down_payment`,
+ 1 AS `equipment_cost`,
+ 1 AS `equipment_desc`,
+ 1 AS `car_model`,
+ 1 AS `car_year`,
+ 1 AS `s1`,
+ 1 AS `s2`,
+ 1 AS `s3`,
+ 1 AS `s4`,
+ 1 AS `s5`,
+ 1 AS `state_stage`,
+ 1 AS `state_id`,
+ 1 AS `state_name`,
+ 1 AS `m_id`,
+ 1 AS `m_inbank_id`,
+ 1 AS `m_text`,
+ 1 AS `m_created`,
+ 1 AS `m_created_by_user_id`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Table structure for table `messages`
 --
 
@@ -333,6 +375,24 @@ UNLOCK TABLES;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `insalon_max_state_last_msg`
+--
+
+/*!50001 DROP VIEW IF EXISTS `insalon_max_state_last_msg`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `insalon_max_state_last_msg` AS select `s`.`id` AS `id`,`s`.`active` AS `active`,`s`.`salon_id` AS `salon_id`,`s`.`created` AS `created`,`s`.`created_by_user_id` AS `created_by_user_id`,`s`.`changed` AS `changed`,`s`.`changed_by_user_id` AS `changed_by_user_id`,`s`.`client_fname` AS `client_fname`,`s`.`client_sname` AS `client_sname`,`s`.`client_tname` AS `client_tname`,`s`.`client_bdate` AS `client_bdate`,`s`.`client_phone` AS `client_phone`,`s`.`car_price` AS `car_price`,`s`.`down_payment` AS `down_payment`,`s`.`equipment_cost` AS `equipment_cost`,`s`.`equipment_desc` AS `equipment_desc`,`s`.`car_model` AS `car_model`,`s`.`car_year` AS `car_year`,`s`.`s1` AS `s1`,`s`.`s2` AS `s2`,`s`.`s3` AS `s3`,`s`.`s4` AS `s4`,`s`.`s5` AS `s5`,`sal_st`.`stage` AS `state_stage`,`st`.`id` AS `state_id`,`st`.`name` AS `state_name`,`sal_msg`.`id` AS `m_id`,`m`.`inbank_id` AS `m_inbank_id`,`m`.`text` AS `m_text`,`m`.`created` AS `m_created`,`m`.`created_by_user_id` AS `m_created_by_user_id` from ((((`avto_cred`.`insalon` `s` left join (select `b`.`insalon_id` AS `insalon_id`,max(`rs`.`stage`) AS `stage` from (`avto_cred`.`inbank` `b` left join `avto_cred`.`rstates` `rs` on((`rs`.`id` = `b`.`state_id`))) group by `b`.`insalon_id`) `sal_st` on((`s`.`id` = `sal_st`.`insalon_id`))) left join `avto_cred`.`rstates` `st` on((`sal_st`.`stage` = `st`.`stage`))) left join (select `b`.`insalon_id` AS `insalon_id`,max(`m`.`id`) AS `id` from (`avto_cred`.`inbank` `b` left join `avto_cred`.`messages` `m` on((`b`.`id` = `m`.`inbank_id`))) group by `b`.`insalon_id`) `sal_msg` on((`s`.`id` = `sal_msg`.`insalon_id`))) left join `avto_cred`.`messages` `m` on((`m`.`id` = `sal_msg`.`id`))) */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -343,4 +403,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-26 11:44:53
+-- Dump completed on 2017-09-26 12:57:03
