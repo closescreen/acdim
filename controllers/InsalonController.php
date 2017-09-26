@@ -50,7 +50,8 @@ class InsalonController extends AppController
 
     // ------------- view --------------------------------
     public function actionView(
-        $id, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone
+        $id
+        //, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone
     )
     {
         $model = $this->findModel($id);
