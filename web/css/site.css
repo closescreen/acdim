@@ -121,27 +121,27 @@ a.desc:after {
 }
 
 /*новая заявка*/
-.request-status-new {
+.request-status-new * {
     background-color: whitesmoke;
 }
 
 /*заявка в работе*/
-.request-status-in-work {
+.request-status-in-work *{
     background-color: #c0c0c0;
 }
 
 /*заявка одобрена*/
-.request-status-approved {
+.request-status-approved * {
     background-color: #b2dba1;
 }
 
 /*заявка отклонена*/
-.request-status-rejected {
+.request-status-rejected * {
     background-color: #dca7a7;
 }
 
 /*заявка оформлена*/
-.request-status-formalized {
+.request-status-formalized * {
     background-color: cornflowerblue;
 }
 

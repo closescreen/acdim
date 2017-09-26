@@ -26,11 +26,12 @@ $this->params['breadcrumbs'][] = $this->title;
             if ($model->active == 0) {
                 return ['class' => 'inactive'];
             }elseif($model->state_id !== null ){
-                $state_id = $model->state_id;
-                $class = "request-status-" . $state_id;
-                return ['class'=> $class];
+                //$state_id = $model->state_id;
+                //$class = "request-status-" . $model->state_id;
+                return ['class'=> "request-status-" . $model->state_id];
             }
         },
+
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
 
