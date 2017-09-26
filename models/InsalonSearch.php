@@ -10,7 +10,7 @@ use app\models\Insalon;
 /**
  * InsalonSearch represents the model behind the search form about `app\models\Insalon`.
  */
-class InsalonSearch extends Insalon
+class InsalonSearch extends InsalonMaxStateLastMsg //Insalon
 {
 
 
@@ -21,8 +21,18 @@ class InsalonSearch extends Insalon
     public function rules()
     {
         return [
-            [['id', 'active', 'salon_id', 'created_by_user_id', 'changed_by_user_id', 'car_price', 'down_payment', 'equipment_cost', 'car_year'], 'integer'],
-            [['created', 'changed', 'client_fname', 'client_sname', 'client_tname', 'client_bdate', 'client_phone', 'equipment_desc', 'car_model', 's1', 's2', 's3', 's4', 's5'], 'safe'],
+            [[
+                'id', 'active', 'salon_id', 'created_by_user_id',
+                'changed_by_user_id', 'car_price', 'down_payment',
+                'equipment_cost', 'car_year', 'state_stage',
+                'm_id', 'm_inbank_id', 'm_created_by_user_id'],
+                    'integer'],
+            [['created', 'changed', 'client_fname', 'client_sname',
+                'client_tname', 'client_bdate', 'client_phone',
+                'equipment_desc', 'car_model',
+                's1', 's2', 's3', 's4', 's5','state_id','state_name',
+                'm_text', 'm_created'],
+                    'safe'],
         ];
     }
 
@@ -44,7 +54,8 @@ class InsalonSearch extends Insalon
      */
     public function search($params)
     {
-        $query = Insalon::find();
+        //$query = Insalon::find();
+        $query = InsalonMaxStateLastMsg::find();
 
         // add conditions that should always apply here
 
@@ -76,6 +87,9 @@ class InsalonSearch extends Insalon
             'down_payment' => $this->down_payment,
             'equipment_cost' => $this->equipment_cost,
             'car_year' => $this->car_year,
+
+            'state_name' => $this->state_name,
+
         ]);
 
         $query->andFilterWhere(['like', 'client_fname', $this->client_fname])
@@ -84,6 +98,7 @@ class InsalonSearch extends Insalon
             ->andFilterWhere(['like', 'client_phone', $this->client_phone])
             ->andFilterWhere(['like', 'equipment_desc', $this->equipment_desc])
             ->andFilterWhere(['like', 'car_model', $this->car_model])
+            ->andFilterWhere(['like','state_name', $this->state_name])
             ->andFilterWhere(['like', 's1', $this->s1])
             ->andFilterWhere(['like', 's2', $this->s2])
             ->andFilterWhere(['like', 's3', $this->s3])

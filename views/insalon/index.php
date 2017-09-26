@@ -25,12 +25,17 @@ $this->params['breadcrumbs'][] = $this->title;
         'rowOptions'=>function($model) {
             if ($model->active == 0) {
                 return ['class' => 'inactive'];
+            }elseif($model->state_id !== null ){
+                $state_id = $model->state_id;
+                $class = "request-status-" . $state_id;
+                return ['class'=> $class];
             }
         },
         'columns' => [
             //['class' => 'yii\grid\SerialColumn'],
 
             'id',
+            'state_name',
             //'salon_id',
             'created',
             // 'changed',
@@ -53,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
             // 's5',
             'created_by_user_id',
             'active',
+            'm_text',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],
