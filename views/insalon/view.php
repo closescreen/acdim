@@ -11,6 +11,7 @@ $this->title = $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Insalons', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
+
 <div class="insalon-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
@@ -55,6 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ] ) ?>
     <?= Html::endTag('div')?>
 
+
  <!--   <p>
         <?/*= Html::a('Update', [
                 'update',
@@ -87,7 +89,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-<div class="inbanks">
+
+
+<div>
     <? foreach ($model->inbanks as $inbank): ?>
         <div class="container-fluid">
             <!-- по банку -->
@@ -103,14 +107,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 $author_org_name = $message->author->org->name;
 
 //                что-то со стилями не работает:
-                $div = $is_our_msg ?
-                    Html::beginTag('div', ['class'=>"alert alert-light", 'role'=>"alert"]):
-                    Html::beginTag('div', ['class'=>"alert alert-primary", 'role'=>"alert"]);
+                $div = //'<div class="alert alert-success">';
+                    $is_our_msg ?
+                        '<div class="alert alert-success">' :
+                        '<div class="alert alert-info">' ;
+ //                   Html::beginTag('div', ['class'=>"alert alert-light", 'role'=>"alert"])
+//                :
+//                    Html::beginTag('div', ['class'=>"alert alert-primary", 'role'=>"alert"])
+ //               ;
 
                 ?>
 
                 <b><?= $is_our_msg ? $author_fio : $author_org_name ?></b>
                 <?= $div ?>
+<!--                <div class="alert alert-success">-->
                     <?= "our: $is_our_msg" ?>
                     <?= $message->text ?>
                 </div>
