@@ -145,6 +145,8 @@ class InsalonController extends AppController
     {
         $model = new Insalon();
         $model->active = 1; // в форме уже должно быть активно
+        $model->client_bdate = '1985-12-30';
+        $model->equipment_cost = 0;
 
         if ($model->load(Yii::$app->request->post()) ) {
 
@@ -152,6 +154,7 @@ class InsalonController extends AppController
             $model->active = 1; // нет смысла содавать неактивную
             $model->created_by_user_id = Yii::$app->user->identity->id;
             $model->changed_by_user_id = Yii::$app->user->identity->id;
+
             // действительно только для org_type_id salon:
             if (Yii::$app->user->identity->org_type_id == 'salon') {
                 $model->salon_id = Yii::$app->user->identity->org_id;

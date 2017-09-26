@@ -95,7 +95,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <? foreach ($model->inbanks as $inbank): ?>
         <div class="container-fluid">
             <!-- по банку -->
-            <h2><?= $inbank->bank->name ?>  </h2>
+            <hr>
+            <h4><?= 'Чат с банком: <b>' . ( $inbank->bank->name ) . '</b>' ?>  </h4>
             <? foreach ($inbank->messages as $message): ?>
                 <!-- сообщения по inbank -->
                 <?php
@@ -106,27 +107,20 @@ $this->params['breadcrumbs'][] = $this->title;
                 // организация-автор сообщения:
                 $author_org_name = $message->author->org->name;
 
-//                что-то со стилями не работает:
-                $div = //'<div class="alert alert-success">';
+                $div =
                     $is_our_msg ?
                         '<div class="alert alert-success">' :
                         '<div class="alert alert-info">' ;
- //                   Html::beginTag('div', ['class'=>"alert alert-light", 'role'=>"alert"])
-//                :
-//                    Html::beginTag('div', ['class'=>"alert alert-primary", 'role'=>"alert"])
- //               ;
+
 
                 ?>
 
                 <b><?= $is_our_msg ? $author_fio : $author_org_name ?></b>
                 <?= $div ?>
-<!--                <div class="alert alert-success">-->
-                    <?= "our: $is_our_msg" ?>
                     <?= $message->text ?>
                 </div>
 
-
-
+    
             <? endforeach;?>
 
            <? Url::remember(); ?>
