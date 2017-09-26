@@ -108,7 +108,12 @@ class InbankController extends AppController
 
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-        return $this->redirect(['index',
+
+            // ?? нужно, если да, то может вынести в общее место?:
+            if (!Yii::$app->session->isActive) Yii::$app->session->open();
+
+            Yii::$app->session->addFlash('inbank_update','Изменения сохранены');
+            return $this->redirect(['update',
                 'id' => $model->id,
                 'states'=>$states,
                 ]

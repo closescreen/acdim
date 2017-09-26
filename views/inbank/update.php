@@ -6,11 +6,23 @@ use yii\helpers\Url;
 /* @var $this yii\web\View */
 /* @var $model app\models\Inbank */
 
+// todo: номер зявки лучше чтоб был -> из insalon.id
 $this->title = 'Заявка №' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
+// todo: тоже самое - номер из insalon:
 $this->params['breadcrumbs'][] = 'Заявка #'.$model->id;
 ?>
+
+<div class="container bg-info text-info h2">
+
+    <? if( $msgs = Yii::$app->session->getFlash('inbank_update') ): ?>
+        <? foreach( $msgs as $msg ): ?>
+            <?= $msg ?>
+        <? endforeach; ?>
+    <? endif; ?>
+</div>
+
 <div class="inbank-update">
 
     <?= $this->render('_form', [
