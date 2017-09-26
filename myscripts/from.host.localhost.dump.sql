@@ -37,7 +37,7 @@ CREATE TABLE `inbank` (
   `b4` varchar(255) NOT NULL DEFAULT '',
   `b5` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `inbank` (
 
 LOCK TABLES `inbank` WRITE;
 /*!40000 ALTER TABLE `inbank` DISABLE KEYS */;
-INSERT INTO `inbank` VALUES (7,1,4,5,'2017-09-22 07:57:38',0,'new','','','','','',''),(8,1,4,7,'2017-09-22 07:57:38',0,'new','','','','','',''),(9,1,3,5,'2017-09-25 09:51:54',0,'in-work','Видим cкоро возьмем','','','','',''),(10,1,3,7,'2017-09-22 07:58:05',0,'new','','','','','','');
+INSERT INTO `inbank` VALUES (7,1,4,5,'2017-09-22 07:57:38',0,'new','','','','','',''),(8,1,4,7,'2017-09-22 07:57:38',0,'new','','','','','',''),(9,1,3,5,'2017-09-25 09:51:54',0,'in-work','Видим cкоро возьмем','','','','',''),(10,1,3,7,'2017-09-22 07:58:05',0,'new','','','','','',''),(11,1,5,5,'2017-09-26 07:35:52',0,'in-work','','','','','',''),(12,1,5,7,'2017-09-25 15:37:06',0,'new','','','','','','');
 /*!40000 ALTER TABLE `inbank` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -110,7 +110,7 @@ CREATE TABLE `insalon` (
   `s4` varchar(255) NOT NULL,
   `s5` varchar(255) NOT NULL,
   PRIMARY KEY (`id`,`active`,`salon_id`,`created_by_user_id`,`changed_by_user_id`,`client_tname`,`client_phone`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +119,7 @@ CREATE TABLE `insalon` (
 
 LOCK TABLES `insalon` WRITE;
 /*!40000 ALTER TABLE `insalon` DISABLE KEYS */;
-INSERT INTO `insalon` VALUES (2,0,2,'2017-09-20 08:10:19',20,'2017-09-20 12:43:45',20,'asdf','asdf','asdf','1980-02-01','  34563456',3456,3456,100,'sdf','sdf',1900,'','','','',''),(3,1,2,'2017-09-20 12:35:18',20,'2017-09-20 12:40:58',20,'Петр','Пертович','Петров','1995-06-05','0987987987',5000,123,0,'','Lada',1945,'','','','',''),(4,1,2,'2017-09-22 07:39:07',20,'2017-09-22 07:39:07',20,'Валерия','Витальевна','Иванова','1990-03-04','9879879879',500000,10000,5000,'','Патриот ВАЗ---',2015,'коммент','','','','');
+INSERT INTO `insalon` VALUES (2,0,2,'2017-09-20 08:10:19',20,'2017-09-20 12:43:45',20,'asdf','asdf','asdf','1980-02-01','  34563456',3456,3456,100,'sdf','sdf',1900,'','','','',''),(3,1,2,'2017-09-20 12:35:18',20,'2017-09-20 12:40:58',20,'Петр','Пертович','Петров','1995-06-05','0987987987',5000,123,0,'','Lada',1945,'','','','',''),(4,1,2,'2017-09-22 07:39:07',20,'2017-09-26 07:05:16',20,'Валерия','Витальевна','Иванова','1990-03-04','9879879879',500000,10000,5000,'','Патриот ВАЗ---',2015,'коммент','','','',''),(5,1,2,'2017-09-25 15:37:06',20,'2017-09-25 15:37:06',20,'Василий','Васильевич','Васечкин','1995-05-07','8800200600',600000,20000,5000,'фары','Mersedes',1955,'s1 text','s2 text','s3 text','s4 text','s5 text');
 /*!40000 ALTER TABLE `insalon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -137,7 +137,7 @@ CREATE TABLE `messages` (
   `created_by_user_id` int(11) NOT NULL,
   `text` text NOT NULL,
   PRIMARY KEY (`id`,`created_by_user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -146,7 +146,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (3,9,'2017-09-22 13:17:04',26,'Привет!'),(4,9,'2017-09-23 08:56:45',20,'Привет из салона!');
+INSERT INTO `messages` VALUES (3,9,'2017-09-22 13:17:04',26,'Привет!'),(4,9,'2017-09-23 08:56:45',20,'Привет из салона!'),(5,11,'2017-09-25 15:37:42',20,'Заявку видели?'),(6,12,'2017-09-25 15:38:13',20,'А вы заявку видели? Дело в том, что я новенький.');
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -237,6 +237,7 @@ DROP TABLE IF EXISTS `rstates`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `rstates` (
   `id` varchar(10) NOT NULL,
+  `stage` int(1) NOT NULL,
   `name` varchar(45) NOT NULL,
   `style` varchar(45) NOT NULL,
   PRIMARY KEY (`id`)
@@ -249,7 +250,7 @@ CREATE TABLE `rstates` (
 
 LOCK TABLES `rstates` WRITE;
 /*!40000 ALTER TABLE `rstates` DISABLE KEYS */;
-INSERT INTO `rstates` VALUES ('new','Новая','request-status-new'),('in-work','В работе','request-status-in-work'),('approved','Одобрена','request-status-approved'),('rejected','Отклонена','request-status-rejected'),('formalized','Оформлена','request-status-formalized');
+INSERT INTO `rstates` VALUES ('new',0,'Новая','request-status-new'),('in-work',1,'В работе','request-status-in-work'),('approved',2,'Одобрена','request-status-approved'),('rejected',-1,'Отклонена','request-status-rejected'),('formalized',4,'Оформлена','request-status-formalized');
 /*!40000 ALTER TABLE `rstates` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -342,4 +343,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-25 17:40:15
+-- Dump completed on 2017-09-26 11:44:53
