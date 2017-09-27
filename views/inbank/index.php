@@ -90,6 +90,17 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'rowOptions'=>function($model) {
+            if ($model->active == 0) {
+                return ['class' => 'inactive'];
+            }elseif($model->state_id !== null ){
+                //$state_id = $model->state_id;
+                //$class = "request-status-" . $model->state_id;
+                return ['class'=> "request-status-" . $model->state_id];
+            }else{
+                return []; 
+            }
+        },
         'columns' => $columns
 
     ]); ?>
