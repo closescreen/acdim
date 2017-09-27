@@ -20,39 +20,69 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
 <div class="inbank-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php
+        $columns = Yii::$app->user->identity->org_type_id == 'bank' ?
+            [
+                //['class' => 'yii\grid\SerialColumn'],
+                ['class' => 'yii\grid\ActionColumn','template' => '{update}',],
 
-<!--    --><?// debug($searchModel);exit; ?>
+                'id',
+                //'active',
+                //'insalon_id',
+                //'bank_id',
+                //'bank_name', // для админов можно
+                //'changed',
+                //'insalon.salon_id',
+                'insalon.client_tname',
+                'insalon.client_fname',
+                'insalon.client_sname',
+                'insalon.salon.name',
+                // 'changed_by_user_id',
+                // 'state_id',
+                // 'state_desc',
+                // 'b1',
+                // 'b2',
+                // 'b3',
+                // 'b4',
+                // 'b5',
+                'm_text',
+            ] // - for bank
+            :
+            [
+                //['class' => 'yii\grid\SerialColumn'],
+                ['class' => 'yii\grid\ActionColumn','template' => '{update}',],
+
+                'id',
+                //'active',
+                //'insalon_id',
+                //'bank_id',
+                'insalon.salon.name',
+                'bank_name', // для админов можно
+                //'changed',
+                //'insalon.salon_id',
+                'insalon.client_tname',
+                'insalon.client_fname',
+                'insalon.client_sname',
+                // 'changed_by_user_id',
+                // 'state_id',
+                // 'state_desc',
+                // 'b1',
+                // 'b2',
+                // 'b3',
+                // 'b4',
+                // 'b5',
+                'm_text',
+
+            ]; // - for admins
+
+    ?>
+
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
-            ['class' => 'yii\grid\ActionColumn','template' => '{update}',],
+        'columns' => $columns
 
-            'id',
-            //'active',
-            //'insalon_id',
-            //'bank_id',
-            //'changed',
-            //'insalon.salon_id',
-            'insalon.client_tname',
-            'insalon.client_fname',
-            'insalon.client_sname',
-            'insalon.salon.name',
-            // 'changed_by_user_id',
-            // 'state_id',
-            // 'state_desc',
-            // 'b1',
-            // 'b2',
-            // 'b3',
-            // 'b4',
-            // 'b5',
-            'm_text',
-
-
-        ],
     ]); ?>
 
 </div>
