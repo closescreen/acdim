@@ -1,5 +1,6 @@
 <?php
 
+use app\models\UploadForm;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\DetailView;
@@ -7,7 +8,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\Insalon */
 
-$this->title = $model->id;
+$this->title = "Просмотр заявки ".$model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Insalons', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -95,8 +96,34 @@ $this->params['breadcrumbs'][] = $this->title;
     <? foreach ($model->inbanks as $inbank): ?>
         <div class="container-fluid">
             <!-- по банку -->
+            <h4><b><?= $inbank->bank->name ?></b></h4>
+            <h4>Файлы:</h4>
+            <?php
+
+
+            ?>
+
+            <div class="upload-list">
+                <?= $this->render('_uploads',[
+                    'upload_model'=>$inbank->uploads,
+                ]) ?>
+
+                <?php
+                    $upload_model = new UploadForm();
+                    $upload_model->inbank_id = $inbank->id;
+                ?>
+
+                <div class="upload-file">
+                    <?= $this->render('_upload_form', ['upload_model'=>$upload_model] ) ?>
+                </div>
+
+            </div>
+
             <hr>
-            <h4><?= 'Чат с банком: <b>' . ( $inbank->bank->name ) . '</b>' ?>  </h4>
+            <h4><?= 'Чат:' ?>  </h4>
+
+
+
             <? foreach ($inbank->messages as $message): ?>
                 <!-- сообщения по inbank -->
                 <?php

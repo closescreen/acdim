@@ -44,7 +44,7 @@ class Upload extends \yii\db\ActiveRecord
                     'file_real_name',
                     'file_desc'],
                 'required'],
-            [['file_name'], 'file'],
+            [['file_name'], 'file', 'maxSize'=>5000000],
             [[ 'file_desc'], 'string', 'max' => 512],
             [['file_real_name'],'string','max'=>512],
         ];

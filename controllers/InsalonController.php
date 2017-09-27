@@ -56,6 +56,8 @@ class InsalonController extends AppController
     {
         $model = $this->findModel($id);
 
+
+
         return $this->render('view', ['model'=>$model, ]);
         //, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone),
 
