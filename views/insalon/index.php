@@ -18,23 +18,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>
         <?= Html::a('Новая заявка', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
-<?php Pjax::begin(); ?>
-    <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'rowOptions'=>function($model) {
-            if ($model->active == 0) {
-                return ['class' => 'inactive'];
-            }elseif($model->state_id !== null ){
-                //$state_id = $model->state_id;
-                //$class = "request-status-" . $model->state_id;
-                return ['class'=> "request-status-" . $model->state_id];
-            }
-        },
+    <?php
+    $columns = Yii::$app->user->identity->org_type_id == 'salon' ?
+        [
 
-        'columns' => [
-            //['class' => 'yii\grid\SerialColumn'],
-
+                // колонки для салона
             'id',
             //'state_id',
             'state_name',
@@ -42,9 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'created',
             // 'changed',
             // 'changed_by_user_id',
-            //'client_fname',
-            //'client_sname',
-            //'client_tname',
+             //'client_tname',
             'client_fio',
             // 'client_bdate',
             'client_phone',
@@ -64,7 +50,57 @@ $this->params['breadcrumbs'][] = $this->title;
             'm_text',
 
             ['class' => 'yii\grid\ActionColumn'],
-        ],
+                ] :
+
+        [
+                // колонки для админа
+                'id',
+                'salon_name',
+                //'state_id',
+                'state_name',
+                //'salon_id',
+                'created',
+                // 'changed',
+                // 'changed_by_user_id',
+                //'client_fname',
+                //'client_sname',
+                //'client_tname',
+                'client_fio',
+                // 'client_bdate',
+                'client_phone',
+                //'car_price',
+                //'down_payment',
+                //'equipment_cost',
+                // 'equipment_desc',
+                'car_model',
+                'car_year',
+                // 's1',
+                // 's2',
+                // 's3',
+                // 's4',
+                // 's5',
+                'created_by_user_id',
+                'active',
+                'm_text',
+
+                ['class' => 'yii\grid\ActionColumn'],
+        ]
+    ?>
+<?php Pjax::begin(); ?>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'rowOptions'=>function($model) {
+            if ($model->active == 0) {
+                return ['class' => 'inactive'];
+            }elseif($model->state_id !== null ){
+                //$state_id = $model->state_id;
+                //$class = "request-status-" . $model->state_id;
+                return ['class'=> "request-status-" . $model->state_id];
+            }
+        },
+
+        'columns' => $columns,
     ]); ?>
 <?php Pjax::end(); ?>
 </div>

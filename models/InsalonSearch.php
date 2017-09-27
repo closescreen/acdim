@@ -31,7 +31,7 @@ class InsalonSearch extends InsalonMaxStateLastMsg //Insalon
                 'client_tname', 'client_bdate', 'client_phone',
                 'equipment_desc', 'car_model',
                 's1', 's2', 's3', 's4', 's5','state_id','state_name',
-                'm_text', 'm_created'],
+                'm_text', 'm_created','salon_name'],
                     'safe'],
         ];
     }
@@ -44,6 +44,16 @@ class InsalonSearch extends InsalonMaxStateLastMsg //Insalon
         // bypass scenarios() implementation in the parent class
         return Model::scenarios();
     }
+
+     public function attributes()
+     {
+         // делаем поле зависимости доступным для поиска
+         return
+             array_merge(parent::attributes(),
+                 [
+
+                 ]);
+     }
 
     /**
      * Creates data provider instance with search query applied
@@ -88,11 +98,10 @@ class InsalonSearch extends InsalonMaxStateLastMsg //Insalon
             'equipment_cost' => $this->equipment_cost,
             'car_year' => $this->car_year,
 
-            'state_name' => $this->state_name,
-
         ]);
 
         $query->andFilterWhere(['like', 'client_fname', $this->client_fname])
+            ->andFilterWhere(['like', 'salon_name', $this->salon_name])
             ->andFilterWhere(['like', 'client_sname', $this->client_sname])
             ->andFilterWhere(['like', 'client_tname', $this->client_tname])
             ->andFilterWhere(['like', 'client_phone', $this->client_phone])
