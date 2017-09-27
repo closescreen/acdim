@@ -37,7 +37,7 @@ CREATE TABLE `inbank` (
   `b4` varchar(255) NOT NULL DEFAULT '',
   `b5` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,7 +46,7 @@ CREATE TABLE `inbank` (
 
 LOCK TABLES `inbank` WRITE;
 /*!40000 ALTER TABLE `inbank` DISABLE KEYS */;
-INSERT INTO `inbank` VALUES (7,1,4,5,'2017-09-22 07:57:38',0,'new','','','','','',''),(8,1,4,7,'2017-09-22 07:57:38',0,'new','','','','','',''),(9,1,3,5,'2017-09-25 09:51:54',0,'in-work','Видим cкоро возьмем','','','','',''),(10,1,3,7,'2017-09-22 07:58:05',0,'new','','','','','',''),(11,1,5,5,'2017-09-26 07:35:52',0,'in-work','','','','','',''),(12,1,5,7,'2017-09-25 15:37:06',0,'new','','','','','','');
+INSERT INTO `inbank` VALUES (7,1,4,5,'2017-09-22 07:57:38',0,'new','','','','','',''),(8,1,4,7,'2017-09-22 07:57:38',0,'new','','','','','',''),(9,1,3,5,'2017-09-25 09:51:54',0,'in-work','Видим cкоро возьмем','','','','',''),(10,1,3,7,'2017-09-22 07:58:05',0,'new','','','','','',''),(11,1,5,5,'2017-09-26 07:35:52',0,'in-work','','','','','',''),(12,1,5,7,'2017-09-25 15:37:06',0,'new','','','','','',''),(13,1,6,5,'2017-09-27 07:51:02',0,'rejected','','','','','',''),(14,1,6,7,'2017-09-26 20:41:24',0,'new','','','','','',''),(15,1,7,5,'2017-09-27 07:51:24',0,'approved','','','','','',''),(16,1,7,7,'2017-09-26 21:02:37',0,'new','','','','','',''),(17,1,8,5,'2017-09-27 09:36:51',0,'new','','','','','',''),(18,1,8,7,'2017-09-27 09:36:51',0,'new','','','','','',''),(19,1,9,5,'2017-09-27 10:03:40',0,'new','','','','','',''),(20,1,9,7,'2017-09-27 10:03:40',0,'new','','','','','','');
 /*!40000 ALTER TABLE `inbank` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -72,6 +72,17 @@ SET character_set_client = utf8;
  1 AS `b3`,
  1 AS `b4`,
  1 AS `b5`,
+ 1 AS `bank_name`,
+ 1 AS `salon_name`,
+ 1 AS `s_client_fio`,
+ 1 AS `s_client_bdate`,
+ 1 AS `s_client_phone`,
+ 1 AS `s_car_price`,
+ 1 AS `s_down_payment`,
+ 1 AS `s_equipment_cost`,
+ 1 AS `s_equipment_desc`,
+ 1 AS `s_car_model`,
+ 1 AS `s_car_year`,
  1 AS `m_id`,
  1 AS `m_created`,
  1 AS `m_created_by_user_id`,
@@ -110,7 +121,7 @@ CREATE TABLE `insalon` (
   `s4` varchar(255) NOT NULL,
   `s5` varchar(255) NOT NULL,
   PRIMARY KEY (`id`,`active`,`salon_id`,`created_by_user_id`,`changed_by_user_id`,`client_tname`,`client_phone`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -119,7 +130,7 @@ CREATE TABLE `insalon` (
 
 LOCK TABLES `insalon` WRITE;
 /*!40000 ALTER TABLE `insalon` DISABLE KEYS */;
-INSERT INTO `insalon` VALUES (2,0,2,'2017-09-20 08:10:19',20,'2017-09-20 12:43:45',20,'asdf','asdf','asdf','1980-02-01','  34563456',3456,3456,100,'sdf','sdf',1900,'','','','',''),(3,1,2,'2017-09-20 12:35:18',20,'2017-09-20 12:40:58',20,'Петр','Пертович','Петров','1995-06-05','0987987987',5000,123,0,'','Lada',1945,'','','','',''),(4,1,2,'2017-09-22 07:39:07',20,'2017-09-26 07:05:16',20,'Валерия','Витальевна','Иванова','1990-03-04','9879879879',500000,10000,5000,'','Патриот ВАЗ---',2015,'коммент','','','',''),(5,1,2,'2017-09-25 15:37:06',20,'2017-09-25 15:37:06',20,'Василий','Васильевич','Васечкин','1995-05-07','8800200600',600000,20000,5000,'фары','Mersedes',1955,'s1 text','s2 text','s3 text','s4 text','s5 text');
+INSERT INTO `insalon` VALUES (2,0,2,'2017-09-20 08:10:19',20,'2017-09-20 12:43:45',20,'asdf','asdf','asdf','1980-02-01','  34563456',3456,3456,100,'sdf','sdf',1900,'','','','',''),(3,1,2,'2017-09-20 12:35:18',20,'2017-09-27 09:13:08',20,'Петр','Пертович','Петров','1995-06-05','0987987987',5000,123,0,'','Lada',1945,'','','','',''),(4,1,2,'2017-09-22 07:39:07',20,'2017-09-26 07:05:16',20,'Валерия','Витальевна','Иванова','1990-03-04','9879879879',500000,10000,5000,'','Патриот ВАЗ---',2015,'коммент','','','',''),(5,1,2,'2017-09-25 15:37:06',20,'2017-09-25 15:37:06',20,'Василий','Васильевич','Васечкин','1995-05-07','8800200600',600000,20000,5000,'фары','Mersedes',1955,'s1 text','s2 text','s3 text','s4 text','s5 text'),(6,1,2,'2017-09-26 20:41:24',20,'2017-09-27 10:01:39',20,'Иван','Петрович','Сидоров','1975-02-03','12342345',400000,20000,0,'','Камаз 3120',1985,'','','','',''),(7,1,2,'2017-09-26 21:02:37',20,'2017-09-26 21:02:37',20,'Сергей','Васильевич','Мопедов','1975-11-15','8-945-123-234',500000,30000,0,'','BMW 6',2010,'','','','',''),(8,1,2,'2017-09-27 09:36:51',20,'2017-09-27 09:36:51',20,'Вениамин','Довлатович','Скоростин','1995-04-03','+7 345-456-567',200000,10000,0,'','Formula Bollid',2011,'','','','',''),(9,1,2,'2017-09-27 10:03:40',20,'2017-09-27 10:03:40',20,'Антон','Мявович','Светоч','1985-12-31','8-234-346',300000,20000,0,'','УАЗ-469',1985,'','','','','');
 /*!40000 ALTER TABLE `insalon` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -180,7 +191,7 @@ CREATE TABLE `messages` (
   `created_by_user_id` int(11) NOT NULL,
   `text` text NOT NULL,
   PRIMARY KEY (`id`,`created_by_user_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,7 +200,7 @@ CREATE TABLE `messages` (
 
 LOCK TABLES `messages` WRITE;
 /*!40000 ALTER TABLE `messages` DISABLE KEYS */;
-INSERT INTO `messages` VALUES (3,9,'2017-09-22 13:17:04',26,'Привет!'),(4,9,'2017-09-23 08:56:45',20,'Привет из салона!'),(5,11,'2017-09-25 15:37:42',20,'Заявку видели?'),(6,12,'2017-09-25 15:38:13',20,'А вы заявку видели? Дело в том, что я новенький.');
+INSERT INTO `messages` VALUES (3,9,'2017-09-22 13:17:04',26,'Привет!'),(4,9,'2017-09-23 08:56:45',20,'Привет из салона!'),(5,11,'2017-09-25 15:37:42',20,'Заявку видели?'),(6,12,'2017-09-25 15:38:13',20,'А вы заявку видели? Дело в том, что я новенький.'),(7,15,'2017-09-26 21:05:04',20,'Привет'),(8,16,'2017-09-26 21:11:21',20,'hello');
 /*!40000 ALTER TABLE `messages` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -316,7 +327,7 @@ CREATE TABLE `uploads` (
   `file_desc` varchar(512) COLLATE utf8_unicode_ci NOT NULL,
   `inbank_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -325,7 +336,7 @@ CREATE TABLE `uploads` (
 
 LOCK TABLES `uploads` WRITE;
 /*!40000 ALTER TABLE `uploads` DISABLE KEYS */;
-INSERT INTO `uploads` VALUES (5,1,'2017-09-24 11:34:13',26,'2017-09-24 11:34:13',26,'Beach_by_Renato_Giordanelli.jpg','/home/dima/avto-cred-dim/config/../web/uploads/2017-09/s2/b5//1506252853.1496_Beach_by_Renato_Giordanelli.jpg','aaaaaaaa',9),(6,1,'2017-09-24 12:01:49',26,'2017-09-24 12:01:49',26,'Безымянный документ.txt','/home/dima/avto-cred-dim/config/../web/uploads/2017-09/s2/b5//1506254509.5394_Безымянный документ.txt','Документ, который очень просили',9);
+INSERT INTO `uploads` VALUES (5,1,'2017-09-24 11:34:13',26,'2017-09-24 11:34:13',26,'Beach_by_Renato_Giordanelli.jpg','/home/dima/avto-cred-dim/config/../web/uploads/2017-09/s2/b5//1506252853.1496_Beach_by_Renato_Giordanelli.jpg','aaaaaaaa',9),(6,1,'2017-09-24 12:01:49',26,'2017-09-24 12:01:49',26,'Безымянный документ.txt','/home/dima/avto-cred-dim/config/../web/uploads/2017-09/s2/b5//1506254509.5394_Безымянный документ.txt','Документ, который очень просили',9),(7,1,'2017-09-27 11:24:04',20,'2017-09-27 11:24:04',20,'Julia_on_LLVM4.png','/home/belyaev/Avtocred/config/../web/uploads/2017-09/s2/b5//1506511444.6583_Julia_on_LLVM4.png','Фото',19),(8,1,'2017-09-27 11:33:14',20,'2017-09-27 11:33:14',20,'Beach_by_Renato_Giordanelli_hot_keys.png','/home/belyaev/Avtocred/config/../web/uploads/2017-09/s2/b5//1506511994.6148_Beach_by_Renato_Giordanelli_hot_keys.png','Пляж',19),(9,1,'2017-09-27 11:47:44',20,'2017-09-27 11:47:44',20,'Juliabox.png','/home/belyaev/Avtocred/config/../web/uploads/2017-09/s2/b5//1506512864.492_Juliabox.png','Juliabox',9),(10,1,'2017-09-27 11:50:34',20,'2017-09-27 11:50:34',20,'llvm.jpg','/home/belyaev/Avtocred/config/../web/uploads/2017-09/s2/b7//1506513034.5508_llvm.jpg','llvm',10);
 /*!40000 ALTER TABLE `uploads` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -372,7 +383,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `inbank_last_msg` AS select `b`.`id` AS `id`,`b`.`active` AS `active`,`b`.`insalon_id` AS `insalon_id`,`b`.`bank_id` AS `bank_id`,`b`.`changed` AS `changed`,`b`.`changed_by_user_id` AS `changed_by_user_id`,`b`.`state_id` AS `state_id`,`b`.`state_desc` AS `state_desc`,`b`.`b1` AS `b1`,`b`.`b2` AS `b2`,`b`.`b3` AS `b3`,`b`.`b4` AS `b4`,`b`.`b5` AS `b5`,`m`.`id` AS `m_id`,`m`.`created` AS `m_created`,`m`.`created_by_user_id` AS `m_created_by_user_id`,`m`.`text` AS `m_text` from ((`avto_cred`.`inbank` `b` left join (select `avto_cred`.`messages`.`inbank_id` AS `inbank_id`,max(`avto_cred`.`messages`.`id`) AS `last_msg_id` from `avto_cred`.`messages` group by `avto_cred`.`messages`.`inbank_id`) `lm` on((`lm`.`inbank_id` = `b`.`id`))) left join `avto_cred`.`messages` `m` on((`lm`.`last_msg_id` = `m`.`id`))) */;
+/*!50001 VIEW `inbank_last_msg` AS select `b`.`id` AS `id`,`b`.`active` AS `active`,`b`.`insalon_id` AS `insalon_id`,`b`.`bank_id` AS `bank_id`,`b`.`changed` AS `changed`,`b`.`changed_by_user_id` AS `changed_by_user_id`,`b`.`state_id` AS `state_id`,`b`.`state_desc` AS `state_desc`,`b`.`b1` AS `b1`,`b`.`b2` AS `b2`,`b`.`b3` AS `b3`,`b`.`b4` AS `b4`,`b`.`b5` AS `b5`,`bo`.`name` AS `bank_name`,`salon`.`name` AS `salon_name`,concat_ws('.',`s`.`client_tname`,substr(`s`.`client_fname`,1,1),substr(`s`.`client_sname`,1,1)) AS `s_client_fio`,`s`.`client_bdate` AS `s_client_bdate`,`s`.`client_phone` AS `s_client_phone`,`s`.`car_price` AS `s_car_price`,`s`.`down_payment` AS `s_down_payment`,`s`.`equipment_cost` AS `s_equipment_cost`,`s`.`equipment_desc` AS `s_equipment_desc`,`s`.`car_model` AS `s_car_model`,`s`.`car_year` AS `s_car_year`,`m`.`id` AS `m_id`,`m`.`created` AS `m_created`,`m`.`created_by_user_id` AS `m_created_by_user_id`,`m`.`text` AS `m_text` from (((((`avto_cred`.`inbank` `b` left join (select `avto_cred`.`messages`.`inbank_id` AS `inbank_id`,max(`avto_cred`.`messages`.`id`) AS `last_msg_id` from `avto_cred`.`messages` group by `avto_cred`.`messages`.`inbank_id`) `lm` on((`lm`.`inbank_id` = `b`.`id`))) left join `avto_cred`.`messages` `m` on((`lm`.`last_msg_id` = `m`.`id`))) left join `avto_cred`.`orgs` `bo` on((`b`.`bank_id` = `bo`.`id`))) left join `avto_cred`.`insalon` `s` on((`b`.`insalon_id` = `s`.`id`))) left join `avto_cred`.`orgs` `salon` on((`s`.`salon_id` = `salon`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -404,4 +415,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-26 23:21:48
+-- Dump completed on 2017-09-27 15:22:27
