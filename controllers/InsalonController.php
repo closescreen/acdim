@@ -205,7 +205,12 @@ class InsalonController extends AppController
             $model->changed_by_user_id = Yii::$app->user->identity->id;
             if ( $model->save() ) {
                 return $this->redirect(['view', 'id' => $model->id, 'active' => $model->active, 'salon_id' => $model->salon_id, 'created_by_user_id' => $model->created_by_user_id, 'changed_by_user_id' => $model->changed_by_user_id, 'client_tname' => $model->client_tname, 'client_phone' => $model->client_phone]);
+            }else{
+                return $this->render('update', [
+                    'model' => $model,
+                ]);
             }
+
         } else {
             return $this->render('update', [
                 'model' => $model,

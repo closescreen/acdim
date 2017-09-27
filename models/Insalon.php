@@ -23,15 +23,37 @@ class Insalon extends \yii\db\ActiveRecord
                     'client_phone', 'car_price', 'down_payment', 'equipment_cost',
                      'car_model', 'car_year'
                 ], 'required'],
+            // что-то не работает
+            // при валидации не отдает страницу
+
+//            ['filter_custom_function', 'filter', 'filter' => function ($value) {
+//			// your concept
+//			if($value=='')
+//				return '';
+//			return 'Value Changed';
+//		}],
+
+                [['client_bdate'],'date','format'=>'yyyy-MM-dd'],
+//            [['client_bdate'] , 'filter', 'filter'=>function($v){
+//                $matches = [];
+//                if (preg_match('/(d\d\d\d)-(\d\d)-(\d\d)/', $v, $matches)){
+//                    return "ok";
+//                }
+//                return "";
+//            }],
             [
                 ['active', 'salon_id', 'created_by_user_id',
                     'changed_by_user_id', 'car_price', 'down_payment',
                     'equipment_cost', 'car_year'
                 ], 'integer'],
-            [['equipment_desc','created', 'changed', 'client_bdate', 's1', 's2', 's3', 's4', 's5'], 'safe'],
-            [['client_fname', 'client_sname', 'client_tname'], 'string', 'max' => 20],
-            [['client_phone'], 'string', 'max' => 45],
-            [['equipment_desc', 'car_model', 's1', 's2', 's3', 's4', 's5'], 'string', 'max' => 255],
+            [['equipment_desc','created', 'changed', 'client_bdate', 's1', 's2', 's3', 's4', 's5'],
+                'safe'],
+            [['client_fname', 'client_sname', 'client_tname'],
+                'string', 'max' => 20],
+            [['client_phone'],
+                'string', 'max' => 45],
+            [['equipment_desc', 'car_model', 's1', 's2', 's3', 's4', 's5'],
+                'string', 'max' => 255],
         ];
     }
 

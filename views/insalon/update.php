@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Insalon */
 
-$this->title = 'Update Insalon: ' . $model->id;
+$this->title = 'Редактирование заявки: ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Insalons', 'url' => ['index']];
 $this->params['breadcrumbs'][] = [
     'label' => $model->id,
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = 'Update';
 
 </div>
 
-<div>
-    <?= $this->render('_distrib_form', compact('model')) ?>
-
-</div>
+<!--отослать во все банки не нужна-->
+<!--<div>-->
+<!--    --><?//= $this->render('_distrib_form', compact('model')) ?>
+<!--</div>-->

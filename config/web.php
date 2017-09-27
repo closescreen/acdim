@@ -21,6 +21,8 @@ $config = [
 */
 //    ],
 
+
+
     'aliases' => [
          '@upload' => __DIR__ . '/../web/uploads',
         ],

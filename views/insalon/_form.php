@@ -2,6 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use yii\i18n\Formatter;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Insalon */
@@ -29,6 +31,17 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'client_sname')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'client_bdate')->textInput() ?>
+
+<!--    --><?php
+// не смог установить
+    //    echo DatePicker::widget([
+//    'model' => $model,
+//    'attribute' => 'from_date',
+//    //'language' => 'ru',
+//    //'dateFormat' => 'yyyy-MM-dd',
+//    ]);
+
+    ?>
 
     <?= $form->field($model, 'client_phone')->textInput(['maxlength' => true]) ?>
 
