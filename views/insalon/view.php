@@ -98,7 +98,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <!-- по банку -->
             <? $css_class = 'request-status-'.$inbank->state_id ?>
             <div class=<?= $css_class?> >
-                <h3><b><?= $inbank->bank->name ?></b></h3>
+                <h3><b><?= $inbank->bank->name . ' ('. $inbank->state->name.')' ?></b></h3>
             </div>
             <h4>Файлы:</h4>
             <?php

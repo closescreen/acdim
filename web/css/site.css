@@ -145,3 +145,7 @@ a.desc:after {
     background-color: cornflowerblue;
 }
 
+textarea {
+    width: 100%;
+}
+
