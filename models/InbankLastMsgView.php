@@ -61,7 +61,7 @@ class InbankLastMsgView extends Inbank //\yii\db\ActiveRecord
         return [
             'id' => 'Номер',
             'active' => 'Активна',
-            'insalon_id' => 'Insalon ID',
+            'insalon_id' => '№',
             'bank_id' => 'Bank ID',
             'changed' => 'Изменена',
             'changed_by_user_id' => 'Изменена пользователем',
@@ -73,6 +73,15 @@ class InbankLastMsgView extends Inbank //\yii\db\ActiveRecord
             'b4' => 'B4',
             'b5' => 'B5',
             'bank_name' =>'Банк',
+               's_client_fio'=>'ФИО Клиента',
+                's_client_bdate'=>'Д.р. кл.',
+                's_client_phone'=>'телефон кл.',
+                's_car_model'=>'Модель авто',
+                's_car_year'=>'Год авто',
+                's_car_price'=>'Стоим. авто',
+                's_down_payment'=>'Перв. взнос',
+                's_equipment_cost'=>'Стоим. оборуд.',
+
         ];
     }
 
