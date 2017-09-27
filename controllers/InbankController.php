@@ -99,6 +99,45 @@ class InbankController extends AppController
             ->joinWith('insalon.salon')->one();
 
         $states =  ArrayHelper::map(Rstates::find()->all(), 'id', 'name');
+//        debug($states);
+//        exit;
+//        Array
+//        (
+//            [new] => Новая
+//            [in-work] => В работе
+//            [approved] => Одобрена
+//            [rejected] => Отклонена
+//            [formalized] => Оформлена
+//        )
+
+        $current_state = $model->state_id;
+//        debug($current_state);
+//        exit;
+        switch ($current_state){
+            case 'new':
+                unset($states['approved']);
+                unset($states['rejected']);
+                unset($states['formalized']);
+                break;
+            case 'in-work':
+                unset($states['formalized']);
+                break;
+            case 'approved':
+                unset($states['new']);
+                unset($states['rejected']);
+                break;
+            case 'rejected':
+                unset($states['new']);
+                unset($states['approved']);
+                unset($states['formalized']);
+                break;
+            case 'formalized':
+                unset($states['new']);
+                unset($states['in-work']);
+                unset($states['rejected']);
+                break;
+        }
+
 
         $messages = Message::find()->where(['inbank_id'=>$id])->all();
 
@@ -106,7 +145,7 @@ class InbankController extends AppController
         // тут наверняка никаких параметров
         $messageDataProvider = $messageSearchModel->search(Yii::$app->request->queryParams);
 
-
+        $model->changed_by_user_id = Yii::$app->user->identity->id;
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
 
             // ?? нужно, если да, то может вынести в общее место?:

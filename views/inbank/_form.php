@@ -9,6 +9,8 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
+<!--<div class="request-status-in-work">--><?//=$states[$model->state_id]?><!--</div>-->
+
 
 <div class="inbank-form">
 
@@ -23,9 +25,9 @@ use yii\widgets\ActiveForm;
         $avto_string = $model->insalon->car_model
             . ' ' . $model->insalon->car_year . ' года';
 
-        $price_string = ' Cтоимость: ' . $model->insalon->car_price .' руб';
+        $price_string = $model->insalon->car_price .' руб';
 
-        $eq_string = 'Оборудование:' . $model->insalon->equipment_desc
+        $eq_string = $model->insalon->equipment_desc
             . ' стоимостью ' . $model->insalon->equipment_cost . ' руб';
     $style1 = ['disabled'=>'disabled', 'style'=>'width:100%;'];
 
@@ -41,8 +43,10 @@ use yii\widgets\ActiveForm;
     <?= Html::label('Оборудование: ')
         . HTML::textInput('eq_string',$eq_string, $style1) ?><br>
 
-    <?= $form->field($model, 'state_id')->dropDownList($states)
-        ->label('Состояние') ?>
+    <?= $form->field($model, 'state_id')
+        ->dropDownList($states)
+        ->label('Состояние' )
+    ?>
 
     <?= $form->field($model, 'state_desc')->textInput(['maxlength' => true])
         ->label('Примечания') ?>
@@ -51,8 +55,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'changed')->textInput(['disabled'=>'disabled'])
         ->label('Изменено') ?>
 
-    <?= $form->field($model, 'changed_by_user_id')->textInput(['disabled'=>'disabled'])
-        ->label('Изменено пользователем') ?>
+<!--    пока скроем, можно админам открыть-->
+<!--    --><?//= $form->field($model, 'changed_by_user_id')->textInput(['disabled'=>'disabled'])
+//        ->label('Изменено пользователем') ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ?
