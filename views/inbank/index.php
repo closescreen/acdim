@@ -29,6 +29,8 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
                 //'id',
                 //'active',
                 'insalon_id', // - номер заявки банк пусть видит как номер id insalon
+                'salon_name',
+                //'insalon.salon.name', //-через связь (не ищет)
                 //'bank_id',
                 //'bank_name', // для админов можно
                 //'changed',
@@ -61,17 +63,29 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
                 //['class' => 'yii\grid\SerialColumn'],
                 ['class' => 'yii\grid\ActionColumn','template' => '{update}',],
 
-                'id',
+                //'id',
                 //'active',
-                //'insalon_id',
+                'insalon_id', // - номер заявки банк пусть видит как номер id insalon
+                //'insalon.salon.name', // - через связь не ищет
                 //'bank_id',
-                'insalon.salon.name',
+                'salon_name',
                 'bank_name', // для админов можно
+
                 //'changed',
                 //'insalon.salon_id',
-                'insalon.client_tname',
-                'insalon.client_fname',
-                'insalon.client_sname',
+                's_client_fio',
+                's_client_bdate',
+                's_client_phone',
+                's_car_model',
+                's_car_year',
+                's_car_price',
+                's_down_payment',
+                's_equipment_cost',
+
+//                'insalon.client_tname',
+//                'insalon.client_fname',
+//                'insalon.client_sname',
+//                'insalon.salon.name',
                 // 'changed_by_user_id',
                 // 'state_id',
                 // 'state_desc',

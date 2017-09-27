@@ -9,7 +9,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Insalon */
 
 $this->title = "Просмотр заявки ".$model->id;
-$this->params['breadcrumbs'][] = ['label' => 'Insalons', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -96,7 +96,10 @@ $this->params['breadcrumbs'][] = $this->title;
     <? foreach ($model->inbanks as $inbank): ?>
         <div class="container-fluid">
             <!-- по банку -->
-            <h4><b><?= $inbank->bank->name ?></b></h4>
+            <? $css_class = 'request-status-'.$inbank->state_id ?>
+            <div class=<?= $css_class?> >
+                <h3><b><?= $inbank->bank->name ?></b></h3>
+            </div>
             <h4>Файлы:</h4>
             <?php
 

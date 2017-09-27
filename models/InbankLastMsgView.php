@@ -73,6 +73,7 @@ class InbankLastMsgView extends Inbank //\yii\db\ActiveRecord
             'b4' => 'B4',
             'b5' => 'B5',
             'bank_name' =>'Банк',
+            'salon_name'=>'Салон',
                's_client_fio'=>'ФИО Клиента',
                 's_client_bdate'=>'Д.р. кл.',
                 's_client_phone'=>'телефон кл.',
