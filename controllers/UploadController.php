@@ -3,10 +3,13 @@
 namespace app\controllers;
 
 use app\models\Inbank;
+use app\models\Message;
 use app\models\UploadForm;
 use Yii;
 use app\models\Upload;
 use app\models\UploadSearch;
+use yii\base\ErrorException;
+use yii\base\Exception;
 use yii\helpers\Url;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -84,7 +87,11 @@ class UploadController extends AppController
                         $full_name = "${full_path}/$name";
 
                         // создание дир:
-                        FileHelper::createDirectory($full_path);
+                        try {
+                            FileHelper::createDirectory($full_path);
+                        } catch (Exception $e) {
+                            throw new ErrorException('Не могу создать папку');
+                        }
 
                         $upload_ar_model = new Upload();
                         $upload_ar_model->inbank_id = $inbank_id;
@@ -102,6 +109,18 @@ class UploadController extends AppController
                             // ok
                             // сохранение файла на диск:
                             $upload_ar_model->file_name->saveAs($full_name);
+
+                            // запись сообщения о файле
+                            $model = new Message();
+                            $model->inbank_id = $inbank_id;
+                            $model->created_by_user_id = Yii::$app->user->identity->id; // перезапись
+                            $model->created = null; // бд вставит timestamp
+                            $model->text = 'Прикреплен файл '.
+                                $upload_form_model->file_name.
+                                ($upload_form_model->file_desc ?
+                                    '('.$upload_form_model->file_desc.')': '');
+
+                            $model->save();
 
                         }else{
                             // bed

@@ -16,14 +16,31 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <? foreach($messages as $message): ?>
-        <?php
-            $msg_class = $message->created_by_user_id == Yii::$app->user->identity->id ?
-                    "alert alert-success" : "alert alert-secondary";
+<!--        --><?php
+//            $msg_class = $message->created_by_user_id == Yii::$app->user->identity->id ?
+//                    "alert alert-success" : "alert alert-info";
+//
+//        ?>
 
-        ?>
+            <?php
+                   // наше ли это сообщение
+                $is_our_msg = ( $message->author->org_id == Yii::$app->user->identity->org_id);
+                // fio автора
+                $author_fio = $message->author->fio;
+                // организация-автор сообщения:
+                $author_org_name = $message->author->org->name;
 
-        <div class="container">
-            <?= $message->created_by_user_id?>
+                $msg_class =
+                    $is_our_msg ?
+                        'alert alert-success' :
+                        'alert alert-info' ;
+
+
+            ?>
+
+
+         <div class="container">
+            <b><?= $is_our_msg ? $author_fio : $author_org_name ?></b>
             <?= $message->created ?><br>
         </div>
 

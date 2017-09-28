@@ -52,7 +52,6 @@ class MessageController extends AppController
     public function actionAnswer($inbank_id){
         $model = new Message();
         $model->inbank_id = $inbank_id;
-        $model->created_by_user_id = Yii::$app->user->identity->id;
         $model->created_by_user_id = Yii::$app->user->identity->id; // перезапись
         $model->created = null; // бд вставит timestamp
 
