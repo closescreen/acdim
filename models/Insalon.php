@@ -106,4 +106,9 @@ class Insalon extends \yii\db\ActiveRecord
     public function getInbanks(){
         return $this->hasMany(Inbank::className(), ['insalon_id'=>'id']);
     }
+
+    // для удобного доступа к inbank_last_msg
+    public function getInbankLastMsg(){
+        return $this->hasMany(InbankLastMsgView::className(), ['insalon_id'=>'id']);
+    }
 }

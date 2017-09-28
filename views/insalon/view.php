@@ -90,10 +90,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-
+<?// debug( $model->inbanks-> ); exit; ?>
 
 <div>
-    <? foreach ($model->inbanks as $inbank): ?>
+<!--    <?// foreach ($model->inbanks as $inbank): ?> -->
+
+
+    <? foreach( $model->getInbankLastMsg()
+            ->orderBy(['m_created'=>SORT_DESC])
+            ->all() as $inbank ): ?>
         <div class="container-fluid">
             <!-- по банку -->
             <? $css_class = 'request-status-'.$inbank->state_id ?>
