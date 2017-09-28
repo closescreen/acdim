@@ -86,7 +86,7 @@ SET character_set_client = utf8;
  1 AS `m_id`,
  1 AS `m_created`,
  1 AS `m_created_by_user_id`,
- 1 AS `m_text`*/;
+ 1 AS `m_created_text`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -384,7 +384,7 @@ UNLOCK TABLES;
 /*!50001 SET collation_connection      = utf8_general_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `inbank_last_msg` AS select `b`.`id` AS `id`,`b`.`active` AS `active`,`b`.`insalon_id` AS `insalon_id`,`b`.`bank_id` AS `bank_id`,`b`.`changed` AS `changed`,`b`.`changed_by_user_id` AS `changed_by_user_id`,`b`.`state_id` AS `state_id`,`b`.`state_desc` AS `state_desc`,`b`.`b1` AS `b1`,`b`.`b2` AS `b2`,`b`.`b3` AS `b3`,`b`.`b4` AS `b4`,`b`.`b5` AS `b5`,`bo`.`name` AS `bank_name`,`salon`.`name` AS `salon_name`,concat_ws('.',`s`.`client_tname`,substr(`s`.`client_fname`,1,1),substr(`s`.`client_sname`,1,1)) AS `s_client_fio`,`s`.`client_bdate` AS `s_client_bdate`,`s`.`client_phone` AS `s_client_phone`,`s`.`car_price` AS `s_car_price`,`s`.`down_payment` AS `s_down_payment`,`s`.`equipment_cost` AS `s_equipment_cost`,`s`.`equipment_desc` AS `s_equipment_desc`,`s`.`car_model` AS `s_car_model`,`s`.`car_year` AS `s_car_year`,`m`.`id` AS `m_id`,`m`.`created` AS `m_created`,`m`.`created_by_user_id` AS `m_created_by_user_id`,`m`.`text` AS `m_text` from (((((`avto_cred`.`inbank` `b` left join (select `avto_cred`.`messages`.`inbank_id` AS `inbank_id`,max(`avto_cred`.`messages`.`id`) AS `last_msg_id` from `avto_cred`.`messages` group by `avto_cred`.`messages`.`inbank_id`) `lm` on((`lm`.`inbank_id` = `b`.`id`))) left join `avto_cred`.`messages` `m` on((`lm`.`last_msg_id` = `m`.`id`))) left join `avto_cred`.`orgs` `bo` on((`b`.`bank_id` = `bo`.`id`))) left join `avto_cred`.`insalon` `s` on((`b`.`insalon_id` = `s`.`id`))) left join `avto_cred`.`orgs` `salon` on((`s`.`salon_id` = `salon`.`id`))) */;
+/*!50001 VIEW `inbank_last_msg` AS select `b`.`id` AS `id`,`b`.`active` AS `active`,`b`.`insalon_id` AS `insalon_id`,`b`.`bank_id` AS `bank_id`,`b`.`changed` AS `changed`,`b`.`changed_by_user_id` AS `changed_by_user_id`,`b`.`state_id` AS `state_id`,`b`.`state_desc` AS `state_desc`,`b`.`b1` AS `b1`,`b`.`b2` AS `b2`,`b`.`b3` AS `b3`,`b`.`b4` AS `b4`,`b`.`b5` AS `b5`,`bo`.`name` AS `bank_name`,`salon`.`name` AS `salon_name`,concat_ws('.',`s`.`client_tname`,substr(`s`.`client_fname`,1,1),substr(`s`.`client_sname`,1,1)) AS `s_client_fio`,`s`.`client_bdate` AS `s_client_bdate`,`s`.`client_phone` AS `s_client_phone`,`s`.`car_price` AS `s_car_price`,`s`.`down_payment` AS `s_down_payment`,`s`.`equipment_cost` AS `s_equipment_cost`,`s`.`equipment_desc` AS `s_equipment_desc`,`s`.`car_model` AS `s_car_model`,`s`.`car_year` AS `s_car_year`,`m`.`id` AS `m_id`,`m`.`created` AS `m_created`,`m`.`created_by_user_id` AS `m_created_by_user_id`,concat_ws(' ',`m`.`created`,`m`.`text`) AS `m_created_text` from (((((`avto_cred`.`inbank` `b` left join (select `avto_cred`.`messages`.`inbank_id` AS `inbank_id`,max(`avto_cred`.`messages`.`id`) AS `last_msg_id` from `avto_cred`.`messages` group by `avto_cred`.`messages`.`inbank_id`) `lm` on((`lm`.`inbank_id` = `b`.`id`))) left join `avto_cred`.`messages` `m` on((`lm`.`last_msg_id` = `m`.`id`))) left join `avto_cred`.`orgs` `bo` on((`b`.`bank_id` = `bo`.`id`))) left join `avto_cred`.`insalon` `s` on((`b`.`insalon_id` = `s`.`id`))) left join `avto_cred`.`orgs` `salon` on((`s`.`salon_id` = `salon`.`id`))) */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -416,4 +416,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-09-28 11:18:19
+-- Dump completed on 2017-09-28 11:45:03

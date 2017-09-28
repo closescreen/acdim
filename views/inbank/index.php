@@ -21,6 +21,15 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php
+        $m_created_text = [ 'attribute' => 'm_created_text',
+                //'format' => 'raw',
+                'value' => function($m) {
+                    return $m->m_created_text ?
+                        mb_substr($m->m_created_text,0,50).'...' :
+                        '';
+                }
+            ];
+
         $columns = Yii::$app->user->identity->org_type_id == 'bank' ?
             [
                 //['class' => 'yii\grid\SerialColumn'],
@@ -56,7 +65,8 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
                 // 'b3',
                 // 'b4',
                 // 'b5',
-                'm_text',
+                //'m_created_text',
+                $m_created_text,
             ] // - for bank
             :
             [
@@ -94,13 +104,18 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
                 // 'b3',
                 // 'b4',
                 // 'b5',
-                'm_text',
+                //'m_created_text',
+                $m_created_text,
 
             ]; // - for admins
 
     ?>
 
-
+    <?php
+    $dataProvider->sort->defaultOrder =  [
+             'm_created_text'=>SORT_DESC
+        ];
+    ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

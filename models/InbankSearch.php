@@ -29,7 +29,7 @@ class InbankSearch extends InbankLastMsgView // Inbank
                 's_equipment_desc',
                 's_car_model',
                 'm_created',
-                'm_text',
+                'm_created_text',
                 'insalon.client_tname',
                 'insalon.client_fname',
                 'insalon.client_sname',
@@ -119,7 +119,6 @@ class InbankSearch extends InbankLastMsgView // Inbank
 //            's_equipment_desc' => $this->s_equipment_desc,
 //            's_car_model' => $this->s_car_model,
             's_car_year' => $this->s_car_year,
-//            'm_text' => $this->m_text,
             //'insalon.salon.name' => $this->insalon->salon->name,//так не работает
 
         ]);
@@ -139,7 +138,7 @@ class InbankSearch extends InbankLastMsgView // Inbank
             ->andFilterWhere(['like', 's_client_phone', $this->s_client_phone])
             ->andFilterWhere(['like', 's_equipment_desc', $this->s_equipment_desc])
             ->andFilterWhere(['like', 's_car_model', $this->s_car_model])
-            ->andFilterWhere(['like', 'm_text', $this->m_text]);
+            ->andFilterWhere(['like', 'm_created_text', $this->m_created_text]);
 //            ->andFilterWhere(['like', '', $this->])
 //            ->andFilterWhere(['like', '', $this->])
 //            ->andFilterWhere(['like', '', $this->])
