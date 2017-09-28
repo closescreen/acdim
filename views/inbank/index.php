@@ -41,7 +41,7 @@ $dataProvider->sort->attributes['state_name'] = [
         $columns = Yii::$app->user->identity->org_type_id == 'bank' ?
             [ // колонки для банка
                 //['class' => 'yii\grid\SerialColumn'],
-                ['class' => 'yii\grid\ActionColumn','template' => '{update}',],
+                ['class' => 'yii\grid\ActionColumn','template' => '{view} {update}',],
                 'insalon_id', // - номер заявки банк пусть видит как номер id insalon
                 'insalon_created',
                 'salon_name',
@@ -74,7 +74,7 @@ $dataProvider->sort->attributes['state_name'] = [
             :
             [ // колонки для админа
                 //['class' => 'yii\grid\SerialColumn'],
-                ['class' => 'yii\grid\ActionColumn','template' => '{update}',],
+                ['class' => 'yii\grid\ActionColumn','template' => '{view} {update}',],
 
                 'insalon_id', // - номер заявки банк пусть видит как номер id insalon
                 'insalon_created',

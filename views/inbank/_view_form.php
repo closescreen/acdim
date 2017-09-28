@@ -43,30 +43,36 @@ use yii\widgets\ActiveForm;
     <?= Html::label('Оборудование: ')
         . HTML::textInput('eq_string',$eq_string, $style1) ?><br>
 
-    <?= $form->field($model, 'state_id')
-        ->dropDownList($states)
-        ->label('Состояние' )
-    ?>
 
-    <?= $form->field($model, 'state_desc')->textInput(['maxlength' => true])
-        ->label('Примечания') ?>
+    <?= Html::label('Состояние: ')
+    . HTML::textInput('state_name',$states[$model->state_id] , $style1) ?><br>
+
+<!--    --><?//= $form->field($model, 'state_id')
+//        ->dropDownList($states)
+//        ->label('Состояние' )
+//    ?>
+
+    <?= Html::label('Примечания')
+        . Html::textInput('state_desc', $model->state_desc, $style1) ?><br>
+<!--    --><?//= $form->field($model, 'state_desc')->textInput(['maxlength' => true])
+//        ->label('Примечания') ?>
 
 
-    <?= Html::label('Изменено: ')
-        . HTML::textInput('changed', $model->changed, $style1) ?><br>
+    <?= Html::label('Изменено')
+        . Html::textInput('changed', $model->changed, $style1) ?><br>
 
 <!--    --><?//= $form->field($model, 'changed')->textInput(['disabled'=>'disabled'])
-//        ->label('Изменено') ?><br>
+//        ->label('Изменено') ?>
 
 <!--    пока скроем, можно админам открыть-->
 <!--    --><?//= $form->field($model, 'changed_by_user_id')->textInput(['disabled'=>'disabled'])
 //        ->label('Изменено пользователем') ?>
 
-    <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ?
-            'Create' : 'Update',
-            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
-    </div>
+<!--    <div class="form-group">-->
+<!--        --><?//= Html::submitButton($model->isNewRecord ?
+//            'Create' : 'Update',
+//            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+<!--    </div>-->
 
 
 

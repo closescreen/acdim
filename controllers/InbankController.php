@@ -62,8 +62,20 @@ class InbankController extends AppController
      */
     public function actionView($id)
     {
+        $states =  ArrayHelper::map(Rstates::find()->all(), 'id', 'name');
+        $messages = Message::find()->where(['inbank_id'=>$id])->all();
+        $messageSearchModel = new MessageSearch();
+        $messageDataProvider = $messageSearchModel->search(Yii::$app->request->queryParams);
+        $upload_model = new UploadForm();
+        $upload_model->inbank_id = $id;
+
         return $this->render('view', [
             'model' => $this->findModel($id),
+            'states'=> $states,
+            'messages'=> $messages,
+            'messageSearchModel' => $messageSearchModel,
+            'messageDataProvider' => $messageDataProvider,
+            'upload_model' => $upload_model,
         ]);
     }
 

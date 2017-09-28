@@ -12,7 +12,7 @@ $this->title = 'Заявка №' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 // todo: тоже самое - номер из insalon:
-$this->params['breadcrumbs'][] = 'Заявка #'.$model->id;
+$this->params['breadcrumbs'][] = 'Заявка #'.$model->id. ' ('.$model->insalon->salon->name .')';
 ?>
 
            <? $css_class = 'request-status-'.$model->state_id ?>
@@ -38,30 +38,3 @@ $this->params['breadcrumbs'][] = 'Заявка #'.$model->id;
 </div>
 
 
-<div class="upload-list">
-    <?= $this->render('_uploads',[
-            'upload_model'=>$model->uploads,
-    ]) ?>
-
-</div>
-
-<div class="message-list">
-
-    <?= $this->render('_messages', [
-        'messages' => $messages,
-        //'messageDataProvider'=>$messageDataProvider,
-        'inbank_model' => $model,
-    ]) ?>
-
-</div>
-
-<!-- запомнить урл-->
-<? Url::remember(); ?>
-
-<div class="answer-form">
-    <?= $this->render('_answer_form',['inbank_model'=>$model]) ?>
-</div>
-
-<div class="upload-file">
-    <?= $this->render('_upload_form', ['upload_model'=>$upload_model] ) ?>
-</div>
