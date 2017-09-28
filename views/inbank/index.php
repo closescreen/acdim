@@ -16,6 +16,14 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
     'desc' => ['insalon.client_tname' => SORT_DESC],
 ];
 
+$dataProvider->sort->attributes['state_name'] = [
+    'asc' => ['state_id' => SORT_ASC],
+    'desc' => ['state_id' => SORT_DESC],
+];
+
+
+
+
 ?>
 <div class="inbank-index">
 
@@ -31,31 +39,22 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
             ];
 
         $columns = Yii::$app->user->identity->org_type_id == 'bank' ?
-            [
+            [ // колонки для банка
                 //['class' => 'yii\grid\SerialColumn'],
                 ['class' => 'yii\grid\ActionColumn','template' => '{update}',],
-
-                //'id',
-                //'active',
                 'insalon_id', // - номер заявки банк пусть видит как номер id insalon
+                'insalon_created',
                 'salon_name',
-                //'insalon.salon.name', //-через связь (не ищет)
-                //'bank_id',
                 //'bank_name', // для админов можно
-                //'changed',
                 //'insalon.salon_id',
                 's_client_fio',
-                's_client_bdate',
-                's_client_phone',
+                //'s_client_bdate',
+                //'s_client_phone',
                 's_car_model',
                 's_car_year',
                 's_car_price',
                 's_down_payment',
                 's_equipment_cost',
-
-//                'insalon.client_tname',
-//                'insalon.client_fname',
-//                'insalon.client_sname',
 //                'insalon.salon.name',
                 // 'changed_by_user_id',
                 // 'state_id',
@@ -67,25 +66,26 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
                 // 'b5',
                 //'m_created_text',
                 $m_created_text,
+                'state_name',
+                'changed',
+                'active',
+
             ] // - for bank
             :
-            [
+            [ // колонки для админа
                 //['class' => 'yii\grid\SerialColumn'],
                 ['class' => 'yii\grid\ActionColumn','template' => '{update}',],
 
-                //'id',
-                //'active',
                 'insalon_id', // - номер заявки банк пусть видит как номер id insalon
-                //'insalon.salon.name', // - через связь не ищет
-                //'bank_id',
+                'insalon_created',
+                'insalon_created',
                 'salon_name',
                 'bank_name', // для админов можно
 
-                //'changed',
                 //'insalon.salon_id',
                 's_client_fio',
-                's_client_bdate',
-                's_client_phone',
+                //'s_client_bdate',
+                //'s_client_phone',
                 's_car_model',
                 's_car_year',
                 's_car_price',
@@ -106,6 +106,8 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
                 // 'b5',
                 //'m_created_text',
                 $m_created_text,
+                'changed',
+                'active',
 
             ]; // - for admins
 
@@ -113,7 +115,7 @@ $dataProvider->sort->attributes['insalon.client_tname'] = [
 
     <?php
     $dataProvider->sort->defaultOrder =  [
-             'm_created_text'=>SORT_DESC
+             'insalon_created'=>SORT_DESC
         ];
     ?>
     <?= GridView::widget([
