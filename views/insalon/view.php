@@ -93,8 +93,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <?// debug( $model->inbanks-> ); exit; ?>
 
 <div>
-<!--    <?// foreach ($model->inbanks as $inbank): ?> -->
-
 
     <? foreach( $model->getInbankLastMsg()
             ->orderBy(['m_created'=>SORT_DESC])
@@ -142,17 +140,23 @@ $this->params['breadcrumbs'][] = $this->title;
                 // организация-автор сообщения:
                 $author_org_name = $message->author->org->name;
 
+                $is_last_msg = $message->id == $inbank->m_id;
+
                 $div =
                     $is_our_msg ?
                         '<div class="alert alert-success">' :
-                        '<div class="alert alert-info">' ;
+                        ( $is_last_msg ?
+                            '<div class="alert alert-success">' :
+                            '<div class="alert alert-success">');
 
 
                 ?>
 
                 <b><?= $is_our_msg ? $author_fio : $author_org_name ?></b>
+                (<?= $is_last_msg ? ($message->created.' - последнее сообщение'): $message->created ?>)
+
                 <?= $div ?>
-                    <?= $message->text ?>
+                    <?= $is_last_msg? Html::tag('b', $message->text):$message->text ?>
                 </div>
 
     
@@ -171,3 +175,5 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <? endforeach;?>
 </div>
+
+<div class="">asd</div>
