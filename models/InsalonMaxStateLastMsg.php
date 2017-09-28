@@ -48,9 +48,9 @@ class InsalonMaxStateLastMsg extends Insalon //\yii\db\ActiveRecord
             'active' => 'Активна',
             'salon_id' => 'Salon ID',
             'salon_name'=>'Салон',
-            'created' => 'Когда создана',
+            'created' => 'Создана',
             'created_by_user_id' => 'Создана пользователем',
-            'changed' => 'Когда изменена',
+            'changed' => 'Изменена',
             'changed_by_user_id' => 'Изменена пользователем',
             'client_fname' => 'Имя',
             'client_sname' => 'Отчество',
@@ -69,8 +69,8 @@ class InsalonMaxStateLastMsg extends Insalon //\yii\db\ActiveRecord
   //          's4' => 'S4',
   //          's5' => 'S5',
             'state_name' => 'Состояние',
-            'm_text'=>'Сообщение',
             'm_created' => 'Время сообщ',
+            'm_created_text' => 'Сообщение',//время+сообщ
         ];
     }
 

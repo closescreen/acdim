@@ -19,17 +19,22 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Новая заявка', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
     <?php
-    $columns = Yii::$app->user->identity->org_type_id == 'salon' ?
-        [
 
-                // колонки для салона
+    $m_created_text = [ 'attribute' => 'm_created_text',
+                //'format' => 'raw',
+                'value' => function($m) {
+                    return $m->m_created_text ?
+                        mb_substr($m->m_created_text,0,50).'...' :
+                        '';
+                }
+            ];
+
+    $columns = Yii::$app->user->identity->org_type_id == 'salon' ?
+        [    // колонки для салона
+            ['class' => 'yii\grid\ActionColumn'],
             'id',
-            //'state_id',
-            'state_name',
-            //'salon_id',
             'created',
-            // 'changed',
-            // 'changed_by_user_id',
+            'changed',
              //'client_tname',
             'client_fio',
             // 'client_bdate',
@@ -45,23 +50,20 @@ $this->params['breadcrumbs'][] = $this->title;
             // 's3',
             // 's4',
             // 's5',
-            'created_by_user_id',
+            //'created_by_user_id',
+            //'m_created',
+            $m_created_text,
+            'state_name',
             'active',
-            'm_text',
-
-            ['class' => 'yii\grid\ActionColumn'],
                 ] :
-
         [
                 // колонки для админа
+            ['class' => 'yii\grid\ActionColumn'],
+
                 'id',
                 'salon_name',
-                //'state_id',
-                'state_name',
-                //'salon_id',
                 'created',
-                // 'changed',
-                // 'changed_by_user_id',
+                'changed',
                 //'client_fname',
                 //'client_sname',
                 //'client_tname',
@@ -79,14 +81,24 @@ $this->params['breadcrumbs'][] = $this->title;
                 // 's3',
                 // 's4',
                 // 's5',
-                'created_by_user_id',
+                //'created_by_user_id',
+                //'m_created',
+                 $m_created_text,
+                'state_name',
                 'active',
-                'm_text',
 
-                ['class' => 'yii\grid\ActionColumn'],
+
         ]
     ?>
 <?php Pjax::begin(); ?>
+
+    <?php
+    $dataProvider->sort->defaultOrder =  [
+             'm_created_text'=>SORT_DESC
+        ];
+
+
+    ?>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,

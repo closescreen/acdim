@@ -31,7 +31,9 @@ class InsalonSearch extends InsalonMaxStateLastMsg //Insalon
                 'client_tname', 'client_bdate', 'client_phone',
                 'equipment_desc', 'car_model',
                 's1', 's2', 's3', 's4', 's5','state_id','state_name',
-                'm_text', 'm_created','salon_name'],
+                'm_created_text',
+                'm_created',
+                'salon_name' ],
                     'safe'],
         ];
     }

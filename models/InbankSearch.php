@@ -26,7 +26,10 @@ class InbankSearch extends InbankLastMsgView // Inbank
                 'changed', 'state_id', 'state_desc', 'b1', 'b2', 'b3', 'b4', 'b5',
                 's_client_fio','s_client_bdate','s_client_phone',
                 'bank_name','salon_name',
-                's_equipment_desc','s_car_model','m_text',
+                's_equipment_desc',
+                's_car_model',
+                'm_created',
+                'm_text',
                 'insalon.client_tname',
                 'insalon.client_fname',
                 'insalon.client_sname',
@@ -48,7 +51,10 @@ class InbankSearch extends InbankLastMsgView // Inbank
 //            'insalon.salon.name' // отображает но неищет , чего-то не хватает
             'salon_name','bank_name',
             's_client_fio','s_client_bdate','s_client_phone',
-            's_equipment_desc','s_car_model','m_text',
+            's_equipment_desc',
+            's_car_model',
+            'm_created',
+            'm_created_text',
         ]
             );
     }
