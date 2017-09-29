@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Users;
+use app\models\Org_bindings;
 
 /**
- * UsersSearch represents the model behind the search form about `app\models\Users`.
+ * Org_bindingsSearch represents the model behind the search form about `app\models\Org_bindings`.
  */
-class UsersSearch extends Users
+class Org_bindingsSearch extends Org_bindings
 {
     /**
      * @inheritdoc
@@ -18,8 +18,7 @@ class UsersSearch extends Users
     public function rules()
     {
         return [
-            [['id', 'active', 'org_id'], 'integer'],
-            [['username', 'password', 'fio'], 'safe'],
+            [['id', 'bank_id', 'salon_id'], 'integer'],
         ];
     }
 
@@ -41,7 +40,7 @@ class UsersSearch extends Users
      */
     public function search($params)
     {
-        $query = Users::find();
+        $query = Org_bindings::find()->joinWith('salon');
 
         // add conditions that should always apply here
 
@@ -60,13 +59,9 @@ class UsersSearch extends Users
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'active' => $this->active,
-            'org_id' => $this->org_id,
+            'bank_id' => $this->bank_id,
+            'salon_id' => $this->salon_id,
         ]);
-
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'password', $this->password])
-            ->andFilterWhere(['like', 'fio', $this->fio]);
 
         return $dataProvider;
     }

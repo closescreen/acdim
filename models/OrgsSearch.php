@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Users;
+use app\models\Orgs;
 
 /**
- * UsersSearch represents the model behind the search form about `app\models\Users`.
+ * OrgsSearch represents the model behind the search form about `app\models\Orgs`.
  */
-class UsersSearch extends Users
+class OrgsSearch extends Orgs
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class UsersSearch extends Users
     public function rules()
     {
         return [
-            [['id', 'active', 'org_id'], 'integer'],
-            [['username', 'password', 'fio'], 'safe'],
+            [['id', 'active'], 'integer'],
+            [['name', 'org_type_id'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class UsersSearch extends Users
      */
     public function search($params)
     {
-        $query = Users::find();
+        $query = Orgs::find();
 
         // add conditions that should always apply here
 
@@ -61,12 +61,10 @@ class UsersSearch extends Users
         $query->andFilterWhere([
             'id' => $this->id,
             'active' => $this->active,
-            'org_id' => $this->org_id,
         ]);
 
-        $query->andFilterWhere(['like', 'username', $this->username])
-            ->andFilterWhere(['like', 'password', $this->password])
-            ->andFilterWhere(['like', 'fio', $this->fio]);
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'org_type_id', $this->org_type_id]);
 
         return $dataProvider;
     }

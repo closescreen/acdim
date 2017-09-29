@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use Yii;
+use yii\base\ErrorException;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 //use yii\web\UploadedFile;
@@ -35,7 +36,7 @@ class AppController extends Controller
                         $rr = $action->controller->module->requestedRoute;
                         $am = $action->actionMethod;
                         //debug( $action );
-                        throw new \Exception("Нет доступа. ${un} ( ${oti} ) --> $rr ($am)");
+                        throw new ErrorException("Нет доступа. ${un} ( ${oti} ) --> $rr ($am)");
                     }else{
                         print "<br>Нужно залогиниться.</br>";
                         $this->redirect('site/login');

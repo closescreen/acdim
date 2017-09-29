@@ -1,71 +1,43 @@
-
-<? use yii\widgets\LinkPager; ?>
-
-<h1>Организации</h1>
-
 <?php
 
-use yii\grid\GridView;
-use yii\data\ActiveDataProvider;
-use app\models\Orgs;
-use yii\helpers\Url;
 use yii\helpers\Html;
+use yii\grid\GridView;
 
-$dataProvider = new ActiveDataProvider([
-    'query' => $orgs, //Orgs::find(),
-    'pagination' => [
-        'pageSize' => 15,
-    ],
-]);
+/* @var $this yii\web\View */
+/* @var $searchModel app\models\OrgsSearch */
+/* @var $dataProvider yii\data\ActiveDataProvider */
 
-echo GridView::widget([
-    'dataProvider' => $dataProvider,
-    'columns' => [
-        //['class' => 'yii\grid\SerialColumn'], // добавляет номер в колонке #1
-//        'id',
-        [
-            'value'=> function($data){
-                return Html::a( $data->name, Url::to(['org/view', 'id' => $data->id]));
-            },
-            'label'=>'название', 
-            'format'=>'html'
-        ],
-        [ 
-            'value'=>'org_type_id',
-            'label'=>'Тип',
-        ],
-        // Более сложный пример.
-/*        [
-            'class' => 'yii\grid\DataColumn', // может быть опущено, поскольку является значением по умолчанию
-            'format'=>'html', // 'raw'|'text| ['date', 'php:Y-m-d']'
-            'value' => function ($data) {
-                return Html::a( 'Удалить', Url::to(['org/del', 'id' => $data->id]) , $options = [] );
-                //return Yii::$app->urlManager->createUrl(['org/del', 'id' => $data->id]); 
-                //Url::to(['org/del', 'id' => $data->id]); //$data->name; 
-                // $data['name'] для массивов, например, при использовании SqlDataProvider.
-            },
-            'label' => ''
-        ], 
-*/
-/*        [
-        'class' => 'yii\grid\ActionColumn',
-        'template' => '{view} {update} {delete}',
-        'buttons' => [
-         // ...
-             'delete' => function ($url, $model) {
-                 return Html::a('<span class="glyphicon glyphicon-trash"></span>', Url::to(['delete', 'id' => $model->id]), [
-                    'title' => Yii::t('app', 'Удалить'),
-                    'data' => [                               
-                       'method' => 'post',
-                       'confirm' => Yii::t('app', 'Удалить?'),
-                    ]
-                ]);
-            },
-        ],
-     
-        ],
-*/
-    ],
-]);
-
+$this->title = Yii::t('app', 'Orgs');
+$this->params['breadcrumbs'][] = $this->title;
 ?>
+<div class="orgs-index">
+
+    <h1><?= Html::encode($this->title) ?></h1>
+    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+
+    <p>
+        <?= Html::a(Yii::t('app', 'Создать новую организацию'), ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
+    <?= GridView::widget([
+        'dataProvider' => $dataProvider,
+        'filterModel' => $searchModel,
+        'columns' => [
+            ['class' => 'yii\grid\SerialColumn'],
+
+            'id',
+            'name',
+            //'org_type_id',
+            'org_type.name',
+            'active',
+
+            ['class' => 'yii\grid\ActionColumn'],
+        ],
+        'rowOptions'=>function($model) {
+            if ($model->active == 0) {
+                return ['class' => 'inactive'];
+            } else {
+                return [];
+            }
+        }
+    ]); ?>
+</div>

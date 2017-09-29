@@ -2,110 +2,126 @@
 
 namespace app\controllers;
 
-use Yii;
-//use yii\filters\AccessControl;
-//use yii\web\Controller;
-//use yii\web\UploadedFile;
-//use yii\web\Response;
-//use yii\filters\VerbFilter;
-//use app\models\Org_types;
-//use app\models\Orgs;
-use app\models\Users;
 use app\models\Orgs;
+use Yii;
+use app\models\Users;
 use app\models\UsersSearch;
-use yii\helpers\Url;
+use yii\base\ErrorException;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
-//use yii\helpers\Html;
-//use yii\data\Pagination;
-
+/**
+ * UserController implements the CRUD actions for Users model.
+ */
 class UserController extends AppController
 {
 
-// ----------------- index ----------------------
-    public function actionIndex( $active=1 ){
 
+    /**
+     * Lists all Users models.
+     * @return mixed
+     */
+    public function actionIndex()
+    {
         $searchModel = new UsersSearch();
-        $dataProvider = $searchModel->search(Yii::$app->request->get());
-        $newuser = new Users();
-        $newuser->active = 1;
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-        $orgs = Orgs::find()->select(['name'])->asArray()->indexBy('id')->column();
-
-        return $this->render('index', compact(
-            'dataProvider', 'searchModel',
-            'newuser',
-            'orgs'));
-
-
-//        return $this->render('create', compact('record', 'orgs'));
-//        $query = Users::find()
-//            ->joinWith(['org' => function($query) { $query->from(['org' => 'orgs']); }]);
-        
-
-/*	$pagination = new Pagination([
-	    'defaultPageSize' => 2,
-	    'totalCount' => $userlist->count()
-	]);
-	$userlist = $userlist->offset( $pagination->offset )
-			    ->limit( $pagination->limit)
-			    ->all();
-*/
-	//return $this->render('index', compact('query')); //=>$userlist, 'pagination'=>$pagination]);
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
     }
 
+    /**
+     * Displays a single Users model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+        $orgs_model = new Orgs();
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+            'orgs_model' => $orgs_model,
+        ]);
+    }
 
-// ---------------------- update -------------------------
+    /**
+     * Creates a new Users model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new Users();
+        $model->active=1;
+        $orgs_model = new Orgs();
 
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+                'orgs_model'=>$orgs_model,
+            ]);
+        }
+    }
+
+    /**
+     * Updates an existing Users model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
     public function actionUpdate($id)
     {
-        if (Yii::$app->request->isGet and $id) {
-            if ($record = Users::find()->where(['id' => $id])->one()) {
-                $orgs = Orgs::find()->select(['name'])->asArray()->indexBy('id')->column();
-                return $this->render('update', compact('record', 'orgs'));
-            }
-        }
+        $model = $this->findModel($id);
 
-       // debug(Yii::$app->request->post());
-
-        if( $users = Yii::$app->request->post('Users')){
-            if ($id = $users['id']){
-                if ( $record = Users::findOne(['id'=>$id])){
-                    $record->load(Yii::$app->request->post());
-                    if ( $record->save() ){
-                        return $this->redirect(Url::to(['index']));
-                    }
-                }
-            }
-        }
-        else{
-            debug('no');
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            $orgs_model = new Orgs();
+            return $this->render('update', [
+                'model' => $model,
+                'orgs_model'=>$orgs_model,
+            ]);
         }
     }
 
-// -------------------------- create ----------------------------------
-    public function actionCreate(){
-        $users = new Users();
-        if ( $users->load( Yii::$app->request->post())){
-            if ($users->save()){
-                $this->redirect(['user/index']);
-            }else{
-                debug( $users->errors ); // переделать
-            }
+    /**
+     * Deletes an existing Users model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionDelete($id)
+    {
+        //$this->findModel($id)->delete();
+        // вместо удаления симаем active
+        try {
+            $model = $this->findModel($id);
+        } catch (NotFoundHttpException $e) {
+            throw new ErrorException('Не найдено '.$id);
         }
-
+        $model->active = 0;
+        $model->save();
+        return $this->redirect(['index']);
     }
 
-    // -------------------- delete (deactivate) --------------
-    public function actionDelete($id){
-        if( $user = Users::findOne(['id'=>$id])){
-            $user->active = false;
-            $user->save();
-            $this->redirect(['user/index']);
+    /**
+     * Finds the Users model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Users the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Users::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
-
-
-
-    
-
 }

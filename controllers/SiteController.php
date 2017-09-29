@@ -63,8 +63,9 @@ class SiteController extends AppController
             if ($iden->org_type_id == 'bank'){
                 return $this->redirect(['inbank/index']);
             }
+            return $this->render('index');
         }
-        return $this->render('index');
+        return $this->redirect(['site/login']);
     }
 
     /**

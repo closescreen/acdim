@@ -2,112 +2,126 @@
 
 namespace app\controllers;
 
+use app\models\Org_types;
 use Yii;
-use yii\filters\AccessControl;
-//use yii\web\Controller;
-//use yii\web\UploadedFile;
-use yii\web\Response;
-use yii\filters\VerbFilter;
-//use app\models\LoginForm;
-//use app\models\Org_types;
 use app\models\Orgs;
-use app\models\Org_bindings;
-use app\models\User;
-//use app\models\Users;
-use yii\helpers\Html;
-use yii\data\Pagination;
-use yii\data\Sort;
+use app\models\OrgsSearch;
+use yii\base\ErrorException;
+use yii\web\Controller;
+use yii\web\NotFoundHttpException;
+use yii\filters\VerbFilter;
 
+/**
+ * OrgController implements the CRUD actions for Orgs model.
+ */
 class OrgController extends AppController
 {
 
-    // список организаций:
-    public function actionIndex($active=1){
-        
-//        debug($this->foo(123));
-/*        // Мой велосипед  как можно котроль доступа
-        if( !Yii::$app->user->identity or Yii::$app->user->identity->notin(['admins']) ){
-            Yii::$app->session->addFlash('123','У вас нет доступа к этой странице'); 
-            return $this->goBack(); //goHome();
-        }
-*/
-/*        
-        $sort = new Sort([
-            'attributes' => [
-                'org_type_id' => ['label'=>'Тип'],
-                'name'  => [
-//                    'asc' => ['first_name' => SORT_ASC, 'last_name' => SORT_ASC],
-//                    'desc' => ['first_name' => SORT_DESC, 'last_name' => SORT_DESC],
-//                    'default' => SORT_DESC,
-                    'label' => 'Название',
-                ],
-            ],
+    /**
+     * Lists all Orgs models.
+     * @return mixed
+     */
+    public function actionIndex()
+    {
+        $searchModel = new OrgsSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
-*/        
-	$orgs = Orgs::find()
-	    ->where(['active'=>$active]);
-	//->orderBy('org_type_id, name')->all();
-/*	$pagination = new Pagination([
-	    'defaultPageSize' => 2,
-	    'totalCount' => $orgs->count()
-	]);
-	$orgs = $orgs->offset( $pagination->offset )
-		    ->limit($pagination->limit)
-		    ->orderBy($sort->orders)
-		    ->all();
-*/
-	return $this->render('index',
-//	    ['orgs'=>$orgs, 'pagination' =>$pagination, 'sort'=>$sort ]
-            compact('orgs')
-	);
     }
 
-// ------------------------------- view ------------------
-    // просмотр организации
-    public function actionView( $id ){
-        if (!$id) return $this->goBack();
+    /**
+     * Displays a single Orgs model.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionView($id)
+    {
+        return $this->render('view', [
+            'model' => $this->findModel($id),
+        ]);
+    }
 
-//	$id = Yii::$app->request->get('id'); // ->get() без параметра вернет весь массив $_GET
-	
-	//пример работы с сессиями
-	//$session = Yii::$app->session;
-	//$last_viewed_org_id = $session->get('last_viewed_org_id');
-	//$session->set('last_viewed_org_id',$id);
-	////$session->remove('last_viewed_org_id')' // удаление
-	////$session->has('last_viewed_org_id'); // можно проверять существование
-	
-	// пример cookies:
-	/*$got_cookies = Yii::$app->request->cookies;
-	$last_viewed_org_id = $got_cookies->getValue('last_viewed_org_id');
-	
-	$cookies = Yii::$app->response->cookies;
-	$cookies->add(new \yii\web\Cookie([
-	    'name'=>'last_viewed_org_id',
-	    'value'=>$id
-	]));
-	*/
-	// удаление куки
-	//$cookies->remove('last_viewed_org_id');
+    /**
+     * Creates a new Orgs model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionCreate()
+    {
+        $model = new Orgs();
 
-	$orgs = Orgs::findOne($id);
-	$org_type_id = $orgs->org_type_id;
-	
-	if ( $org_type_id == 'salon' ){
-            $org_bindings = Org_bindings::find()->where(['salon_id'=>$id]);
-        }elseif( $org_type_id == 'bank' ){
-            $org_bindings = Org_bindings::find()->where(['bank_id'=>$id]);
-        }else{
-            // вернуть пустой
-            $org_bindings = Org_bindings::find()->limit(0);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            $model->active = 1;
+            $org_types_model = new Org_types();
+            return $this->render('create', [
+                'model' => $model,
+                'org_types_model'=>$org_types_model,
+            ]);
         }
-	
-	return $this->render('view', compact('orgs','org_bindings')); 
-	// ''=>$id, 
-	//    'last_viewed_org_id'=>$last_viewed_org_id 
-	//    ]
-	//    );
     }
 
-    
+    /**
+     * Updates an existing Orgs model.
+     * If update is successful, the browser will be redirected to the 'view' page.
+     * @param integer $id
+     * @return mixed
+     */
+    public function actionUpdate($id)
+    {
+        $model = $this->findModel($id);
 
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            $org_types_model = new Org_types();
+            return $this->render('update', [
+                'model' => $model,
+                'org_types_model'=>$org_types_model,
+            ]);
+        }
+    }
+
+    /**
+     * Deletes an existing Orgs model.
+     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * @param integer $id
+     * @return mixed
+     * @throws ErrorException
+     */
+    public function actionDelete($id)
+    {
+        //$this->findModel($id)->delete();
+        // вместо удаления - снятие признака active
+        try {
+            $model = $this->findModel($id);
+        } catch (NotFoundHttpException $e) {
+            throw new ErrorException('Not found org id '.$id);
+        }
+        $model->active = 0;
+        $model->save();
+
+
+        return $this->redirect(['index']);
+    }
+
+    /**
+     * Finds the Orgs model based on its primary key value.
+     * If the model is not found, a 404 HTTP exception will be thrown.
+     * @param integer $id
+     * @return Orgs the loaded model
+     * @throws NotFoundHttpException if the model cannot be found
+     */
+    protected function findModel($id)
+    {
+        if (($model = Orgs::findOne($id)) !== null) {
+            return $model;
+        } else {
+            throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
 }

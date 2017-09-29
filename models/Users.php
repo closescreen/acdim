@@ -1,50 +1,60 @@
 <?php
+
 namespace app\models;
-use yii\db\ActiveRecord;
-//use app\components\MyBehavior;
 
-class Users extends ActiveRecord{
+use Yii;
 
-    public function rules(){
+/**
+ * This is the model class for table "users".
+ *
+ * @property integer $id
+ * @property integer $active
+ * @property string $username
+ * @property string $password
+ * @property string $fio
+ * @property integer $org_id
+ */
+class Users extends \yii\db\ActiveRecord
+{
+    /**
+     * @inheritdoc
+     */
+    public static function tableName()
+    {
+        return 'users';
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
         return [
-            [['active','username','password','fio','org_id'], 'required'],
+            [['active', 'org_id'], 'integer'],
+            [['username', 'password', 'fio', 'org_id'], 'required'],
+            [['username', 'password'], 'string', 'max' => 255],
+            [['fio'], 'string', 'max' => 20],
+            [['username'], 'unique'],
         ];
     }
 
+    /**
+     * @inheritdoc
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => Yii::t('app', 'ID'),
+            'active' => Yii::t('app', 'Active'),
+            'username' => Yii::t('app', 'Username'),
+            'password' => Yii::t('app', 'Password'),
+            'fio' => Yii::t('app', 'Fio'),
+            'org_id' => Yii::t('app', 'Org ID'),
+        ];
+    }
 
-    // организация пользователя
+       // организация пользователя
     public function getOrg(){
         return $this->hasOne(Orgs::className(), ['id'=>'org_id']);
     }
-
-    
-
-    
-/*  пример примеси поведения
-    public $name = 'мое свойство из модели';
-
-    public function behaviors(){
-        return [
-            [ 
-                'class'=> MyBehavior::className(),
-                'property1' => $this->name
-            ],
-        ];
-    }    
-
-    
-    
-    const EVENT_1 = "событие 1";
-    
-    public function method1($event){
-        debug('вызва метод method1'.self::m2());
-        //$event->handled = true; // прервать цепочку
-    }
-    
-    public function m2(){
-        debug('M2');
-    }
-*/
 }
-?>
-
