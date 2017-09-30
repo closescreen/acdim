@@ -60,7 +60,8 @@ class InbankLastMsgView extends Inbank //\yii\db\ActiveRecord
     {
         return [
             'id' => 'Номер',
-            'active' => 'Активна',
+            'active' => 'Открыта',
+            'insalon_active'=>'Актуальна',
             'insalon_id' => '№',
             'insalon_created'=>'Создана',
             'bank_id' => 'Bank ID',

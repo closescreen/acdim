@@ -17,18 +17,36 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
+
+
+
     <?php
        $options = ['class' => []];
        if (!$model->active) {
-           Html::addCssClass($options, 'inactive');
+           Html::addCssClass($options, 'inactual');
        }
     ?>
     <?= Html::beginTag('div', $options) ?>
+
+    <? if( $msgs = Yii::$app->session->getFlash('insalon_update') ): ?>
+        <? foreach( $msgs as $msg ): ?>
+            <div class="alert alert-success">
+                <?= $msg ?>
+            </div>
+        <? endforeach; ?>
+    <? endif; ?>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
+            [
+                'attribute'=>'active',
+                'label'=>'Актуально?',
+                'value'=>function($m){
+                    return $m->active ? 'Да' : 'Нет';
+                }
+                ],
             'salon_id',
             'created:datetime',
             'client_tname',
@@ -50,17 +68,16 @@ $this->params['breadcrumbs'][] = $this->title;
             'created_by_user_id',
             'changed:datetime',
             'changed_by_user_id',
-            'active',
+
         ],
 
 
     ] ) ?>
     <?= Html::endTag('div')?>
 
-
- <!--   <p>
-        <?/*= Html::a('Update', [
-                'update',
+    <p>
+        <?= Html::a('Редактировать заявку', [
+            'update',
             'id' => $model->id,
             'active' => $model->active,
             'salon_id' => $model->salon_id,
@@ -68,26 +85,29 @@ $this->params['breadcrumbs'][] = $this->title;
             'changed_by_user_id' => $model->changed_by_user_id,
             'client_tname' => $model->client_tname,
             'client_phone' => $model->client_phone
-        ], ['class' => 'btn btn-primary']) */?>
+        ], ['class' => 'btn btn-primary']) ?>
+    </p>
 
-        <?/*= Html::a('Delete', [
-                'delete',
-            'id' => $model->id,
-            'active' => $model->active,
-            'salon_id' => $model->salon_id,
-            'created_by_user_id' => $model->created_by_user_id,
-            'changed_by_user_id' => $model->changed_by_user_id,
-            'client_tname' => $model->client_tname,
-            'client_phone' => $model->client_phone
-        ], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) */?>
-    </p>-->
 
+
+
+<!--    --><?///*= Html::a('Delete', [
+//                'delete',
+//            'id' => $model->id,
+//            'active' => $model->active,
+//            'salon_id' => $model->salon_id,
+//            'created_by_user_id' => $model->created_by_user_id,
+//            'changed_by_user_id' => $model->changed_by_user_id,
+//            'client_tname' => $model->client_tname,
+//            'client_phone' => $model->client_phone
+//        ], [
+//            'class' => 'btn btn-danger',
+//            'data' => [
+//                'confirm' => 'Are you sure you want to delete this item?',
+//                'method' => 'post',
+//            ],
+//        ]) */?>
+<!--    </p>-->
 </div>
 
 <?// debug( $model->inbanks-> ); exit; ?>
@@ -145,9 +165,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 $div =
                     $is_our_msg ?
                         '<div class="alert alert-success">' :
-                        ( $is_last_msg ?
-                            '<div class="alert alert-success">' :
-                            '<div class="alert alert-success">');
+                        '<div class="alert alert-info">';
 
 
                 ?>

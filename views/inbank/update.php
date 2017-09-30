@@ -14,11 +14,33 @@ $this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['index']]
 // todo: тоже самое - номер из insalon:
 $this->params['breadcrumbs'][] = 'Заявка #'.$model->id. ' ('.$model->insalon->salon->name .')';
 ?>
+<?php
+$bank_css_class = '';
+if( !$model->active ) {
+    $bank_css_class = 'closed'; // закрыта банком
+}else{
+    $bank_css_class = 'request-status-'.$model->state_id; // статус
+}
 
-           <? $css_class = 'request-status-'.$model->state_id ?>
-            <div class=<?= $css_class?> >
-                <h3><b><?= 'Статус: '.$states[$model->state_id] ?></b></h3>
-            </div>
+$salon_css_class = '';
+if(!$model->insalon->active ){
+    $salon_css_class = 'inactual'; // не актуально (в салоне)
+}
+
+?>
+
+<? $bank_name = $model->bank->name ?>
+<div class=<?= $bank_css_class?> >
+    <h3><b><?= $bank_name.': '.$states[$model->state_id]
+            .' / '.($model->active?'Открыта':'Закрыта'); ?>
+</div>
+<? $salon_name = $model->insalon->salon->name ?>
+<div class=<?= $salon_css_class?> >
+    <h3><b><?= $salon_name.': '
+            .($model->insalon->active?'Актуальна':'Неактуальна')
+             ?></b></h3>
+</div>
+
 
     <? if( $msgs = Yii::$app->session->getFlash('inbank_update') ): ?>
         <? foreach( $msgs as $msg ): ?>
@@ -33,8 +55,10 @@ $this->params['breadcrumbs'][] = 'Заявка #'.$model->id. ' ('.$model->insal
     <?= $this->render('_form', [
         'model' => $model,
         'states'=>$states,
+        'can_close'=>$can_close,
     ]) ?>
 
 </div>
+
 
 

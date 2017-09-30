@@ -12,17 +12,20 @@ use yii\i18n\Formatter;
 
 <div class="insalon-form">
 
-    <?php
-       $options = ['class' => []];
-       if (!$model->active) {
-           Html::addCssClass($options, 'inactive');
-       }
-    ?>
-    <?= Html::beginTag('div', $options) ?>
+<!--    --><?php
+//       $options = ['class' => []];
+//       if (!$model->active) {
+//           Html::addCssClass($options, 'inactual');
+//       }
+//    ?>
+<!--    --><?//= Html::beginTag('div', $options) ?>
+    <?= Html::beginTag('div') ?>
 
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->errorSummary($model) ?>
+
+    <?= $form->field($model, 'active'   )->checkbox() ?>
 
     <?= $form->field($model, 'client_tname')->textInput(['maxlength' => true]) ?>
 
@@ -67,7 +70,6 @@ use yii\i18n\Formatter;
 
     <?= $form->field($model, 's5')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'active')->hiddenInput()->label(false) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

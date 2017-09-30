@@ -34,7 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
         'rowOptions'=>function($model) {
             if ($model->active == 0) {
-                return ['class' => 'inactive'];
+                return ['class' => 'inactual'];
             } else {
                 return [];
             }

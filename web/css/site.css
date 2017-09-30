@@ -73,7 +73,12 @@ a.desc:after {
 }
 
 .grid-view th {
-    white-space: nowrap;
+    white-space: pre-wrap;
+}
+
+.filters * {
+    padding: 3px 3px;
+
 }
 
 .hint-block {
@@ -115,9 +120,16 @@ a.desc:after {
 }
 
 /* Дима: мои стили, используются в логике */
-/* Выключенная запись в БД (почти удаленная) - снят признак active */
-.inactive, .inactive * {
-    background-color: #e7c3c3;
+/* Неактуально (организация, юзер, инсалон и пр.) */
+.inactual, .inactual * {
+    background-color: #595457;
+    color: #e7e3e5;
+}
+
+/*Закрыто (заявка в inbank-ке)*/
+.closed, .closed * {
+    background-color: #45478f;
+    color: #e7e3e5;
 }
 
 /*новая заявка*/
@@ -148,4 +160,5 @@ a.desc:after {
 textarea {
     width: 100%;
 }
+
 

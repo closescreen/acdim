@@ -45,7 +45,7 @@ class InsalonMaxStateLastMsg extends Insalon //\yii\db\ActiveRecord
     {
         return [
             'id' => 'Номер',
-            'active' => 'Активна',
+            'active' => 'Актуальна',
             'salon_id' => 'Salon ID',
             'salon_name'=>'Салон',
             'created' => 'Создана',

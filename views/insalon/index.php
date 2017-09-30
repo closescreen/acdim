@@ -104,7 +104,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'rowOptions'=>function($model) {
             if ($model->active == 0) {
-                return ['class' => 'inactive'];
+                return ['class' => 'inactual'];
             }elseif($model->state_id !== null ){
                 //$state_id = $model->state_id;
                 //$class = "request-status-" . $model->state_id;

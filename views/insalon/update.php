@@ -20,9 +20,33 @@ $this->params['breadcrumbs'][] = [
 ];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
+
+
+<?php
+
+
+$salon_css_class = '';
+if(!$model->active ){
+    $salon_css_class = 'inactual'; // не актуально (в салоне)
+    echo Html::beginTag('div',['class'=>$salon_css_class]);
+    echo Html::tag('h3', Html::tag('b', 'Неактуальна'));
+    echo Html::endTag('div');
+}
+
+?>
+
+
 <div class="insalon-update">
 
     <h1><?= Html::encode($this->title) ?></h1>
+
+    <? if( $msgs = Yii::$app->session->getFlash('insalon_update') ): ?>
+        <? foreach( $msgs as $msg ): ?>
+            <div class="alert alert-success">
+                <?= $msg ?>
+            </div>
+        <? endforeach; ?>
+    <? endif; ?>
 
     <?= $this->render('_form', [
         'model' => $model,
@@ -30,7 +54,3 @@ $this->params['breadcrumbs'][] = 'Update';
 
 </div>
 
-<!--отослать во все банки не нужна-->
-<!--<div>-->
-<!--    --><?//= $this->render('_distrib_form', compact('model')) ?>
-<!--</div>-->

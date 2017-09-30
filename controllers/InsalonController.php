@@ -196,6 +196,10 @@ class InsalonController extends AppController
     //    $id, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone
     //)
     {
+
+        // ?? нужно, если да, то может вынести в общее место?:
+        if (!Yii::$app->session->isActive) Yii::$app->session->open();
+
         $model = $this->findModel( $id );
         //, $active, $salon_id, $created_by_user_id, $changed_by_user_id, $client_tname, $client_phone
         //);
@@ -204,7 +208,10 @@ class InsalonController extends AppController
             $model->changed = null; // бд вставит время правки
             $model->changed_by_user_id = Yii::$app->user->identity->id;
             if ( $model->save() ) {
+                Yii::$app->session->addFlash('insalon_update',
+                    'Изменения сохранены');
                 return $this->redirect(['view', 'id' => $model->id, 'active' => $model->active, 'salon_id' => $model->salon_id, 'created_by_user_id' => $model->created_by_user_id, 'changed_by_user_id' => $model->changed_by_user_id, 'client_tname' => $model->client_tname, 'client_phone' => $model->client_phone]);
+
             }else{
                 return $this->render('update', [
                     'model' => $model,

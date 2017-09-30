@@ -29,7 +29,8 @@ $dataProvider->sort->attributes['state_name'] = [
 
     <h1><?= Html::encode($this->title) ?></h1>
     <?php
-        $m_created_text = [ 'attribute' => 'm_created_text',
+        $m_created_text = [
+                'attribute' => 'm_created_text',
                 //'format' => 'raw',
                 'value' => function($m) {
                     return $m->m_created_text ?
@@ -38,12 +39,54 @@ $dataProvider->sort->attributes['state_name'] = [
                 }
             ];
 
+        $action_column = [
+            'class' => 'yii\grid\ActionColumn',
+            'template' => '{view} {update} {delete}',
+            'buttons'=>[
+                    'delete' => function($url,$model){}
+            ],
+            ];
+
+        $created_column = [
+                'attribute'=>'insalon_created',
+                'value'=> function($m) {
+                    return Yii::$app->formatter->asDatetime(
+                        $m->insalon_created, "php:Y.m.d H:i");
+                },
+        ];
+
+        $changed_column = [
+                'attribute'=>'changed',
+                'value'=> function($m) {
+                    return Yii::$app->formatter->asDatetime(
+                        $m->changed, "php:Y.m.d H:i");
+                },
+        ];
+
+        $open_column = [
+                'attribute'=>'active',
+            'label'=>'Откр.(1/0)',
+            'value' => function($m){
+                return $m->active? 'Откр.':'Закр.';
+            }
+        ];
+
+        $actual_column = [
+            'attribute'=>'insalon_active',
+            'label'=>'Акт.(1/0)',
+            'value' => function($m){
+                return $m->insalon_active? 'Акт.':'Неакт.';
+            }
+        ];
+//        $actual_column = 'insalon_active';
+
         $columns = Yii::$app->user->identity->org_type_id == 'bank' ?
             [ // колонки для банка
                 //['class' => 'yii\grid\SerialColumn'],
-                ['class' => 'yii\grid\ActionColumn','template' => '{view} {update}',],
+                $action_column,
                 'insalon_id', // - номер заявки банк пусть видит как номер id insalon
-                'insalon_created',
+                //'insalon_created',
+                $created_column,
                 'salon_name',
                 //'bank_name', // для админов можно
                 //'insalon.salon_id',
@@ -66,19 +109,24 @@ $dataProvider->sort->attributes['state_name'] = [
                 // 'b5',
                 //'m_created_text',
                 $m_created_text,
+                //'changed',
+                $changed_column,
+                //'active',
                 'state_name',
-                'changed',
-                'active',
+                $open_column,
+                $actual_column,
 
             ] // - for bank
             :
             [ // колонки для админа
                 //['class' => 'yii\grid\SerialColumn'],
-                ['class' => 'yii\grid\ActionColumn','template' => '{view} {update}',],
+                $action_column,
 
                 'insalon_id', // - номер заявки банк пусть видит как номер id insalon
-                'insalon_created',
-                'insalon_created',
+               // 'created',
+               // 'insalon_created',
+                 $created_column,
+
                 'salon_name',
                 'bank_name', // для админов можно
 
@@ -106,8 +154,13 @@ $dataProvider->sort->attributes['state_name'] = [
                 // 'b5',
                 //'m_created_text',
                 $m_created_text,
-                'changed',
-                'active',
+                //'changed',
+                $changed_column,
+                'state_name',
+                //'active', // открыта (со стороны банка)
+                $open_column,
+                //'insalon_active', // Актуально (со стороны салона)
+                $actual_column,
 
             ]; // - for admins
 
@@ -123,8 +176,11 @@ $dataProvider->sort->attributes['state_name'] = [
         'filterModel' => $searchModel,
         'rowOptions'=>function($model) {
             if ($model->active == 0) {
-                return ['class' => 'inactive'];
-            }elseif($model->state_id !== null ){
+                return ['class' => 'closed'];
+            }elseif($model->insalon_active==0){
+                return ['class'=>'inactual'];
+            }
+            elseif($model->state_id !== null ){
                 //$state_id = $model->state_id;
                 //$class = "request-status-" . $model->state_id;
                 return ['class'=> "request-status-" . $model->state_id];

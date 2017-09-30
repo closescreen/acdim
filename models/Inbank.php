@@ -52,7 +52,7 @@ class Inbank extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'Номер',
-            'active' => 'Активна',
+            'active' => 'Открыта',
             'insalon_id' => 'Insalon ID',
             'bank_id' => 'Bank ID',
             'changed' => 'Изменена',
@@ -85,5 +85,9 @@ class Inbank extends \yii\db\ActiveRecord
 
     public function getUploads(){
         return $this->hasMany(Upload::className(),['inbank_id'=>'id']);
+    }
+
+    public function getInbankLastMsg(){
+        return $this->hasOne(InbankLastMsgView::className(), ['id'=>'id']);
     }
 }

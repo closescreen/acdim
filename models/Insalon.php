@@ -62,7 +62,7 @@ class Insalon extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'Номер',
-            'active' => 'Активна',
+            'active' => 'Актуальна',
             'salon_id' => 'Salon ID',
             'created' => 'Создана',
             'created_by_user_id' => 'Создана пользователем',

@@ -19,7 +19,7 @@ class InbankSearch extends InbankLastMsgView // Inbank
     {
         return
             [
-            [['id', 'active', 'insalon_id', 'bank_id', 'changed_by_user_id',
+            [['id', 'active', 'insalon_active' , 'insalon_id', 'bank_id', 'changed_by_user_id',
                 's_car_price','s_down_payment','s_equipment_cost','s_car_year'
             ], 'integer'],
             [[
@@ -97,6 +97,9 @@ class InbankSearch extends InbankLastMsgView // Inbank
             'query' => $query,
         ]);
 
+        $this->active = 1;
+        //$this->insalon_active = 1; // неактуальные показывать?
+
         $this->load($params);
 
         if (!$this->validate()) {
@@ -110,26 +113,11 @@ class InbankSearch extends InbankLastMsgView // Inbank
             'id' => $this->id,
             'active' => $this->active,
 //            'insalon_id' => $this->insalon_id,
+            'insalon_active'=>$this->insalon_active,
             'bank_id' => $this->bank_id,
 //            'changed' => $this->changed,
             'changed_by_user_id' => $this->changed_by_user_id,
-//            'state_desc' => $this->state_desc,
-//            'b1' => $this->b1,
-//            'b2' => $this->b2,
-//            'b3' => $this->b3,
-//            'b4' => $this->b4,
-//            'b5' => $this->b5,
- //           'bank_name'  => $this->bank_name,
-//            's_client_fio' => $this->s_client_fio,
- //           's_client_bdate' => $this->s_client_bdate,
-//            's_client_phone' => $this->s_client_phone,
- //           's_car_price' => $this->s_car_price,
- //           's_down_payment' => $this->s_down_payment,
- //           's_equipment_cost' => $this->s_equipment_cost,
-//            's_equipment_desc' => $this->s_equipment_desc,
-//            's_car_model' => $this->s_car_model,
-//            's_car_year' => $this->s_car_year,
-            //'insalon.salon.name' => $this->insalon->salon->name,//так не работает
+
 
         ]);
 

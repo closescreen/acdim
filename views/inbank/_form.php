@@ -43,6 +43,8 @@ use yii\widgets\ActiveForm;
     <?= Html::label('Оборудование: ')
         . HTML::textInput('eq_string',$eq_string, $style1) ?><br>
 
+    <?= $form->field($model, 'active')->checkbox(); ?>
+
     <?= $form->field($model, 'state_id')
         ->dropDownList($states)
         ->label('Состояние' )
@@ -64,7 +66,7 @@ use yii\widgets\ActiveForm;
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ?
-            'Create' : 'Update',
+            'Сохранить' : 'Сохранить',
             ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
 
