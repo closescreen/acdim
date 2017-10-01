@@ -8,7 +8,9 @@ $this->title = 'My Yii Application';
 
 
     <div class="jumbotron">
-        <b>IP: <?= $_SERVER['REMOTE_ADDR'] ?></b>
+        <b>REMOTE IP: <?= $_SERVER['REMOTE_ADDR'] ?></b><BR>
+        <b>SERVER NAME: <?= $_SERVER['SERVER_NAME'] ?></b>
+
 
 <!--        <p class="lead">Войдите в систему</p> -->
 

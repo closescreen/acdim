@@ -149,6 +149,7 @@ class UploadController extends AppController
         }else{
             // не post
             debug('not post');
+            exit;
         }
 
         $url = Url::previous();
@@ -166,7 +167,10 @@ class UploadController extends AppController
         if ($upload_model === null) throw new NotFoundHttpException('Not found');
 
         return Yii::$app->response
-            ->xSendFile( $upload_model->file_real_name, $upload_model->file_name )->send();
+            // todo: потом переключить вариант XsendFile (будет работать быстрее на серваке):
+//            ->xSendFile( $upload_model->file_real_name, $upload_model->file_name )->send();
+                // sendFile (пока идет отладка из под 'php -S' )
+            ->sendFile( $upload_model->file_real_name, $upload_model->file_name )->send();
 
     }
 

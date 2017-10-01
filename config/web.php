@@ -31,14 +31,14 @@ $config = [
      
     'id' => 'basic',
 //    'name' => 'Автокредитование', не влияет, если не исп в коде
-    'on beforeAction' => function ($event) {
+  //  'on beforeAction' => function ($event) {
         //var_dump(345);
         //exit();
         //if (некоторое условие) {
         //    $event->isValid = false;
         //} else {
         //}
-    },    
+  //  },
     // 'on beforeRequest' => function ($event) {
         //var_dump(Yii::$app->user->identity->org_type_id);
         //var_dump( Yii::$app->is_user_org_type_id('admin') );
