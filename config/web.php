@@ -24,7 +24,7 @@ $config = [
 
 
     'aliases' => [
-         '@upload' => __DIR__ . '/../web/uploads',
+         '@upload' => __DIR__ . '/../uploads',
         ],
 
     'language' => 'ru-RU',
