@@ -25,6 +25,18 @@ use yii\i18n\Formatter;
 
     <?= $form->errorSummary($model) ?>
 
+    <?php
+    if(Yii::$app->user->identity->org_type_id == 'admins'){
+        // для админов - выбор салона
+        $salons = \yii\helpers\ArrayHelper::map( \app\models\Orgs::find()
+        ->where(['org_type_id'=>'salon','active'=>1])->all(), 'id','name');
+
+        echo $form->field($model, 'salon_id')->dropDownList($salons);
+    }
+
+
+    ?>
+
     <?= $form->field($model, 'active'   )->checkbox() ?>
 
     <?= $form->field($model, 'client_tname')->textInput(['maxlength' => true]) ?>

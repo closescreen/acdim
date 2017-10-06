@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Inbank;
 use app\models\Org_bindings;
+use app\models\Orgs;
 use Yii;
 use app\models\Insalon;
 use app\models\InsalonSearch;
@@ -187,6 +188,7 @@ class InsalonController extends AppController
 
             return $this->render('create', [
                 'model' => $model,
+                ''
             ]);
 
     }
