@@ -61,7 +61,7 @@ use yii\widgets\ActiveForm;
 //        ->label('Состояние' )
 //    ?>
 
-    <?= Html::label('Примечания')
+    <?= Html::label('Примечания банка')
         . Html::textInput('state_desc', $model->state_desc, $style1) ?><br>
 <!--    --><?//= $form->field($model, 'state_desc')->textInput(['maxlength' => true])
 //        ->label('Примечания') ?>
