@@ -22,10 +22,11 @@ public $inbank_id;
 public function rules()
     {
         return [
-        [['inbank_id', 'file_name', 'file_desc'], 'required'],
+        [['inbank_id', 'file_name' ], 'required'],
         [['inbank_id'],'integer'],
  //       [['file_name'], 'file'],
-        [['file_desc'], 'string', 'max' => 255]
+        [['file_desc'], 'string', 'max' => 255],
+        [['file_desc'],'safe']
     ];
     }
 }

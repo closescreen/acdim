@@ -47,6 +47,14 @@ use yii\i18n\Formatter;
 
     <?= $form->field($model, 'client_bdate')->textInput() ?>
 
+    <?= $form->field($model, 'client_pserial')->textInput() ?>
+
+    <?= $form->field($model, 'client_pdate')->textInput() ?>
+
+    <?= $form->field($model, 'client_pplace')->textInput(['maxlength' => true]) ?>
+
+
+
 <!--    --><?php
 // не смог установить
     //    echo DatePicker::widget([

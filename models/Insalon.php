@@ -33,7 +33,10 @@ class Insalon extends \yii\db\ActiveRecord
 //			return 'Value Changed';
 //		}],
 
-                [['client_bdate'],'date','format'=>'yyyy-MM-dd'],
+            [['client_bdate'],'date','format'=>'yyyy-MM-dd'], // д.р.
+
+            [['client_pdate'],'date','format'=>'yyyy-MM-dd'], // паспорт
+
 //            [['client_bdate'] , 'filter', 'filter'=>function($v){
 //                $matches = [];
 //                if (preg_match('/(d\d\d\d)-(\d\d)-(\d\d)/', $v, $matches)){
@@ -44,15 +47,17 @@ class Insalon extends \yii\db\ActiveRecord
             [
                 ['active', 'salon_id', 'created_by_user_id',
                     'changed_by_user_id', 'car_price', 'down_payment',
-                    'equipment_cost', 'car_year'
+                    'equipment_cost', 'car_year', 'client_pserial'
                 ], 'integer'],
-            [['equipment_desc','created', 'changed', 'client_bdate', 's1', 's2', 's3', 's4', 's5'],
+            [['equipment_desc','created', 'changed', 'client_bdate',
+                's1', 's2', 's3', 's4', 's5','client_pplace'],
                 'safe'],
             [['client_fname', 'client_sname', 'client_tname'],
                 'string', 'max' => 20],
             [['client_phone'],
                 'string', 'max' => 45],
-            [['equipment_desc', 'car_model', 's1', 's2', 's3', 's4', 's5'],
+            [['equipment_desc', 'car_model',
+                's1', 's2', 's3', 's4', 's5','client_pplace'],
                 'string', 'max' => 255],
         ];
     }
@@ -72,6 +77,9 @@ class Insalon extends \yii\db\ActiveRecord
             'client_sname' => 'Отчество',
             'client_tname' => 'Фамилия',
             'client_bdate' => 'Дата рождения',
+            'client_pserial'=>'Паспорт №',
+            'client_pdate' => 'Дата выдан', // паспорт выдан
+            'client_pplace'=> 'Место выдачи',
             'client_phone' => 'Телефон',
             'car_price' => 'Стоимость авто',
             'down_payment' => 'Первоначальный взнос',

@@ -36,13 +36,12 @@ class Upload extends \yii\db\ActiveRecord
         return [
             [['active', 'created_by_user_id', 'changed_by_user_id','inbank_id'], 'integer'],
             //  попробовать 'value' => null
-            [['created', 'changed'], 'safe'],
+            [['created', 'changed','file_desc'], 'safe'],
             [
                 ['created_by_user_id',
                     'changed_by_user_id',
                     'file_name',
-                    'file_real_name',
-                    'file_desc'],
+                    'file_real_name' ],
                 'required'],
             [['file_name'], 'file', 'maxSize'=>5000000],
             [[ 'file_desc'], 'string', 'max' => 512],

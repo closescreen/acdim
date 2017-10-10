@@ -22,6 +22,10 @@ use yii\widgets\ActiveForm;
             . ' ' . $model->insalon->client_sname
             . ' (' . $model->insalon->client_bdate . ')';
 
+    $client_pasp_string = $model->insalon->client_pserial
+        . ' ' . $model->insalon->client_pdate
+        . ' ' . $model->insalon->client_pplace;
+
         $avto_string = $model->insalon->car_model
             . ' ' . $model->insalon->car_year . ' года';
 
@@ -36,6 +40,10 @@ use yii\widgets\ActiveForm;
 
     <?= Html::label('Клиент: ')
         . HTML::textInput('client_string',$client_string, $style1) ?><br>
+
+    <?= Html::label('Паспорт: ')
+        . HTML::textInput('client_pasp_string',$client_pasp_string, $style1) ?><br>
+
     <?= Html::label('Авто: ')
         . HTML::textInput('avto_string',$avto_string, $style1) ?><br>
     <?= Html::label('Стоимость: ')
