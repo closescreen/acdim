@@ -63,6 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'equipment_desc',
             'car_model',
             'car_year',
+            'salon_desc',
             's1',
             's2',
             's3',

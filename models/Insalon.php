@@ -50,6 +50,7 @@ class Insalon extends \yii\db\ActiveRecord
                     'equipment_cost', 'car_year', 'client_pserial'
                 ], 'integer'],
             [['equipment_desc','created', 'changed', 'client_bdate',
+                'salon_desc', // комментарии салона
                 's1', 's2', 's3', 's4', 's5','client_pplace'],
                 'safe'],
             [['client_fname', 'client_sname', 'client_tname'],
@@ -87,6 +88,7 @@ class Insalon extends \yii\db\ActiveRecord
             'equipment_desc' => 'Описание оборудования',
             'car_model' => 'Модель авто',
             'car_year' => 'Год выпуска',
+            'salon_desc' => 'Примечания салона',
   //          's1' => 'S1',
   //          's2' => 'S2',
   //          's3' => 'S3',

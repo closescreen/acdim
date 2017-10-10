@@ -58,7 +58,7 @@ class Inbank extends \yii\db\ActiveRecord
             'changed' => 'Изменена',
             'changed_by_user_id' => 'Изменена пользователем',
             'state_id' => 'State ID',
-            'state_desc' => 'State Desc',
+            'state_desc' => 'Примечания банка',
             'b1' => 'B1',
             'b2' => 'B2',
             'b3' => 'B3',

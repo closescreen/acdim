@@ -26,6 +26,7 @@ use yii\widgets\ActiveForm;
         . ' ' . $model->insalon->client_pdate
         . ' ' . $model->insalon->client_pplace;
 
+    $salon_comment_string = $model->insalon->salon_desc;
 
     $avto_string = $model->insalon->car_model
             . ' ' . $model->insalon->car_year . ' года';
@@ -51,6 +52,9 @@ use yii\widgets\ActiveForm;
         . HTML::textInput('pr_string',$price_string, $style1) ?><br>
     <?= Html::label('Оборудование: ')
         . HTML::textInput('eq_string',$eq_string, $style1) ?><br>
+
+    <?= Html::label('Примечения салона: ')
+    . HTML::textInput('eq_string',$salon_comment_string, $style1) ?><br>
 
 
     <?= Html::label('Состояние: ')

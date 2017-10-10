@@ -80,6 +80,8 @@ use yii\i18n\Formatter;
 
     <?= $form->field($model, 'car_year')->textInput() ?>
 
+    <?= $form->field($model, 'salon_desc')->textInput(['maxlength' => true]) ?>
+
     <?= $form->field($model, 's1')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 's2')->textInput(['maxlength' => true]) ?>
