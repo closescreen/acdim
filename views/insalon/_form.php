@@ -45,11 +45,11 @@ use yii\i18n\Formatter;
 
     <?= $form->field($model, 'client_sname')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'client_bdate')->textInput() ?>
+    <?= $form->field($model, 'client_bdate')->textInput(['placeholder'=>'1995-12-30']) ?>
 
     <?= $form->field($model, 'client_pserial')->textInput() ?>
 
-    <?= $form->field($model, 'client_pdate')->textInput() ?>
+    <?= $form->field($model, 'client_pdate')->textInput(['placeholder'=>'2001-12-31']) ?>
 
     <?= $form->field($model, 'client_pplace')->textInput(['maxlength' => true]) ?>
 

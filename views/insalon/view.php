@@ -157,7 +157,9 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class=<?= $css_class?> >
                 <h3><b><?= $inbank->bank->name . ' ('. $inbank->state->name.')' ?></b></h3>
                 <? if ($inbank->credit_amount>0): ?>
-                    <? $credit_str = 'Кредит на: '. $inbank->credit_amount . 'руб ' ?>
+                    <? $credit_str = 'Кредит на: '
+                        . number_format($inbank->credit_amount,2,',',' ')
+                        . ' руб ' ?>
                     <b><?= Html::label($credit_str ) ?></b>
                 <? endif; ?>
             </div>
