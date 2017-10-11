@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <? endforeach; ?>
     <? endif; ?>
 
-    <?= DetailView::widget([
+      <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
@@ -48,18 +48,48 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
                 ],
             'salon_id',
-            'created:datetime',
+            ['attribute'=>'created',
+                'value'=>function($m){
+                    return date('d.m.Y', strtotime($m->created));
+                }
+                ],
             'client_tname',
             'client_fname',
             'client_sname',
-            'client_bdate',
+            ['attribute'=>'client_bdate',
+                'value'=>function($m){
+                    return date('d.m.Y', strtotime($m->client_bdate)).' г.р.';
+                }
+            ],
             'client_pserial',
-            'client_pdate',
+            //'client_pdate',
+            ['attribute'=>'client_pdate',
+                'value'=>function($m){
+                    return date('d.m.Y', strtotime($m->client_pdate));
+                }
+            ],
             'client_pplace',
             'client_phone',
-            'car_price',
-            'down_payment',
-            'equipment_cost',
+            [
+                'attribute'=>'car_price',
+                'value'=> function($m){
+                    return number_format($m->car_price,2,',',' ');
+                }
+                ],
+            //'down_payment',
+            [
+                'attribute'=>'down_payment',
+                'value'=> function($m){
+                    return number_format($m->down_payment,2,',',' ');
+                }
+            ],
+            //'equipment_cost',
+            [
+                'attribute'=>'equipment_cost',
+                'value'=> function($m){
+                    return number_format($m->equipment_cost,2,',',' ');
+                }
+            ],
             'equipment_desc',
             'car_model',
             'car_year',
@@ -126,6 +156,10 @@ $this->params['breadcrumbs'][] = $this->title;
             <? $css_class = 'request-status-'.$inbank->state_id ?>
             <div class=<?= $css_class?> >
                 <h3><b><?= $inbank->bank->name . ' ('. $inbank->state->name.')' ?></b></h3>
+                <? if ($inbank->credit_amount>0): ?>
+                    <? $credit_str = 'Кредит на: '. $inbank->credit_amount . 'руб ' ?>
+                    <b><?= Html::label($credit_str ) ?></b>
+                <? endif; ?>
             </div>
             <h4>Файлы:</h4>
             <?php
@@ -150,7 +184,7 @@ $this->params['breadcrumbs'][] = $this->title;
             </div>
 
             <hr>
-            <h4><?= 'Чат:' ?>  </h4>
+            <h4><?= 'Сообщения:' ?>  </h4>
 
 
 

@@ -7,12 +7,13 @@ use yii\helpers\Url;
 /* @var $model app\models\Inbank */
 
 // todo: номер зявки лучше чтоб был -> из insalon.id
-$this->title = 'Заявка №' . $model->id;
+$this->title = 'Заявка №' . $model->insalon->id;
 
 $this->params['breadcrumbs'][] = ['label' => 'Заявки', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
 // todo: тоже самое - номер из insalon:
-$this->params['breadcrumbs'][] = 'Заявка #'.$model->id. ' ('.$model->insalon->salon->name .')';
+$this->params['breadcrumbs'][] = 'Заявка #'.$model->insalon->id
+    . ' ('.$model->insalon->salon->name .')';
 ?>
 
 <?php

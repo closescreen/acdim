@@ -31,10 +31,17 @@ use yii\widgets\ActiveForm;
     $avto_string = $model->insalon->car_model
             . ' ' . $model->insalon->car_year . ' года';
 
-        $price_string = $model->insalon->car_price .' руб';
+        $price_string = number_format(
+                $model->insalon->car_price,2,',',' ' )
+            .' руб'.
+        ' ( первоначальный взнос: '.
+            number_format($model->insalon->down_payment,2,',',' ')
+            .' )';
 
         $eq_string = $model->insalon->equipment_desc
-            . ' стоимостью ' . $model->insalon->equipment_cost . ' руб';
+            . ' стоимостью ' .
+            number_format($model->insalon->equipment_cost,2,',',' ' )
+            . ' руб';
     $style1 = ['disabled'=>'disabled', 'style'=>'width:100%;'];
 
     ?>
@@ -71,6 +78,13 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'state_desc')->textInput(['maxlength' => true])
         ->label('Примечания банка') ?>
+
+<!--    --><?//= $form->field($model, 'b1')->textInput(['maxlength' => true]) ?>
+<!--    --><?//= $form->field($model, 'b2')->textInput(['maxlength' => true]) ?>
+<!--    --><?//= $form->field($model, 'b3')->textInput(['maxlength' => true]) ?>
+<!--    --><?//= $form->field($model, 'b4')->textInput(['maxlength' => true]) ?>
+<!--    --><?//= $form->field($model, 'b5')->textInput(['maxlength' => true]) ?>
+
 
 
     <?= Html::label('Изменено: ')

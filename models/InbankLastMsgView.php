@@ -86,6 +86,9 @@ class InbankLastMsgView extends Inbank //\yii\db\ActiveRecord
             's_car_price'=>'Стоим. авто',
             's_down_payment'=>'Перв. взнос',
             's_equipment_cost'=>'Стоим. оборуд.',
+            'credit_amount'=>'Сумма кредита',
+            'credit_rate'=>'Проц. ставка',
+            'credit_months'=>'Срок (мес)',
             'm_created_text'=>'Сообщение',
             'm_created'=>'Время сообщение',
 
