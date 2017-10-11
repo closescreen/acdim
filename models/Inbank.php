@@ -15,6 +15,9 @@ use Yii;
  * @property integer $changed_by_user_id
  * @property string $state_id
  * @property string $state_desc
+ * @property integer $credit_amount
+ * @property integer $credit_rate
+ * @property integer $credit_months
  * @property string $b1
  * @property string $b2
  * @property string $b3
@@ -37,7 +40,8 @@ class Inbank extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['active', 'insalon_id', 'bank_id', 'changed_by_user_id'], 'integer'],
+            [['active', 'insalon_id', 'bank_id', 'changed_by_user_id',
+                'credit_amount', 'credit_rate', 'credit_months' ], 'integer'],
             [['insalon_id', 'bank_id' ], 'required'],
             [['changed', 'changed_by_user_id'], 'safe'],
             [['state_id'], 'string', 'max' => 10],
@@ -59,6 +63,9 @@ class Inbank extends \yii\db\ActiveRecord
             'changed_by_user_id' => 'Изменена пользователем',
             'state_id' => 'State ID',
             'state_desc' => 'Примечания банка',
+            'credit_amount'=>'Сумма кредита',
+            'credit_rate'=>'Процентная ставка (%)',
+            'credit_months'=>'Срок кредита (мес)',
             'b1' => 'B1',
             'b2' => 'B2',
             'b3' => 'B3',

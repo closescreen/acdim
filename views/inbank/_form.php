@@ -53,6 +53,11 @@ use yii\widgets\ActiveForm;
     <?= Html::label('Оборудование: ')
         . HTML::textInput('eq_string',$eq_string, $style1) ?><br>
 
+    <?= $form->field($model, 'credit_amount') ?>
+    <?= $form->field($model, 'credit_rate') ?>
+    <?= $form->field($model, 'credit_months') ?>
+
+
     <?= Html::label('Примечения салона: ')
     . HTML::textInput('eq_string',$salon_comment_string, $style1) ?><br>
 

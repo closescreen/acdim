@@ -20,7 +20,8 @@ class InbankSearch extends InbankLastMsgView // Inbank
         return
             [
             [['id', 'active', 'insalon_active' , 'insalon_id', 'bank_id', 'changed_by_user_id',
-                's_car_price','s_down_payment','s_equipment_cost','s_car_year'
+                's_car_price','s_down_payment','s_equipment_cost','s_car_year',
+                'credit_amount','credit_rate','credit_months',
             ], 'integer'],
             [[
                 'insalon_created',
@@ -124,6 +125,9 @@ class InbankSearch extends InbankLastMsgView // Inbank
         $query
             //->andFilterWhere(['like', 'state_id', $this->state_id])
             ->andFilterWhere(['like', 'state_desc', $this->state_desc])
+            ->andFilterWhere(['like', 'credit_amount', $this->credit_amount])
+            ->andFilterWhere(['like', 'credit_rate', $this->credit_rate])
+            ->andFilterWhere(['like', 'credit_months', $this->credit_months])
             ->andFilterWhere(['like', 'insalon_id', $this->insalon_id])
             ->andFilterWhere(['like', 'changed', $this->changed])
             ->andFilterWhere(['like', 'insalon_created', $this->insalon_created])
